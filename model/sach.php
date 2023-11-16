@@ -1,5 +1,5 @@
 <?php
-require_once "pdo.php";
+// require_once "pdo.php";
 
 function load_all_sach()
 {
@@ -35,4 +35,4 @@ function delete_sach_mem($ma_sach)
     $sql = "UPDATE sach SET trang_thai=0 WHERE ma_sach=?";
     pdo_execute($sql, $ma_sach);
 }
-$sql = "SELECT sach.*, ten_danh_muc FROM sach JOIN danhmuc ON sach.ma_danh_muc=danhmuc.ma_danh_muc WHERE trang_thai = 1 ORDER BY id DESC";
+// $sql = "SELECT sach.*, ten_danh_muc FROM sach JOIN danhmuc ON sach.ma_danh_muc=danhmuc.ma_danh_muc WHERE trang_thai = 1 ORDER BY id DESC";

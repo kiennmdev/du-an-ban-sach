@@ -1,0 +1,14 @@
+.title {
+    background-color: #0D6EFD;
+    color: white;
+    padding: 10px 20px;
+    font-size: 25px;
+}
+header {
+    background-color: #edb5bf;
+    color: #a03741;
+}
+.flex {
+    display: flex;
+    gap: 10px
+}

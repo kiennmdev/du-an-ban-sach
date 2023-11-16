@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    
+}
+header {
+    background-color: black;
+}
+.mb {
+    margin-bottom: 20px;
+}
+.mb10 {
+    margin-bottom: 10px;
+}
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+header {
+    line-height: 80px;
+    background-color: #0D6EFD;
+    font-size:xx-large;
+    color: white;
+    padding: 0 20px;
+    width: 100%;
+}
+nav {
+    margin-bottom: 20px;
+    background-color: rgb(221, 221, 221);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+nav li {
+    list-style: none;
+}
+nav a {
+    color: black;
+    text-decoration: none;
+    line-height: 50px;
+}
+nav a:hover {
+    text-decoration: underline;
+    color: black;
+}
+.nav a {
+    margin-right: 20px;
+}
+.nav {
+    display: flex;
+}
+.carousel-inner img {
+    height: 300px;
+    object-fit: contain;
+}
+
+.box {
+    box-shadow: inset 0 0 1px black;
+}
+
+.body {
+    display: flex;
+    gap: 20px;
+}
+.main-content {
+    width: 75%;
+}
+.sidebar {
+    width: 25%;
+}
+.hang {
+    display: flex;
+}
+.slider {
+    margin-bottom: 20px;
+}
+.card {
+    flex: 1;
+}
+.pro-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+} 
+.form-account {
+    padding: 5px 10px;
+}
+.inputtk {
+    padding: 10px;
+}
+.inputtk input {
+    width: 100%;
+    padding: 5px;
+}
+.boxtitle {
+    border-bottom: 1px solid rgba(0, 0, 0,0.2);
+    padding: 5px 10px;
+    background-color: #0D6EFD;
+    color: white;
+}
+
+.boxcontent1, .loai {
+    border-bottom: 1px #ccc solid;
+    padding: 5px 10px;
+}
+
+footer {
+    margin-top: 20px;
+    line-height: 80px;
+    background-color: rgb(149, 152, 151);
+    font-size:large;
+    color: rgb(55, 58, 56);
+    padding: 0 20px;
+}
+
+/* css detail */
+.pro {
+    display: flex;
+    gap: 50px;
+}
+.info button {
+    border-radius: 10px;
+    background-color: #0D6EFD;
+    color: white;
+    border: 1px solid #0D6EFD ;
+    padding: 5px 10px;
+}
+.title {
+    background-color: rgb(221, 221, 221);
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 20px;
+}
+.border {
+    border: 1px solid #ccc;
+}
+.comment li{
+    display: flex;
+    justify-content: space-between; 
+    padding: 5px;
+}
+.form-comment button{
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 4px;
+    width: 100%;
+    padding: 5px 0;
+}
+.form-comment button:hover {
+    background-color: #dddddd;
+}
+
+/* css register */
+.alert {
+    display: none;
+}
