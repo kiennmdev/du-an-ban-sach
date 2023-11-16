@@ -3,19 +3,19 @@
 
 function load_all_sach()
 {
-    $sql = "SELECT * FROM sach ORDER BY id DESC";
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.madanhmuc ORDER BY masach DESC";
     return pdo_query($sql);
 }
 
 function load_one_sach($ma_sach)
 {
-    $sql = "SELECT * FROM sach WHERE ma_sach=?";
+    $sql = "SELECT * FROM sach WHERE masach=?";
     return pdo_query_one($sql, $ma_sach);
 }
-function insert_sach($ten_sach, $hinh, $nha_xuat_ban, $so_luong, $gia, $mo_ta, $ngay_xuat_ban, $ma_danh_muc, $trang_thai)
+function insert_sach($tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai)
 {
-    $sql = "INSERT INTO sach(ten_sach, hinh, nha_xuat_ban, so_luong, gia, mo_ta, ngay_xuat_ban, ma_danh_muc, trang_thai) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    pdo_execute($sql, $ten_sach, $hinh, $nha_xuat_ban, $so_luong, $gia, $mo_ta, $ngay_xuat_ban, $ma_danh_muc, $trang_thai);
+    $sql = "INSERT INTO sach(tensach, hinh, nhaxuatban, soluong, gia, mota, ngayxuatban, madanhmuc, trangthai) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    pdo_execute($sql, $tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
 }
 function update_sach($ma_sach, $ten_sach, $hinh, $nha_xuat_ban, $so_luong, $gia, $mo_ta, $ngay_xuat_ban, $ma_danh_muc, $trang_thai)
 {

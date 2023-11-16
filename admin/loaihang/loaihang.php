@@ -3,6 +3,7 @@
         Quản lý loại sách
     </div>
     <div class="listdanhmuc">
+    <form action="?act=loaihang" method="post">
         <table class="table">
             <thead>
                 <tr>
@@ -18,7 +19,7 @@
                 foreach ($dsdm as $dm) {
                     extract($dm); ?>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td class="text-center"><input type="checkbox" class="checkbox" name="madanhmuc[]" value="<?=$madanhmuc?>"></td>
                         <td> <?= $madanhmuc ?> </td>
                         <td> <?= $tendanhmuc ?> </td>
                         <td><?= $trangthai == 1 ? 'Hiện' : 'Ẩn' ?></td>
@@ -34,11 +35,10 @@
             </tbody>
         </table>
         <div class="chucnang">
-            <form action="?act=loaihang" method="get">
                 <a href="?act=themloaihang"><button type="button" class="btn btn-success" >Thêm mới</button></a>
-                <button type="button" class="btn btn-primary">Chọn tất cả</button>
-                <button type="button" class="btn btn-primary">Bỏ chọn tất cả</button>
-                <button type="button" class="btn btn-danger">Xóa các mục chọn</button>
+                <button type="button" id="checkall" class="btn btn-primary">Chọn tất cả</button>
+                <button type="button" id="clearall" class="btn btn-primary">Bỏ chọn tất cả</button>
+                <button type="submit" id="deleteall" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')">Xóa các mục chọn</button>
             </form>
         </div>
     </div>

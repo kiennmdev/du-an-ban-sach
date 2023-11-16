@@ -16,12 +16,13 @@ session_start();
 //     }
     // if (isset($_SESSION['username']) && $_SESSION['role'] == 0) {
         
-    include '../model/pdo.php';
-    include '../model/danhmuc.php';
-    include '../model/sach.php';
+    require_once '../model/pdo.php';
+    require_once '../_global.php';
+    require_once '../model/danhmuc.php';
+    require_once '../model/sach.php';
     include 'header.php';
     $dsdm = load_all_danhmuc();
-    // $dssp = load_all_sach();
+    $dssp = load_all_sach();
     // $dsthongke = null;
 
     if (isset($_GET['act']) && ($_GET['act'] != "")) {
@@ -37,6 +38,11 @@ session_start();
                 if (isset($_GET['iddm'])) {
                     $iddm = $_GET['iddm'];
                     delete_danhmuc($iddm); 
+                    header('location: ?act=loaihang');
+                }
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $madanhmuc = $_POST['madanhmuc']; //đây là 1 mảng
+                    delete_multi_danhmuc($madanhmuc);
                     header('location: ?act=loaihang');
                 }
                 include 'loaihang/loaihang.php';
@@ -134,9 +140,9 @@ session_start();
             //     break;
 
             // Hàng hóa
-            // case 'hanghoa':
-            //     include 'hanghoa/hanghoa.php';
-            //     break;
+            case 'hanghoa':
+                include 'hanghoa/hanghoa.php';
+                break;
             // case 'suahanghoa':
             //     if (isset($_GET['idsp']) && $_GET['idsp'] > 0 ) {
             //         $idsp = $_GET['idsp'];
@@ -165,26 +171,33 @@ session_start();
             //         include 'hanghoa/suahanghoa.php';
             //     }
             //     break;
-            // case 'themhanghoa':
-            //     if (isset($_POST['themmoi'])) {
-            //         $tensp = $_POST['tensp'];
-            //         $price = $_POST['price'];
-            //         $trangthai = $_POST['trangthai'];
-            //         $loaihang = $_POST['loaihang'];
-            //         $luotxem = $_POST['luotxem'];
-            //         $mota = $_POST['mota'];
-            //         $img = $_FILES['img'];
-            //         $photo = null;
+            case 'themhanghoa':
+                if (isset($_POST['themmoi'])) {
+                    $tensach = $_POST['tensach'];
+                    $img = $_FILES['hinh'];
+                    $nhaxuatban = $_POST['nxb'];
+                    $soluong = $_POST['soluong'];
+                    $gia = $_POST['gia'];
+                    $mota = $_POST['mota'];
+                    $ngayxuatban = $_POST['timexb'];
+                    $madanhmuc = $_POST['loaisach'];
+                    $trangthai = $_POST['trangthai'];
+                    $hinh = null;
+                    
+                    // $err = [];
+                    // if (empty($tensach)) {
+                    //     $err['']
+                    // }
 
-            //         if ($img['name'] != "") {
-            //             $photo = time() . "_" . $img['name'];
-            //             move_uploaded_file($img['tmp_name'],"../".$img_path.$photo);
-            //         }
-            //         insertsp($tensp,$price,$trangthai,$loaihang,$photo,$luotxem,$mota);
-            //         header("location: ?act=hanghoa");
-            //     }
-            //     include 'hanghoa/themhanghoa.php';
-            //     break;
+                    if ($img['name'] != "") {
+                        $hinh = time() . "_" . $img['name'];
+                        move_uploaded_file($img['tmp_name'],"../".$img_path.$hinh);
+                    }
+                    insert_sach($tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
+                    header("location: ?act=hanghoa");
+                }
+                include 'hanghoa/themhanghoa.php';
+                break;
             // case 'xoahanghoa':
             //     if (isset($_GET['idsp']) && $_GET['idsp'] > 0) {
             //         $idsp = $_GET['idsp'];

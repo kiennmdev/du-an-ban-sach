@@ -24,4 +24,16 @@ function delete_danhmuc($madanhmuc){
     $sql ="DELETE FROM danhmuc WHERE madanhmuc=?";
     pdo_execute($sql, $madanhmuc);
 }
+
+function delete_multi_danhmuc($madanhmuc){
+    $madm = "";
+    foreach ($madanhmuc as $item) {
+        $madm .= $item . ", ";
+    }
+    //Xóa dấu (,) thừa ở bên phải
+    $madm = rtrim($madm, ", ");
+    $sql = "DELETE FROM danhmuc where madanhmuc in ($madm)";
+    pdo_execute($sql);
+}
 ?>
+

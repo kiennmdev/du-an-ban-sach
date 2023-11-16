@@ -3,6 +3,7 @@
                 Quản lý hàng hóa
             </div>
             <div class="listhanghoa">
+                <form action="?act=hanghoa" method="post">
                 <table class="table">
                     <thead>
                         <tr>
@@ -23,20 +24,20 @@
                                 extract($sp);
                         ?>
                         <tr>
-                            <td><input type="checkbox"></td>
-                            <td><?= $id ?></td>
-                            <td><?= $name ?></td>
+                            <td class="text-center"><input type="checkbox" class="checkbox" name="madanhmuc[]" value="<?=$madanhmuc?>"></td>
+                            <td><?= $masach ?></td>
+                            <td><?= $tensach ?></td>
                             <td>
-                                <img src="<?= "../". $img_path . $img ?>" width="50px" alt="">
+                                <img src="<?= "../". $img_path . $hinh ?>" width="50px" alt="">
                             </td>
-                            <td>$<?= $price ?></td>
-                            <td><?= $luotxem ?></td>
-                            <td>Bình thường</td>
+                            <td><?= $gia ?></td>
+                            <td><?= $soluong ?></td>
+                            <td><?= $trangthai == 1 ? 'Hiện' : 'Ẩn' ?></td>
                             <td><?= $tendanhmuc ?></td>
                             <td>
-                                <a href="?act=suahanghoa&idsp=<?= $id ?>"><button type="button"
-                                        class="btn btn-primary">Sửa</button></a>
-                                <a href="?act=xoahanghoa&idsp=<?= $id ?>"><button type="button" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')">Xóa</button></a>
+                                <a href="?act=suahanghoa&idsp=<?= $masach ?>"><button type="button"
+                                        class="btn btn-warning">Sửa</button></a>
+                                <a href="?act=xoahanghoa&idsp=<?= $masach ?>"><button type="button" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')">Xóa</button></a>
                             </td>
                         </tr>
                         <?php endforeach ?>
@@ -44,9 +45,10 @@
                 </table>
                 <div class="chucnang">
                     <a href="?act=themhanghoa"><button type="button" class="btn btn-success">Thêm mới</button></a>
-                    <button type="button" class="btn btn-primary">Chọn tất cả</button>
-                    <button type="button" class="btn btn-primary">Bỏ chọn tất cả</button>
-                    <button type="button" class="btn btn-danger">Xóa các mục chọn</button>
+                    <button type="button" id="checkall" class="btn btn-primary">Chọn tất cả</button>
+                    <button type="button" id="clearall" class="btn btn-primary">Bỏ chọn tất cả</button>
+                    <button type="submit" id="deleteall" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')">Xóa các mục chọn</button>
                 </div>
+                </form>
             </div>
         </div>
