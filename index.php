@@ -1,7 +1,11 @@
 <?php
 require_once "model/pdo.php";
 require_once "_global.php";
+require_once "model/danhmuc.php";
+require_once "model/sach.php";
 
+$dsdm = load_all_danhmuc();
+$dssp = 0;
 $act = $_GET['act'] ?? "";
 $view = "";
     switch ($act) {
@@ -9,6 +13,10 @@ $view = "";
             $view = "view/home.php";
             break;
         case 'danhsach':
+            if (isset($_GET['iddm'])) {
+                $iddm = $_GET['iddm'];
+                $dssp = load_all_sach_madanhmuc($iddm);
+            }
             $view = "view/danhsach.php";
             break;
         case 'chitietsach':

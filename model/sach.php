@@ -7,9 +7,16 @@ function load_all_sach()
     return pdo_query($sql);
 }
 
+function load_all_sach_madanhmuc($madanhmuc)
+{
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.madanhmuc where sach.madanhmuc = $madanhmuc ORDER BY masach DESC";
+    return pdo_query($sql);
+}
+
+
 function load_one_sach($ma_sach)
 {
-    $sql = "SELECT * FROM sach WHERE masach=?";
+    $sql = "SELECT *, madanhmuc AS iddm  FROM sach WHERE masach=?";
     return pdo_query_one($sql, $ma_sach);
 }
 function insert_sach($tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai)
@@ -17,22 +24,32 @@ function insert_sach($tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayx
     $sql = "INSERT INTO sach(tensach, hinh, nhaxuatban, soluong, gia, mota, ngayxuatban, madanhmuc, trangthai) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     pdo_execute($sql, $tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
 }
-function update_sach($ma_sach, $ten_sach, $hinh, $nha_xuat_ban, $so_luong, $gia, $mo_ta, $ngay_xuat_ban, $ma_danh_muc, $trang_thai)
+function update_sach($masach, $tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai)
 {
-    $sql = "UPDATE sach SET ten_sach=?, hinh=?, nha_xuat_ban=?, so_luong=?, gia=?, mo_ta=?, ngay_xuat_ban=?, ma_danh_muc=?, trang_thai=? WHERE ma_sach=?";
-    pdo_execute($sql, $ten_sach, $hinh, $nha_xuat_ban, $so_luong, $gia, $mo_ta, $ngay_xuat_ban, $ma_danh_muc, $trang_thai, $ma_sach);
+    $sql = "UPDATE sach SET tensach=?, hinh=?, nhaxuatban=?, soluong=?, gia=?, mota=?, ngayxuatban=?, madanhmuc=?, trangthai=? WHERE masach=?";
+    pdo_execute($sql, $tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai, $masach);
 }
 //Xóa cứng
-function delete_sach($ma_sach)
+function delete_sach($masach)
 {
-    $sql = "DELETE FROM sach WHERE ma_sach=?";
-    pdo_execute($sql, $ma_sach);
+    $sql = "DELETE FROM sach WHERE masach=?";
+    pdo_execute($sql, $masach);
+}
+
+function delete_multi_item_sach($masach){
+    $ma_sach = "";
+    foreach ($masach as $item) {
+        $ma_sach .= $item . ", ";
+    }
+    $ma_sach = rtrim($ma_sach,", ");
+    $sql = "DELETE FROM sach where masach in ($ma_sach)";
+    pdo_execute($sql);
 }
 
 //Xóa mềm
-function delete_sach_mem($ma_sach)
+function delete_sach_mem($masach)
 {
-    $sql = "UPDATE sach SET trang_thai=0 WHERE ma_sach=?";
-    pdo_execute($sql, $ma_sach);
+    $sql = "UPDATE sach SET trangthai=0 WHERE masach=?";
+    pdo_execute($sql, $masach);
 }
 // $sql = "SELECT sach.*, ten_danh_muc FROM sach JOIN danhmuc ON sach.ma_danh_muc=danhmuc.ma_danh_muc WHERE trang_thai = 1 ORDER BY id DESC";

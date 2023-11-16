@@ -12,7 +12,7 @@
     <header>
         <div class="container header">
             <div class="logo">
-                <h2>FakeBook<i class="fa-solid fa-book"></i></h2>
+                <h2><a href="?act=home">FakeBook<i class="fa-solid fa-book"></i></a></h2>
             </div>
             <div class="form-search">
                 <form action="" method="get">
@@ -29,8 +29,8 @@
                     <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
                 <div class="login-regis">
-                    <a href="#">Đăng nhập</a> |
-                    <a href="#">Đăng ký</a>
+                    <a href="?act=dangnhap">Đăng nhập</a> |
+                    <a href="?act=dangky">Đăng ký</a>
                 </div>
             </div>
         </div>

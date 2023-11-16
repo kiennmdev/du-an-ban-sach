@@ -24,7 +24,7 @@
                                 extract($sp);
                         ?>
                         <tr>
-                            <td class="text-center"><input type="checkbox" class="checkbox" name="madanhmuc[]" value="<?=$madanhmuc?>"></td>
+                            <td class="text-center"><input type="checkbox" class="checkbox" name="masach[]" value="<?=$masach?>"></td>
                             <td><?= $masach ?></td>
                             <td><?= $tensach ?></td>
                             <td>
@@ -37,7 +37,7 @@
                             <td>
                                 <a href="?act=suahanghoa&idsp=<?= $masach ?>"><button type="button"
                                         class="btn btn-warning">Sửa</button></a>
-                                <a href="?act=xoahanghoa&idsp=<?= $masach ?>"><button type="button" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')">Xóa</button></a>
+                                <a href="?act=hanghoa&idsp=<?= $masach ?>"><button type="button" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')">Xóa</button></a>
                             </td>
                         </tr>
                         <?php endforeach ?>

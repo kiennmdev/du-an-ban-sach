@@ -20,8 +20,9 @@ header {
     align-items: center;
     justify-content: space-between;
 }
-.logo>h2{
+.logo a{
     color: white;
+    text-decoration: none;
 }
 .form-search {
     background-color: white;

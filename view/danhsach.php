@@ -37,15 +37,18 @@
                             </div>
                         </div>
                         <div class="blockcontent">
+                            <?php foreach($dssp as $sp) :
+                                extract($sp);
+                            ?>
                             <div class="product-contener">
                                 <div class="product">
                                     <div class="image">
-                                        <a href="#"><img src="assets/image/anh1.jpg" alt=""></a>
+                                        <a href="?act=chitietsach&idsp=<?= $masach ?>"><img src="<?= $img_path . $hinh ?>" alt=""></a>
                                         <span class="saleprice">-10%</span>
                                     </div>
                                     <div class="d-pro-content">
                                         <div class="productname">
-                                            <a href="">Địa Cầu Online, tập 1</a>
+                                            <a href="?act=chitietsach&idsp=<?= $masach ?>"><?= $tensach ?></a>
                                         </div>
                                         <div class="fields">
                                             <span><a href="">Mạc Thần Hoàn</a></span>
@@ -53,13 +56,14 @@
                                         <div class="d_price_group">
                                             <div class="prices">148.500 <sup>đ</sup></div>
     
-                                            <div class="rootprice"><del>165.000</del> <sup>đ</sup></div>
+                                            <div class="rootprice"><del><?= number_format($gia,0,',','.') ?></del> <sup>đ</sup></div>
                                         </div>
                                     </div>
                                 </div>
     
                             </div>
-                            <div class="product-contener">
+                            <?php endforeach ?>
+                            <!-- <div class="product-contener">
                                 <div class="product">
                                     <div class="image">
                                         <a href="#"><img src="assets/image/anh1.jpg" alt=""></a>
@@ -168,7 +172,7 @@
                                     </div>
                                 </div>
     
-                            </div>
+                            </div> -->
                         </div>
                         <div class="footcontent">
                             <ul>
