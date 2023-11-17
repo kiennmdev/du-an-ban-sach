@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #checkout {
+            width: 80%;
+        }
+        h2 {
+            color: #e74c3c;
+            text-align: center;
+        }
+        form {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: 1fr 1fr;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        #order-details {
+            margin-top: 20px;
+        }
+        #order-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #order-details th, #order-details td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #order-details th {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+        #order-details td:last-child {
+            text-align: right;
+        }
+        #order-details #total-price {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        #place-order-btn {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="checkout">
+        <h2>ĐẶT HÀNG</h2>
+        <form>
+            <div>
+                <h3>THÔNG TIN ĐƠN HÀNG</h3>
+                <label for="fullname">Họ và Tên: (*)</label>
+                <input type="text" id="fullname" name="fullname" required>
+
+                <label for="phone">Điện thoại: (*)</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="email">Email: (*)</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="address">Địa chỉ nhận: (*)</label>
+                <textarea id="address" name="address" required></textarea>
+
+                <label for="province">Tỉnh/Thành: (*)</label>
+                <select id="province" name="province" required>
+                    
+                </select>
+
+                <label for="district">Quận/Huyện: (*)</label>
+                <select id="district" name="district" required>
+                    
+                </select>
+
+                <label for="ward">Phường/Xã: (*)</label>
+                <select id="ward" name="ward" required>
+                    
+                </select>
+
+                <label for="packaging">Đóng Gói: (*)</label>
+                <select id="packaging" name="packaging" required>
+                    
+                </select>
+
+                <label for="payment-method">Hình thức thanh toán: (*)</label>
+                <select id="payment-method" name="payment-method" required>
+                    <option value="cash">Thanh toán tiền mặt khi nhận hàng</option>
+                    <option value="bank-transfer">Thanh toán chuyển khoản</option>
+                </select>
+
+                <label for="note">Ghi chú:</label>
+                <textarea id="note" name="note"></textarea>
+            </div>
+
+            <div id="order-details">
+                <h3>Chi tiết đơn</h3>
+                <table>
+                    <!-- Đổ dữ liệu -->
+                </table>
+                <div id="total-price">Tổng tiền: </div>
+            </div>
+            
+            <button id="place-order-btn">Đặt Hàng</button>
+        </form>
+    </div>
+</body>
+</html>
