@@ -20,6 +20,11 @@ $view = "";
             $view = "view/danhsach.php";
             break;
         case 'chitietsach':
+            if (isset($_GET['idsp'])) {
+                $idsp = $_GET['idsp'];
+                $sp = load_one_sach($idsp);
+                extract($sp);
+            }
             $view = "view/chitietsach.php";
             break;
         case 'dangnhap':

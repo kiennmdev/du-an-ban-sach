@@ -2,20 +2,20 @@
               <div class="main-content">
                 <div class="product-view-contener">
                     <div class="image-pvc">
-                        <img src="assets/image/anh1.jpg" alt="">
+                        <img src="<?=$img_path . $hinh?>" alt=" ">
                     </div>
                     <div class="showinfo-pvc">
-                        <h4>Địa Cầu Online, tập 1</h4>
+                        <h4><?= $tensach ?></h4>
     
                         <div class="author-contener">
                             Tác Giả: <span>Mạc Thần Hoàn</span> <br>
-                            NXB: <span>Kim Đồng</span>
+                            NXB: <span><?= $nhaxuatban ?></span>
                         </div>
                         <div class="quantity">
-                            Số lượng: <span>15</span>
+                            Số lượng: <span><?= $soluong?></span>
                         </div>
                         <div class="price-contener">
-                            <span class="rootprice"><del>165.000</del> <sup>đ</sup></span>
+                            <span class="rootprice"><del><?= number_format($gia,0,',','.') ?></del> <sup>đ</sup></span>
                             <span class="price">149.000 <sup>đ</sup></span>
                         </div>
                         <div class="module-productdetail">
@@ -23,17 +23,7 @@
                                 Mô Tả:
                             </h4>
                             <p>
-                                1021 tòa tháp đen kỳ lạ thình lình xuất hiện trên toàn cầu, bất kỳ nơi nào, bất kỳ thành phố
-                                nào
-                                cũng có thể nhìn thấy nó.
-    
-                                Đường Mạch, một nhân viên thư viện bình thường vô tình bị cuốn vào chuỗi những thử thách
-                                sinh tồn do
-                                Tháp Đen tạo ra. Bất ngờ thay, cậu còn vô tình phát hiện người bạn quen qua mạng của mình –
-                                Victor,
-                                cũng đã tham gia chinh phục Tháp Đen.
-    
-                                Tất cả đã bắt đầu quen với thông báo của Tháp Đen kỳ bí: “Đing đoong! Địa Cầu Online!”
+                              <?= $mota ?>
                             </p>
                         </div>
                         <div class="button-buy">
