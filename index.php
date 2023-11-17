@@ -43,9 +43,6 @@ $view = "";
 
 
 include "view/_header.php";
-if ($act == 'danhsach' || $act == 'chitietsach' || $act == 'dangnhap' || $act == 'dangky' || $act == 'recover') {
-    include "view/_path.php";
-}
 echo $html;
 include "view/_sidebar.php";
 include $view;

@@ -1,7 +1,7 @@
 
                 <div class="main-content">
                     <div class="main-title">
-                        <h2>Sách Lập Trình</h2>
+                        <h2><?= $tendanhmuc ?></h2>
                     </div>
                     <div class="content">
                         <div class="content-sort">

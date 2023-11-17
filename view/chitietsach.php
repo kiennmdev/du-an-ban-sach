@@ -41,13 +41,13 @@
                         <thead>
                             <tr>
                                 <td>Tác giả</td>
-                                <td>Lastname</td>
+                                <td>Mạc Thần Hoàn</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Nhà xuất bản</td>
-                                <td>Doe</td>
+                                <td><?= $nhaxuatban ?></td>
                             </tr>
                             <tr>
                                 <td>Lượt xem</td>
@@ -55,11 +55,11 @@
                             </tr>
                             <tr>
                                 <td>Ngày xuất bản</td>
-                                <td>Dooley</td>
+                                <td><?= $ngayxuatban ?></td>
                             </tr>
                             <tr>
                                 <td>Danh mục</td>
-                                <td>Dooley</td>
+                                <td><?= $tendanhmuc ?></td>
                             </tr>
                         </tbody>
                     </table>

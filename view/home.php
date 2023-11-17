@@ -1,6 +1,6 @@
 <div class="main-content">
                     <div class="main-banner">
-        
+                        
                     </div>
                     <div class="list">
                         <div class="head-list">
