@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #cart {
+            width: 60%;
+            margin: 20px auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+        img {
+            max-width: 50px;
+            max-height: 50px;
+        }
+        #total {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        #checkout-btn {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="cart">
+        <h2 style="color: #3498db;">Giỏ Hàng</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                    <th>Xoá</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- Dữ liệu sản phẩm sẽ được thêm vào đây -->
+            </tbody>
+        </table>
+        <div id="total">Tạm tính: <span id="total-price">0</span> VNĐ</div>
+        <button id="checkout-btn">Đặt Hàng</button>
+        <button">Chọn Thêm Sản Phẩm</button>
+    </div>
+
+</body>
+</html>
