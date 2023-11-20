@@ -4,6 +4,12 @@ require_once "_global.php";
 require_once "model/danhmuc.php";
 require_once "model/sach.php";
 
+// Kiểm tra session tồn tại chưa trước khi gọi
+if (session_status() == PHP_SESSION_NONE) {
+    ob_start(); // Bắt đầu đệm đầu ra
+    session_start(); // Bắt đầu session
+}
+
 $dsdm = load_all_danhmuc();
 $dssp = 0;
 $act = $_GET['act'] ?? "";

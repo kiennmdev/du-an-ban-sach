@@ -3,7 +3,8 @@
 
 // Kiểm tra session tồn tại chưa trước khi gọi
 if (session_status() == PHP_SESSION_NONE) {
-    session_start();
+    ob_start(); // Bắt đầu đệm đầu ra
+    session_start(); // Bắt đầu session
 }
 
 // Hủy tất cả các biến phiên
