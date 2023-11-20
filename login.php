@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn = pdo_get_connection();
 
         // Truy vấn để kiểm tra thông tin đăng nhập
-        $sql = "SELECT manguoidung, email, matkhau, trangthai FROM nguoidung WHERE email = :email";
+        $sql = "SELECT manguoidung, email, matkhau, trangthai, capbac FROM nguoidung WHERE email = :email";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -49,8 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         setcookie("user_password", $user['matkhau'], 0, "/");
                     }
 
-                    // Chuyển hướng đến trang chính hoặc trang cần thiết
-                    header("Location: index.php");
+                    // Kiểm tra vai trò của người dùng và chuyển hướng đến trang tương ứng
+                    if ($user['capbac'] == 0) {
+                        // Nếu là admin
+                        header("Location: admin1/index.php");
+                    } else {
+                        // Nếu là user
+                        header("Location: index.php");
+                    }
                     exit();
                 }
             } else {
@@ -71,6 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 
 <form action="login.php" method="post" class="main-content">
     <h4 class="fontsize20">Thông Tin Đăng Nhập</h4>
