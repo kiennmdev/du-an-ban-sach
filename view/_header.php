@@ -1,5 +1,14 @@
+<?php 
+// Kiểm tra session tồn tại chưa trước khi gọi
+if (session_status() == PHP_SESSION_NONE) {
+    ob_start(); // Bắt đầu đệm đầu ra
+    session_start(); // Bắt đầu session
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
     <header>
         <div class="container header">
@@ -16,12 +26,12 @@
             </div>
             <div class="form-search">
                 <form action="" method="get">
-                        <div class="form-input">
-                            <input type="text" name="search" placeholder="Tìm kiếm" id="">
-                        </div>
-                        <div class="form-button">
-                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </div>
+                    <div class="form-input">
+                        <input type="text" name="search" placeholder="Tìm kiếm" id="">
+                    </div>
+                    <div class="form-button">
+                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
                 </form>
             </div>
             <div class="cart-login-regis">
@@ -29,11 +39,18 @@
                     <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
                 <div class="login-regis">
-                    <a href="?act=dangnhap">Đăng nhập</a> |
-                    <a href="?act=dangky">Đăng ký</a>
+                    <?php
+                    // Kiểm tra xem người dùng đã đăng nhập hay chưa
+                    if (isset($_SESSION['user_id'])) {
+                        // Nếu đã đăng nhập, hiển thị nút Profile
+                        echo '<a href="?act=profile">Profile</a>';
+                    } else {
+                        // Nếu chưa đăng nhập, hiển thị nút Đăng nhập
+                        echo '<a href="?act=dangnhap">Đăng nhập</a>';
+                    }
+                    ?>
                 </div>
             </div>
-        </div>
     </header>
     <nav>
         <div class="container nav">
@@ -44,7 +61,7 @@
             </div>
 
             <div class="contact">
-                <span><i class="fa-solid fa-phone maincolor"></i><strong>Hotline:</strong> <strong class="maincolor">1900 1508</strong> | <i class="fa-regular fa-circle-question"></i> <a href="#">Hỗ trợ  trực tuyến</a></span>
+                <span><i class="fa-solid fa-phone maincolor"></i><strong>Hotline:</strong> <strong class="maincolor">1900 1508</strong> | <i class="fa-regular fa-circle-question"></i> <a href="#">Hỗ trợ trực tuyến</a></span>
             </div>
         </div>
     </nav>

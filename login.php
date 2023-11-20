@@ -1,6 +1,12 @@
 <?php
-
-
+if (!function_exists('pdo_get_connection')) {
+    include('model/pdo.php');
+}
+// Kiểm tra session tồn tại chưa trước khi gọi
+if (session_status() == PHP_SESSION_NONE) {
+    ob_start(); // Bắt đầu đệm đầu ra
+    session_start(); // Bắt đầu session
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Lấy dữ liệu từ form đăng nhập
@@ -26,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($matkhau == $user['matkhau']) {
                 // Kiểm tra xem người dùng có bị khóa không
                 if ($user['trangthai'] == 0) {
-                    // Người dùng bị khóa, hiển thị thông báo lỗi
                     echo "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ với quản trị viên để biết thêm chi tiết.";
                 } else {
                     // Người dùng không bị khóa, lưu thông tin vào session
@@ -45,17 +50,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
 
                     // Chuyển hướng đến trang chính hoặc trang cần thiết
-                    header("Location: index.php"); // Thay đổi đường dẫn nếu cần
+                    header("Location: index.php");
                     exit();
                 }
             } else {
                 // Đăng nhập thất bại, chuyển hướng về trang đăng nhập
-                header("Location: login.php"); // Thay đổi đường dẫn nếu cần
+                header("Location: login.php");
                 exit();
             }
         } else {
             // Đăng nhập thất bại, chuyển hướng về trang đăng nhập
-            header("Location: login.php"); // Thay đổi đường dẫn nếu cần
+            header("Location: login.php");
             exit();
         }
     } catch (PDOException $e) {
@@ -70,8 +75,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <form action="login.php" method="post" class="main-content">
     <h4 class="fontsize20">Thông Tin Đăng Nhập</h4>
     <hr>
-    <div class="mb-3 mt-3"> <label for="email" class="form-label">Email:</label> <input type="email" id="email" name="email" class="form-control" placeholder="Nhập email" required> </div>
-    <div class="mb-3"> <label for="matkhau" class="form-label">Mật khẩu:</label> <input type="password" id="matkhau" name="matkhau" class="form-control" placeholder="Nhập mật khẩu" required> </div>
-    <div class="mb-3 form-check"> <input type="checkbox" id="remember" name="remember" class="form-check-input"> <label for="remember" class="form-check-label">Nhớ mật khẩu</label> </div>
-    <div class="mb-3"> <label for="forgot" class="form-label">Quên mật khẩu?</label> <a href="forgot.php" id="forgot" class="form-label">Nhấn vào đây</a> </div> <button type="submit"  class="btn btn-success">Đăng Nhập</button>
+    <div class="mb-3 mt-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Nhập email" required>
+    </div>
+    <div class="mb-3">
+        <label for="matkhau" class="form-label">Mật khẩu:</label>
+        <input type="password" id="matkhau" name="matkhau" class="form-control" placeholder="Nhập mật khẩu" required>
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" id="remember" name="remember" class="form-check-input">
+        <label for="remember" class="form-check-label">Nhớ mật khẩu</label>
+    </div>
+    <div class="mb-3">
+        <label for="forgot" class="form-label">Quên mật khẩu?</label>
+        <a href="forgot.php" id="forgot" class="form-label">Nhấn vào đây</a>
+        <p>Bạn chưa có tài khoản? <a href="index.php?act=dangky">Nhấn vào đây</a></p>
+    </div>
+    <button type="submit" class="btn btn-success">Đăng Nhập</button>
+    <div class="mb-3">
+    </div>
 </form>
