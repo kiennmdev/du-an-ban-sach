@@ -1,7 +1,4 @@
 <?php
-// Kết nối cơ sở dữ liệu
-include 'model/pdo.php';
-
 // Kiểm tra nếu người dùng đã gửi form đăng nhập
 if (isset($_POST['login'])) {
     // Lấy dữ liệu từ form
@@ -64,15 +61,11 @@ if (isset($_POST['login'])) {
 }
 ?>
 
-<!-- Tạo form đăng nhập -->
-<form action="login.php" method="post">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <label for="matkhau">Mật khẩu:</label>
-    <input type="password" id="matkhau" name="matkhau" required>
-    <label for="remember">Nhớ mật khẩu:</label>
-    <input type="checkbox" id="remember" name="remember">
-    <label for="forgot">Quên mật khẩu?</label>
-    <a href="forgot.php" id="forgot">Nhấn vào đây</a>
-    <input type="submit" name="login" value="Đăng nhập">
+<form action="login.php" method="post" class="main-content">
+    <h4 class="fontsize20">Thông Tin Đăng Nhập</h4>
+    <hr>
+    <div class="mb-3 mt-3"> <label for="email" class="form-label">Email:</label> <input type="email" id="email" name="email" class="form-control" placeholder="Nhập email" required> </div>
+    <div class="mb-3"> <label for="matkhau" class="form-label">Mật khẩu:</label> <input type="password" id="matkhau" name="matkhau" class="form-control" placeholder="Nhập mật khẩu" required> </div>
+    <div class="mb-3 form-check"> <input type="checkbox" id="remember" name="remember" class="form-check-input"> <label for="remember" class="form-check-label">Nhớ mật khẩu</label> </div>
+    <div class="mb-3"> <label for="forgot" class="form-label">Quên mật khẩu?</label> <a href="forgot.php" id="forgot" class="form-label">Nhấn vào đây</a> </div> <button type="submit" name="login" class="btn btn-success">Đăng Nhập</button>
 </form>
