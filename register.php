@@ -1,7 +1,10 @@
 <?php
 if (!function_exists('pdo_get_connection')) {
-  include('model/pdo.php');
+    include('model/pdo.php');
 }
+
+$message = ''; // Biến để lưu trữ thông báo
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Lấy dữ liệu từ form đăng ký
     $hoten = $_POST['hoten'];
@@ -14,21 +17,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Kết nối cơ sở dữ liệu
         $conn = pdo_get_connection();
 
-        // Truy vấn để thêm thông tin người dùng vào bảng nguoidung
-        $sql = "INSERT INTO nguoidung (hoten, email, matkhau, sodienthoai, diachi) VALUES (:hoten, :email, :matkhau, :sodienthoai, :diachi)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':hoten', $hoten);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':matkhau', $matkhau);
-        $stmt->bindParam(':sodienthoai', $sodienthoai);
-        $stmt->bindParam(':diachi', $diachi);
-        $stmt->execute();
+        // Kiểm tra xem email đã tồn tại hay chưa
+        $check_email_sql = "SELECT COUNT(*) FROM nguoidung WHERE email = :email";
+        $check_email_stmt = $conn->prepare($check_email_sql);
+        $check_email_stmt->bindParam(':email', $email);
+        $check_email_stmt->execute();
+        $email_exists = $check_email_stmt->fetchColumn();
 
-        // Chuyển hướng đến trang chính hoặc trang cần thiết sau khi đăng ký thành công
-        header("Location: index.php"); // Thay đổi đường dẫn nếu cần
-        exit();
+        if ($email_exists) {
+            // Nếu email đã tồn tại, cập nhật biến thông báo
+            $message = "Tài khoản với email đã tồn tại. Vui lòng sử dụng email khác.";
+        } else {
+            // Thêm thông tin người dùng vào bảng nguoidung
+            $insert_user_sql = "INSERT INTO nguoidung (hoten, email, matkhau, sodienthoai, diachi) VALUES (:hoten, :email, :matkhau, :sodienthoai, :diachi)";
+            $insert_user_stmt = $conn->prepare($insert_user_sql);
+            $insert_user_stmt->bindParam(':hoten', $hoten);
+            $insert_user_stmt->bindParam(':email', $email);
+            $insert_user_stmt->bindParam(':matkhau', $matkhau);
+            $insert_user_stmt->bindParam(':sodienthoai', $sodienthoai);
+            $insert_user_stmt->bindParam(':diachi', $diachi);
+            $insert_user_stmt->execute();
+
+            // Chuyển hướng đến trang chính hoặc trang cần thiết sau khi đăng ký thành công
+            header("Location: index.php");
+            exit();
+        }
     } catch (PDOException $e) {
-        // Xử lý lỗi nếu có
         echo "Error: " . $e->getMessage();
     } finally {
         unset($conn);
@@ -38,9 +52,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- Form đăng ký -->
 <div class="main-content">
-    <form action="register.php" method="post">
+    <form action="index.php?act=dangky" method="post">
         <h4 class="fontsize20">Thông Tin Đăng Ký</h4>
         <hr>
+        <!-- Hiển thị thông báo email đã tồn tại -->
+        <?php if (!empty($message)) : ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $message; ?>
+            </div>
+        <?php endif; ?>
         <div class="mb-3 mt-3">
             <label for="hoten" class="form-label">Họ và tên:</label>
             <input type="text" class="form-control" id="hoten" placeholder="Nhập họ và tên" name="hoten" required>
