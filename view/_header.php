@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Kiểm tra session tồn tại chưa trước khi gọi
 if (session_status() == PHP_SESSION_NONE) {
     ob_start(); // Bắt đầu đệm đầu ra
@@ -42,8 +42,10 @@ if (session_status() == PHP_SESSION_NONE) {
                     <?php
                     // Kiểm tra xem người dùng đã đăng nhập hay chưa
                     if (isset($_SESSION['user_id'])) {
-                        // Nếu đã đăng nhập, hiển thị nút Profile
-                        echo '<a href="?act=profile">Profile</a>';
+                        // Nếu đã đăng nhập, kiểm tra xem khóa 'user_name' có tồn tại hay không
+                        $user_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : '';
+                        // Hiển thị nút Profile
+                        echo '<a href="?act=profile">' . $user_name . '</a>';
                     } else {
                         // Nếu chưa đăng nhập, hiển thị nút Đăng nhập
                         echo '<a href="?act=dangnhap">Đăng nhập</a>';
