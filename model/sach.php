@@ -16,7 +16,7 @@ function load_all_sach_madanhmuc($madanhmuc)
 
 function load_one_sach($ma_sach)
 {
-    $sql = "SELECT *, madanhmuc AS iddm  FROM sach WHERE id=?";
+    $sql = "SELECT * FROM sach WHERE id=?";
     return pdo_query_one($sql, $ma_sach);
 }
 function insert_sach($tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai)

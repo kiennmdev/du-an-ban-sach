@@ -52,13 +52,12 @@
                                         <tr>
                                             <th></th>
                                             <th class="border-top-0">ID</th>
-                                            <th class="border-top-0">Tên sản phẩm</th>
+                                            <th class="border-top-0">Tên sách</th>
                                             <th class="border-top-0">Hình ảnh</th>
-                                            <th class="border-top-0">Thương hiệu</th>
-                                            <th class="border-top-0">Kích cỡ</th>
+                                            <th class="border-top-0">NXB</th>
                                             <th class="border-top-0">Số lượng</th>
                                             <th class="border-top-0">Giá</th>
-                                            <th class="border-top-0">Loại hàng</th>
+                                            <th class="border-top-0">Loại sách</th>
                                             <th class="border-top-0">Trạng thái</th>
                                             <th></th>
                                         </tr>

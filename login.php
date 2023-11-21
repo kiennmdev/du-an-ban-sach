@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
+<div class="main-content">
 <form action="login.php" method="post" class="main-content">
     <h4 class="fontsize20">Thông Tin Đăng Nhập</h4>
     <hr>
@@ -96,10 +96,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <div class="mb-3">
         <label for="forgot" class="form-label">Quên mật khẩu?</label>
-        <a href="forgot.php" id="forgot" class="form-label">Nhấn vào đây</a>
+        <a href="?act=recover" id="forgot" class="form-label">Nhấn vào đây</a>
         <p>Bạn chưa có tài khoản? <a href="index.php?act=dangky">Nhấn vào đây</a></p>
     </div>
     <button type="submit" class="btn btn-success">Đăng Nhập</button>
     <div class="mb-3">
     </div>
 </form>
+</div>
+
+</div>
+</main>
+</div>

@@ -66,7 +66,7 @@
                                             <td><?= $thoigian?></td>
                                             <td><?= $hoten?></td>
                                             <td>
-                                                <a href="?act=chitietbinhluan&maxoa" class="btn btn-danger text-white">Xóa</a>
+                                                <a href="?act=chitietbinhluan&maxoa=<?= $id ?>" class="btn btn-danger text-white">Xóa</a>
                                             </td>
                                         </tr>
                       

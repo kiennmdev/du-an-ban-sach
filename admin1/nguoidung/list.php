@@ -47,7 +47,7 @@
                             <button type="button" id="clearall" class="btn btn-primary">Bỏ chọn tất cả</button>
                             <button type="submit" id="deleteall" class="btn btn-danger text-white" onclick="return confirm('Bạn có muốn xóa không')">Xóa các mục chọn</button>
                             <div class="table-responsive">
-                                <table class="table text-nowrap">
+                                <table class="table text-wrap">
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -71,7 +71,7 @@
                                         <td class="text-center"><input type="checkbox" class="checkbox" name="id[]" value="<?=$id?>"></td>
                                             <td><?= $id ?></td>
                                             <td>
-                                                <img src="../assets/images/user/<?=$hinh?>" width="50px" alt="">
+                                                <img src="../<?=$img_path . $hinh?>" width="50px" alt="">
                                             </td>
                                             <td><?= $hoten ?></td>
                                             <td><?= $email ?></td>

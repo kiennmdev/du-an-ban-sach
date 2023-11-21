@@ -8,7 +8,7 @@
                             <?php foreach($dsdm as $dm):
                                 extract($dm); 
                             ?>
-                            <a href="?act=danhsach&iddm=<?=$madanhmuc?>"><?= $tendanhmuc ?></a>
+                            <a href="?act=danhsach&iddm=<?=$id?>"><?= $tendanhmuc ?></a>
                             <?php endforeach ?>
                         </div>
                     </div>

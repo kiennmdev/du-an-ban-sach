@@ -6,8 +6,8 @@
                     <div class="content">
                         <div class="content-sort">
                             <div class="view">
-                                <span><a href=""><i class="fa-solid fa-table-cells-large"></i></a></i></span>
-                                <span><a href=""><i class="fa-solid fa-list"></i></a></span>
+                                <!-- <span><a href=""><i class="fa-solid fa-table-cells-large"></i></a></i></span>
+                                <span><a href=""><i class="fa-solid fa-list"></i></a></span> -->
                             </div>
                             <div class="sort">
                                 <span>Xem theo:</span>&nbsp;&nbsp;&nbsp;
@@ -43,20 +43,27 @@
                             <div class="product-contener">
                                 <div class="product">
                                     <div class="image">
-                                        <a href="?act=chitietsach&idsp=<?= $masach ?>"><img src="<?= $img_path . $hinh ?>" alt=""></a>
-                                        <span class="saleprice">-10%</span>
+                                        <a href="?act=chitietsach&idsp=<?= $id ?>"><img src="<?= $img_path . $hinh ?>" alt=""></a>
+                                        <?php if($giamgia != 0): ?>
+                                        <span class="saleprice">-<?=$giamgia?>%</span>
+                                        <?php endif ?>
                                     </div>
                                     <div class="d-pro-content">
                                         <div class="productname">
-                                            <a href="?act=chitietsach&idsp=<?= $masach ?>"><?= $tensach ?></a>
+                                            <a href="?act=chitietsach&idsp=<?= $id ?>"><?= $tensach ?></a>
                                         </div>
                                         <div class="fields">
-                                            <span><a href="">Mạc Thần Hoàn</a></span>
+                                            <span><a href=""><?= $tacgia ?></a></span>
                                         </div>
                                         <div class="d_price_group">
-                                            <div class="prices">148.500 <sup>đ</sup></div>
-    
+                                        <?php if($giamgia != 0): 
+                                            $giamoi = $gia - $gia*$giamgia/100;
+                                        ?>
+                                            <div class="prices"><?= number_format($giamoi,0,',','.')?><sup>đ</sup></div>
                                             <div class="rootprice"><del><?= number_format($gia,0,',','.') ?></del> <sup>đ</sup></div>
+                                        <?php else: ?>
+                                            <div class="prices"><?=number_format($gia,0,',','.')?><sup>đ</sup></div>
+                                            <?php endif ?>
                                         </div>
                                     </div>
                                 </div>

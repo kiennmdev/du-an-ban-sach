@@ -8,15 +8,22 @@
                         <h4><?= $tensach ?></h4>
     
                         <div class="author-contener">
-                            Tác Giả: <span>Mạc Thần Hoàn</span> <br>
+                            Tác Giả: <span><?= $tacgia ?></span> <br>
                             NXB: <span><?= $nhaxuatban ?></span>
                         </div>
                         <div class="quantity">
                             Số lượng: <span><?= $soluong?></span>
                         </div>
                         <div class="price-contener">
-                            <span class="rootprice"><del><?= number_format($gia,0,',','.') ?></del> <sup>đ</sup></span>
-                            <span class="price">149.000 <sup>đ</sup></span>
+                            <?php if($giamgia != 0): 
+                                $giamoi = $gia - $gia*$giamgia/100;
+                            ?>
+                                <span class="rootprice"><del><?= number_format($gia,0,',','.') ?></del> <sup>đ</sup></span>
+                                <span class="price"><?= number_format($giamoi,0,',','.') ?><sup>đ</sup></span>
+                            <?php else: ?>
+                                <span class="price"><?= number_format($gia,0,',','.') ?><sup>đ</sup></span>
+                            <?php endif ?>
+                            
                         </div>
                         <div class="module-productdetail">
                             <h4 class="fontsize20">
@@ -41,7 +48,7 @@
                         <thead>
                             <tr>
                                 <td>Tác giả</td>
-                                <td>Mạc Thần Hoàn</td>
+                                <td><?= $tacgia ?></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,7 +58,7 @@
                             </tr>
                             <tr>
                                 <td>Lượt xem</td>
-                                <td>6</td>
+                                <td><?= $luotxem ?></td>
                             </tr>
                             <tr>
                                 <td>Ngày xuất bản</td>

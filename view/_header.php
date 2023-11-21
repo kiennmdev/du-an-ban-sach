@@ -48,7 +48,8 @@ if (session_status() == PHP_SESSION_NONE) {
                         echo '<a href="?act=profile">' . $user_name . '</a>';
                     } else {
                         // Nếu chưa đăng nhập, hiển thị nút Đăng nhập
-                        echo '<a href="?act=dangnhap">Đăng nhập</a>';
+                        echo '<a href="?act=dangnhap">Đăng nhập</a> /
+                            <a href="?act=dangky">Đăng ký</a>';
                     }
                     ?>
                 </div>

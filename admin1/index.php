@@ -1,5 +1,6 @@
 <?php
 require_once '../model/pdo.php';
+require_once '../_global.php';
 require_once '../model/danhmuc.php';
 require_once '../model/sach.php';
 require_once '../model/nguoidung.php';
@@ -20,29 +21,29 @@ switch ($act) {
         if (isset($_GET['iddm'])) {
             $iddm = $_GET['iddm'];
             delete_danhmuc($iddm);
-            header('location: ?act=loaihang');
+            header('location: ?act=danhmuc');
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $madanhmuc = $_POST['madanhmuc']; //đây là 1 mảng
+            $madanhmuc = $_POST['id']; //đây là 1 mảng
             delete_multi_danhmuc($madanhmuc);
-            header('location: ?act=loaihang');
+            header('location: ?act=danhmuc');
         }
         $VIEW = "danhmuc/list.php";
         break;
     case 'adddanhmuc':
-        if (isset($_POST['themloaihang'])) {
-            $tenloaihang = $_POST['tenloaihang'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $tendanhmuc = $_POST['tendanhmuc'];
             $trangthai = $_POST['trangthai'];
             $err = [];
-            if (empty($tenloaihang)) {
-                $err['tenloaihang'] = 'Bạn chưa nhập tên loại hàng';
+            if (empty($tendanhmuc)) {
+                $err['tendanhmuc'] = 'Bạn chưa nhập tên loại hàng';
             }
             // if (empty($trangthai)) {
             //     $err['trangthai'] = 'Bạn chưa chọn trạng thái';
             // }
             if (!$err) {
-                insert_danhmuc($tenloaihang, $trangthai);
-                header('location: ?act=loaihang');
+                insert_danhmuc($tendanhmuc, $trangthai);
+                header('location: ?act=danhmuc');
             }
             
         }
@@ -53,8 +54,8 @@ switch ($act) {
             $iddm = $_GET['iddm'];
             $dm = load_one_danhmuc($iddm);
             extract($dm);
-            if (isset($_POST['sualoaihang'])) {
-                $madanhmuc = $_POST['madanhmuc'];
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // $madanhmuc = $_POST['madanhmuc'];
                 $tendanhmuc = $_POST['tendanhmuc'];
                 $trangthai = $_POST['trangthai'];
 
@@ -65,8 +66,8 @@ switch ($act) {
                 //     $err['trangthai'] = 'Bạn chưa chọn trạng thái';
                 // }
                 if (!$err) {
-                    update_danhmuc($madanhmuc, $tendanhmuc, $trangthai);
-                    header('location: ?act=loaihang');
+                    update_danhmuc($iddm, $tendanhmuc, $trangthai);
+                    header('location: ?act=danhmuc');
                 }
                 
             }
@@ -79,17 +80,17 @@ switch ($act) {
         if (isset($_GET['idsp']) && $_GET['idsp'] > 0) {
             $idsp = $_GET['idsp'];
             delete_sach($idsp);
-            header('location: ?act=hanghoa');
+            header('location: ?act=sanpham');
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $masach = $_POST['masach']; 
+            $masach = $_POST['id']; 
             delete_multi_item_sach($masach);
-            header('location: ?act=hanghoa');
+            header('location: ?act=sanpham');
         }
         $VIEW = "sanpham/list.php";
         break;
     case 'addsanpham':
-        if (isset($_POST['themmoi'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $tensach = $_POST['tensach'];
             $img = $_FILES['hinh'];
             $nhaxuatban = $_POST['nxb'];
@@ -130,7 +131,7 @@ switch ($act) {
                     move_uploaded_file($img['tmp_name'], "../" . $img_path . $hinh);
                 }
                 insert_sach($tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
-                header("location: ?act=hanghoa");
+                header("location: ?act=sanpham");
             }
         }
         $VIEW = "sanpham/add.php";
@@ -140,7 +141,7 @@ switch ($act) {
             $idsp = $_GET['idsp'];
             $sp = load_one_sach($idsp);
             extract($sp);
-            if (isset($_POST['suahanghoa'])) {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $tensach = $_POST['tensach'];
                 $img = $_FILES['hinh'];
                 $nhaxuatban = $_POST['nxb'];
@@ -180,7 +181,7 @@ switch ($act) {
                         move_uploaded_file($img['tmp_name'], "../" . $img_path . $hinh);
                     }
                     update_sach($idsp, $tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
-                    header("location: ?act=hanghoa");
+                    header("location: ?act=sanpham");
                 }
             }
             $VIEW = "sanpham/edit.php";
@@ -211,7 +212,7 @@ switch ($act) {
             $sodienthoai = $_POST['sodienthoai'];
             $diachi = $_POST['diachi'];
             $hinh = $_FILES['hinh']['name'];
-            $target_dir = "../assets/images/user/";
+            $target_dir = "../" . $img_path;
             $target_file = $target_dir . basename($_FILES['hinh']['name']);
             move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file);
             $gioitinh = $_POST['gioitinh'];
@@ -241,7 +242,7 @@ switch ($act) {
 
                 if (!empty($img['name'])) {
                     $hinh = time() . '_' . $img['name'];
-                    move_uploaded_file($img["tmp_name"], "../assets/images/user/" . $hinh);
+                    move_uploaded_file($img["tmp_name"], "../" . $img_path . $hinh);
                 }
                
                 update_nguoidung($idnd, $email, $matkhau, $hoten, $sodienthoai, $diachi, $hinh, $gioitinh, $capbac, $trangthai);
