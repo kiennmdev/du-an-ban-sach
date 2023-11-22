@@ -92,6 +92,7 @@ switch ($act) {
     case 'addsanpham':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $tensach = $_POST['tensach'];
+            $tacgia = $_POST['tacgia'];
             $img = $_FILES['hinh'];
             $nhaxuatban = $_POST['nxb'];
             $soluong = $_POST['soluong'];
@@ -105,6 +106,9 @@ switch ($act) {
             $err = [];
             if (empty($tensach)) {
                 $err['tensach'] = 'Bạn chưa nhập tên sách';
+            }
+            if (empty($tacgia)) {
+                $err['tacgia'] = 'Bạn chưa nhập tên tác giả';
             }
             if (empty($img['name'])) {
                 $err['img'] = 'Bạn chưa đăng ảnh bìa';
@@ -130,7 +134,7 @@ switch ($act) {
                     $hinh = time() . "_" . $img['name'];
                     move_uploaded_file($img['tmp_name'], "../" . $img_path . $hinh);
                 }
-                insert_sach($tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
+                insert_sach($tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
                 header("location: ?act=sanpham");
             }
         }
@@ -143,6 +147,7 @@ switch ($act) {
             extract($sp);
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $tensach = $_POST['tensach'];
+                $tacgia = $_POST['tacgia'];
                 $img = $_FILES['hinh'];
                 $nhaxuatban = $_POST['nxb'];
                 $soluong = $_POST['soluong'];
@@ -155,6 +160,9 @@ switch ($act) {
                 $err = [];
                 if (empty($tensach)) {
                     $err['tensach'] = 'Bạn chưa nhập tên sách';
+                }
+                if (empty($tacgia)) {
+                    $err['tacgia'] = 'Bạn chưa nhập tên tác giả';
                 }
                 // if (empty($img['name'])) {
                 //     $err['img'] = 'Bạn chưa đăng ảnh bìa';
@@ -180,8 +188,8 @@ switch ($act) {
                         $hinh = time() . "_" . $img['name'];
                         move_uploaded_file($img['tmp_name'], "../" . $img_path . $hinh);
                     }
-                    update_sach($idsp, $tensach, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
-                    header("location: ?act=sanpham");
+                    update_sach($idsp, $tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
+                    header("location: ?act=sanpham"); 
                 }
             }
             $VIEW = "sanpham/edit.php";

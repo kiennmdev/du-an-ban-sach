@@ -53,6 +53,11 @@
                         <span class="err"><?= isset($err['tensach']) ? $err['tensach'] : '' ?></span>
                 </div>
                 <div class="mb-3 col">
+                    <label for="" class="form-label">Tên tác giả:<span class="important">*</span></label>
+                    <input type="text" class="form-control" id="" placeholder="" name="tacgia" value="<?= $tacgia ?>">
+                        <span class="err"><?= isset($err['tacgia']) ? $err['tacgia'] : '' ?></span>
+                </div>
+                <div class="mb-3 col">
                     <label for="" class="form-label">Nhà xuất bản:<span class="important">*</span></label>
                     <input type="text" class="form-control" id="" placeholder="" name="nxb" value="<?= $nhaxuatban ?>">
                     <span class="err"><?= isset($err['nxb']) ? $err['nxb'] : '' ?></span>
