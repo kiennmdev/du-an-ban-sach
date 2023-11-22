@@ -1,16 +1,17 @@
 <?php
+ob_start(); // Bắt đầu đệm đầu ra
+session_start(); // Bắt đầu session
+
 require_once "model/pdo.php";
 require_once "_global.php";
 require_once "model/danhmuc.php";
 require_once "model/sach.php";
+require_once "model/nguoidung.php";
+require_once "model/binhluan.php";
 
-// Kiểm tra session tồn tại chưa trước khi gọi
-if (session_status() == PHP_SESSION_NONE) {
-    ob_start(); // Bắt đầu đệm đầu ra
-    session_start(); // Bắt đầu session
-}
 
 $dsdm = load_all_danhmuc();
+$sachmoi = load_all_sach_moi();
 $dssp = 0;
 $act = $_GET['act'] ?? "";
 $view = "";
@@ -30,20 +31,61 @@ switch ($act) {
             $idsp = $_GET['idsp'];
             $sp = load_one_sach($idsp);
             extract($sp);
+            $spsameauthor = load_top5_sach_same_author($tacgia);
+            $spsamedanhmuc = load_top5_sach_same_danhmuc($madanhmuc,$id);
         }
         $view = "view/chitietsach.php";
         break;
     case 'dangnhap':
-        $view = "login.php";
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = $_POST['email'];
+            $matkhau = $_POST['matkhau'];
+            // $remember = isset($_POST['remember']) ? $_POST['remember'] : false;
+            $checknd = check_nguoidung($email,$matkhau);
+            if ($checknd) {
+                extract($checknd);
+                if ($trangthai == 1) {
+                    $_SESSION['idtk'] = $id;
+                    $_SESSION['username'] = $hoten;
+                    $_SESSION['role'] = $capbac;
+                    header('location: ?act=home');
+                }
+                else {echo 'Tài khoản của bạn đang bị khóa';}
+            }
+        }
+        $view = "view/user/login.php";
         break;
     case 'dangky':
-        $view = "register.php";
+        $view = "view/user/register.php";
         break;
     case 'profile':
-        $view = "profile.php";
+        if (isset($_POST['logout'])) {
+            if (isset($_COOKIE['user_email']) && isset($_COOKIE['user_password'])) {
+                setcookie('user_email', '', time() - 3600 * 24 * 30, "/");
+                setcookie('user_password', '', time() - 3600 * 24 * 30, "/");
+            }
+        }
+        if (isset($_SESSION['idtk'])) {
+            $nd = load_one_nguoidung($_SESSION['idtk']);
+            extract($nd);
+            if ($_SESSION['idtk'] == 0) {
+                header("Location: admin1/index.php");
+            }
+        }
+        else {
+            header("Location: ?act=dangnhap"); 
+        }
+        $view = "view/user/profile.php";
         break;
     case 'recover':
         $view = "view/user/recover.php";
+        break;
+    
+    case 'giohang':
+        $view = "view/user/giohang.php";
+        break;
+    case 'thanhtoan':
+        $view = "view/user/dathangthanhcong.php";
         break;
     default:
         $view = "view/home.php";

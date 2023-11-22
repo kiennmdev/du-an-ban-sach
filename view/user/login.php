@@ -1,35 +1,5 @@
-<?php
-if (!function_exists('pdo_get_connection')) {
-    include('model/pdo.php');
-}
-// Kiểm tra session tồn tại chưa trước khi gọi
-if (session_status() == PHP_SESSION_NONE) {
-    ob_start(); // Bắt đầu đệm đầu ra
-    session_start(); // Bắt đầu session
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Lấy dữ liệu từ form đăng nhập
-    $email = $_POST['email'];
-    $matkhau = $_POST['matkhau'];
-    $remember = isset($_POST['remember']) ? $_POST['remember'] : false;
-
-    try {
-        // Kết nối cơ sở dữ liệu
-        $conn = pdo_get_connection();
-
-        // Truy vấn để kiểm tra thông tin đăng nhập
-        $sql = "SELECT manguoidung, email, matkhau, trangthai, capbac FROM nguoidung WHERE email = :email";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-        // Kiểm tra xem có dòng dữ liệu nào trả về không
-        if ($stmt->rowCount() > 0) {
-            // Đăng nhập thành công, lưu thông tin người dùng vào session
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($matkhau == $user['matkhau']) {
+<!-- <?php
+            if ($matkhau == $user['matkhau']) 
                 // Kiểm tra xem người dùng có bị khóa không
                 if ($user['trangthai'] == 0) {
                     echo "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ với quản trị viên để biết thêm chi tiết.";
@@ -48,38 +18,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         setcookie("user_email", $user['email'], 0, "/");
                         setcookie("user_password", $user['matkhau'], 0, "/");
                     }
-
-                    // Kiểm tra vai trò của người dùng và chuyển hướng đến trang tương ứng
-                    if ($user['capbac'] == 0) {
-                        // Nếu là admin
-                        header("Location: admin1/index.php");
-                    } else {
-                        // Nếu là user
-                        header("Location: index.php");
-                    }
-                    exit();
                 }
-            } else {
-                // Đăng nhập thất bại, chuyển hướng về trang đăng nhập
-                header("Location: login.php");
-                exit();
-            }
-        } else {
-            // Đăng nhập thất bại, chuyển hướng về trang đăng nhập
-            header("Location: login.php");
-            exit();
-        }
-    } catch (PDOException $e) {
-        // Xử lý lỗi nếu có
-        echo "Error: " . $e->getMessage();
-    } finally {
-        unset($conn);
-    }
-}
-?>
+
+?> -->
 
 <div class="main-content">
-<form action="login.php" method="post" class="main-content">
+<form action="?act=dangnhap" method="post" class="main-content">
     <h4 class="fontsize20">Thông Tin Đăng Nhập</h4>
     <hr>
     <div class="mb-3 mt-3">

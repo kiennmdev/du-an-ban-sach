@@ -1,9 +1,24 @@
 <?php
-// require_once "pdo.php";
 
 function load_all_sach()
 {
     $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY id DESC";
+    return pdo_query($sql);
+}
+
+function load_top5_sach_same_author($tacgia){
+    $sql = "SELECT * from sach where tacgia = '$tacgia' limit 0,5";
+    return pdo_query($sql);
+}
+
+function load_top5_sach_same_danhmuc($iddanhmuc,$idsp){
+    $sql = "SELECT * from sach where madanhmuc = '$iddanhmuc' and id <> $idsp limit 0,5";
+    return pdo_query($sql);
+}
+
+function load_all_sach_moi()
+{
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY ngayxuatban DESC LIMIT 0,5";
     return pdo_query($sql);
 }
 

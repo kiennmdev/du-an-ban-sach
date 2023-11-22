@@ -125,30 +125,40 @@
                 <div class="module-sameauthor">
                     <h4 class="fontsize20">Sách Cùng Tác Giả</h4>
                     <hr>
+                   
                     <div class="blockcontent">
-                        <div class="product-contener">
-                            <div class="product">
-                                <div class="image">
-                                    <a href="#"><img src="assets/image/anh1.jpg" alt=""></a>
-                                    <span class="saleprice">-10%</span>
+                    <?php foreach($spsameauthor as $sach): 
+                        extract($sach);
+                        ?>
+                    <div class="product">
+                                    <div class="image">
+                                        <a href="?act=chitietsach&idsp=<?= $id ?>"><img src="<?= $img_path . $hinh ?>" alt=""></a>
+                                        <?php if($giamgia != 0): ?>
+                                        <span class="saleprice">-<?=$giamgia?>%</span>
+                                        <?php endif ?>
+                                    </div>
+                                    <div class="d-pro-content">
+                                        <div class="productname">
+                                            <a href="?act=chitietsach&idsp=<?= $id ?>"><?= $tensach ?></a>
+                                        </div>
+                                        <div class="fields">
+                                            <span><a href=""><?= $tacgia ?></a></span>
+                                        </div>
+                                        <div class="d_price_group">
+                                        <?php if($giamgia != 0): 
+                                            $giamoi = $gia - $gia*$giamgia/100;
+                                        ?>
+                                            <div class="prices"><?= number_format($giamoi,0,',','.')?><sup>đ</sup></div>
+                                            <div class="rootprice"><del><?= number_format($gia,0,',','.') ?></del> <sup>đ</sup></div>
+                                        <?php else: ?>
+                                            <div class="prices"><?=number_format($gia,0,',','.')?><sup>đ</sup></div>
+                                            <?php endif ?>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="d-pro-content">
-                                    <div class="productname">
-                                        <a href="">Địa Cầu Online, tập 1</a>
-                                    </div>
-                                    <div class="fields">
-                                        <span><a href="">Mạc Thần Hoàn</a></span>
-                                    </div>
-                                    <div class="d_price_group">
-                                        <div class="prices">148.500 <sup>đ</sup></div>
-    
-                                        <div class="rootprice"><del>165.000</del> <sup>đ</sup></div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                        </div>
+                                <?php endforeach ?>
                     </div>
+                   
                 </div>
                 <div class="module-alsobought">
                     <h4 class="fontsize20">
@@ -156,28 +166,36 @@
                     </h4>
                     <hr>
                     <div class="blockcontent">
-                        <div class="product-contener">
-                            <div class="product">
-                                <div class="image">
-                                    <a href="#"><img src="assets/image/anh1.jpg" alt=""></a>
-                                    <span class="saleprice">-10%</span>
+                    <?php foreach($spsamedanhmuc as $sach): 
+                        extract($sach);
+                        ?>
+                    <div class="product">
+                                    <div class="image">
+                                        <a href="?act=chitietsach&idsp=<?= $id ?>"><img src="<?= $img_path . $hinh ?>" alt=""></a>
+                                        <?php if($giamgia != 0): ?>
+                                        <span class="saleprice">-<?=$giamgia?>%</span>
+                                        <?php endif ?>
+                                    </div>
+                                    <div class="d-pro-content">
+                                        <div class="productname">
+                                            <a href="?act=chitietsach&idsp=<?= $id ?>"><?= $tensach ?></a>
+                                        </div>
+                                        <div class="fields">
+                                            <span><a href=""><?= $tacgia ?></a></span>
+                                        </div>
+                                        <div class="d_price_group">
+                                        <?php if($giamgia != 0): 
+                                            $giamoi = $gia - $gia*$giamgia/100;
+                                        ?>
+                                            <div class="prices"><?= number_format($giamoi,0,',','.')?><sup>đ</sup></div>
+                                            <div class="rootprice"><del><?= number_format($gia,0,',','.') ?></del> <sup>đ</sup></div>
+                                        <?php else: ?>
+                                            <div class="prices"><?=number_format($gia,0,',','.')?><sup>đ</sup></div>
+                                            <?php endif ?>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="d-pro-content">
-                                    <div class="productname">
-                                        <a href="">Địa Cầu Online, tập 1</a>
-                                    </div>
-                                    <div class="fields">
-                                        <span><a href="">Mạc Thần Hoàn</a></span>
-                                    </div>
-                                    <div class="d_price_group">
-                                        <div class="prices">148.500 <sup>đ</sup></div>
-    
-                                        <div class="rootprice"><del>165.000</del> <sup>đ</sup></div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                        </div>
+                                <?php endforeach ?>
                     </div>
                 </div>
     

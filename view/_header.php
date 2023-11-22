@@ -1,11 +1,3 @@
-<?php
-// Kiểm tra session tồn tại chưa trước khi gọi
-if (session_status() == PHP_SESSION_NONE) {
-    ob_start(); // Bắt đầu đệm đầu ra
-    session_start(); // Bắt đầu session
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,23 +27,21 @@ if (session_status() == PHP_SESSION_NONE) {
                 </form>
             </div>
             <div class="cart-login-regis">
-                <div class="cart">
-                    <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                <?php if(isset($_SESSION['idtk'])): ?>
+                <div class="avatar">
+                    <img src="../assets/image/1700126521_anh1.jpg" alt="" width="20px" height="20px" style="border-radius: 50%;">
                 </div>
                 <div class="login-regis">
-                    <?php
-                    // Kiểm tra xem người dùng đã đăng nhập hay chưa
-                    if (isset($_SESSION['user_id'])) {
-                        // Nếu đã đăng nhập, kiểm tra xem khóa 'user_name' có tồn tại hay không
-                        $user_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : '';
-                        // Hiển thị nút Profile
-                        echo '<a href="?act=profile">' . $user_name . '</a>';
-                    } else {
-                        // Nếu chưa đăng nhập, hiển thị nút Đăng nhập
-                        echo '<a href="?act=dangnhap">Đăng nhập</a> /
-                            <a href="?act=dangky">Đăng ký</a>';
-                    }
-                    ?>
+                    <a href="?act=profile"><?= $_SESSION['username'] ?></a>
+                </div>
+                <?php else: ?>
+                    <div class="login-regis">
+                        <a href="?act=dangnhap">Đăng nhập</a> |
+                        <a href="?act=dangky">Đăng ký</a>
+                    </div>
+                <?php endif ?>
+                <div class="cart">
+                    <a href="?act=giohang"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
             </div>
     </header>

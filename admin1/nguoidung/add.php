@@ -81,8 +81,7 @@
                                 <label for="">Cấp bậc:</label>
                                 <select class="form-select-sm form-control" name="capbac" id="">
                                     <option value="0">Admin</option>
-                                    <option value="1">Manager</option>
-                                    <option value="2">User</option>
+                                    <option value="1">User</option>
                                 </select>
                             </div>
                             <div class="mb-3">

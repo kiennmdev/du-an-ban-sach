@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giỏ Hàng</title>
-    <link rel="stylesheet" href="fontawesome-free-6.4.2-web/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <div class="container">
+    <div class="main-content">
         <form action="" class="mb-4" id="info-form">
             <h4 class="text-success h2">Thông Tin Cá Nhân</h4>
             <hr>
@@ -67,7 +56,7 @@
             </div>
         </div>
     </div>
-    <script>
+    <!-- <script>
         function submitForm() {
             // Hàm này sẽ nộp cả form thông tin, giỏ hàng và hình thức thanh toán khi người dùng ấn nút đặt hàng
             // Bạn có thể thay đổi action và method của form theo ý muốn
@@ -76,7 +65,7 @@
             document.getElementById("info-form").submit();
         }
 
-    </script>
-</body>
-
-</html>
+    </script> -->
+    </div>
+</main>
+</div>

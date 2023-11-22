@@ -4,7 +4,7 @@
                             <div class="box-title">
                                 <h3>Danh Mục</h3>
                             </div>
-                            <a href="#"><strong>Nổi bật</strong></a>
+                            <!-- <a href="#"><strong>Nổi bật</strong></a> -->
                             <?php foreach($dsdm as $dm):
                                 extract($dm); 
                             ?>

@@ -125,8 +125,7 @@ nav {
 }
 .main-list{
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    flex-wrap: wrap;
 }
 .book {
     width: 150px;
@@ -136,7 +135,12 @@ nav {
 .book img {
     width: 100%;
 }
-.info>.name>a{
+.info>.name,.author{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.info a{
     color: #00CC66;
     text-decoration: none;
 
@@ -155,6 +159,7 @@ nav {
     font-size: 12px;
 }
 footer {
+    margin-top: 40px;
     background-color: #00CC66;
     color: white;
     line-height: 30px;
@@ -253,7 +258,7 @@ aside{
 }
 .d-pro-content a{
     text-decoration: none;
-    color: black;
+    color: #04b85e;
 }
 .d-pro-content>.productname>a{
     font-size: 14px;
