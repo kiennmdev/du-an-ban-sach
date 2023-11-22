@@ -18,7 +18,7 @@
                             <label for="" class="form-label">Địa chỉ:</label>
                             <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ" name="" value="" readonly>
                           </div>
-                          <a href="?act=profile"><button class="btn btn-danger">Đăng xuất</button></a>
+                          <a href="?act=dangxuat"><button class="btn btn-danger">Đăng xuất</button></a>
                         <button type="submit" class="btn btn-warning">Sửa tài khoản</button>
                       </form>
                 </div>

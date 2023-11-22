@@ -36,17 +36,18 @@ switch ($act) {
             $sp = load_one_sach($idsp);
             extract($sp);
             $spsameauthor = load_top5_sach_same_author($tacgia);
-            $spsamedanhmuc = load_top5_sach_same_danhmuc($madanhmuc,$id);
+            $spsamedanhmuc = load_top5_sach_same_danhmuc($madanhmuc, $id);
             $listbinhluan = load_all_binhluan_chitiet_theosp($id);
         }
         $view = "view/chitietsach.php";
         break;
     case 'dangnhap':
+        // $err ="";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email = $_POST['email'];
             $matkhau = $_POST['matkhau'];
             // $remember = isset($_POST['remember']) ? $_POST['remember'] : false;
-            $checknd = check_nguoidung($email,$matkhau);
+            $checknd = check_nguoidung($email, $matkhau);
             if ($checknd) {
                 extract($checknd);
                 if ($trangthai == 1) {
@@ -55,23 +56,30 @@ switch ($act) {
                     $_SESSION['role'] = $capbac;
                     $_SESSION['user'] = $checknd;
                     header('location: ?act=home');
+                } elseif ($trangthai == 0) {
+                    $err = "Tài khoản của bạn đã bị khóa mõm";
                 }
-                else {echo 'Tài khoản của bạn đang bị khóa';}
+            } else {
+                $err = "Tài khoản sai thông tin hoặc không tồn tại";
             }
         }
         $view = "view/user/login.php";
         break;
     case 'dangky':
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $hoten = $_POST['hoten'];
-                $email = $_POST['email'];
-                $matkhau = $_POST['matkhau'];
-                $sodienthoai = $_POST['sodienthoai'];
-                $diachi = $_POST['diachi'];
-                insert_nguoidung($email, $matkhau, $hoten, $sodienthoai, $diachi);
-                header("Location: ?act=home");
-            }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $hoten = $_POST['hoten'];
+            $email = $_POST['email'];
+            $matkhau = $_POST['matkhau'];
+            $sodienthoai = $_POST['sodienthoai'];
+            $diachi = $_POST['diachi'];
+            insert_nguoidung($email, $matkhau, $hoten, $sodienthoai, $diachi);
+            header("Location: ?act=home");
+        }
         $view = "view/user/register.php";
+        break;
+    case 'dangxuat':
+        session_unset();
+        header('Location: ?act=home');
         break;
     case 'profile':
         // if (isset($_POST['logout'])) {
@@ -93,13 +101,13 @@ switch ($act) {
         $view = "view/user/profile.php";
         break;
 
-        case 'editprofile':
-            $view = "view/user/editprofile.php";
-            break;
+    case 'editprofile':
+        $view = "view/user/editprofile.php";
+        break;
     case 'recover':
         $view = "view/user/recover.php";
         break;
-    
+
     case 'giohang':
         $view = "view/user/giohang.php";
         break;
