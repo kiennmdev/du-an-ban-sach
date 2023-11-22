@@ -24,6 +24,13 @@ function update_nguoidung($id,$email,$matkhau,$hoten,$sodienthoai,$diachi,$hinh,
 
     pdo_execute($sql,$email,$matkhau,$hoten,$sodienthoai,$diachi,$hinh,$gioitinh,$capbac,$trangthai,$id);
 }
+function update_nguoidung_user($id,$hoten,$sodienthoai,$diachi,$hinh)
+{
+
+    $sql = "update nguoidung set hoten=?,sodienthoai=?,diachi=?,hinh=? where id=?";
+
+    pdo_execute($sql,$hoten,$sodienthoai,$diachi,$hinh,$id);
+}
 function load_all_nguoidung()
 {
     $sql = "select * from nguoidung order by id asc";

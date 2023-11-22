@@ -53,11 +53,15 @@
                                             <th></th>
                                             <th class="border-top-0">ID</th>
                                             <th class="border-top-0">Tên sách</th>
+                                            <th class="border-top-0">Tác giả</th>
                                             <th class="border-top-0">Hình ảnh</th>
                                             <th class="border-top-0">NXB</th>
                                             <th class="border-top-0">Số lượng</th>
                                             <th class="border-top-0">Giá</th>
+                                            <th class="border-top-0">Giảm giá</th>
                                             <th class="border-top-0">Loại sách</th>
+                                            <th class="border-top-0">Lượt xem</th>
+                                            <th class="border-top-0">Lượt bán</th>
                                             <th class="border-top-0">Trạng thái</th>
                                             <th></th>
                                         </tr>
@@ -70,15 +74,19 @@
                                             <td class="text-center"><input type="checkbox" class="checkbox" name="id[]" value="<?=$id?>"></td>
                                             <td><?=$id?></td>
                                             <td><?=$tensach?></td>
+                                            <td><?=$tacgia?></td>
                                             <td>
                                                 <img src="../assets/image/<?=$hinh?>"  alt=" " width="100px">
                                             </td>
                                             <td><?=$nhaxuatban?></td>
                                             <td><?=$soluong?></td>
                                             <td><?=$gia?></td>
+                                            <td><?=$giamgia?></td>
                                             <td>
                                                 <?=$tendanhmuc?>
                                             </td>
+                                            <td><?=$luotxem?></td>
+                                            <td><?=$luotban?></td>
                                             <td>
                                                 <?=$trangthai == 1 ? 'Hiện' : 'Ẩn'?>
                                             </td>

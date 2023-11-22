@@ -1,11 +1,39 @@
-        <!-- footer -->
-        <footer>
-          Copyright2023
-        </footer>
-
-        </div>
-        </body>
-        <script>
+     <!-- footer -->
+     <!-- ============================================================== -->
+     <footer class="footer text-center"> 2021 © Ample Admin brought to you by <a href="https://www.wrappixel.com/">wrappixel.com</a>
+     </footer>
+     <!-- ============================================================== -->
+     <!-- End footer -->
+     <!-- ============================================================== -->
+ </div>
+ <!-- ============================================================== -->
+ <!-- End Page wrapper  -->
+ <!-- ============================================================== -->
+ </div>
+ <!-- ============================================================== -->
+ <!-- End Wrapper -->
+ <!-- ============================================================== -->
+ <!-- ============================================================== -->
+ <!-- All Jquery -->
+ <!-- ============================================================== -->
+ <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+ <!-- Bootstrap tether Core JavaScript -->
+ <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+ <script src="js/app-style-switcher.js"></script>
+ <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+ <!--Wave Effects -->
+ <script src="js/waves.js"></script>
+ <!--Menu sidebar -->
+ <script src="js/sidebarmenu.js"></script>
+ <!--Custom JavaScript -->
+ <script src="js/custom.js"></script>
+ <!--This page JavaScript -->
+ <!--chartis chart-->
+ <script src="plugins/bower_components/chartist/dist/chartist.min.js"></script>
+ <script src="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+ <script src="js/pages/dashboards/dashboard1.js"></script>
+ </body>
+ <script>
           let checkall = document.getElementById('checkall');
           let clearall = document.getElementById('clearall');
           let deleteall = document.getElementById('deleteall');
@@ -45,52 +73,4 @@
             }
           })
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-          google.charts.load('current', {
-            'packages': ['corechart']
-          });
-          google.charts.setOnLoadCallback(drawChart);
-
-          function drawChart() {
-
-            var data = google.visualization.arrayToDataTable([
-              ['Task', 'Hours per Day'],
-              <?php if (isset($_GET['chart']) && $_GET['chart'] == 'sanpham') : ?>
-                <?php
-                foreach ($dsthongke1 as $thongke) :
-                  extract($thongke);
-                ?>['<?= $name ?>', <?= $soluong ?>],
-                  //   ['Work',     11],
-                  //   ['Eat',      2],
-                  //   ['Commute',  2],
-                  //   ['Watch TV', 2],
-                  //   ['Sleep',    7]
-                <?php endforeach ?>
-              <?php else : ?>
-                <?php
-                foreach ($dsthongke2 as $thongke) :
-                  extract($thongke);
-                ?>['<?= $name ?>', <?= $tongsobl ?>],
-                  //   ['Work',     11],
-                  //   ['Eat',      2],
-                  //   ['Commute',  2],
-                  //   ['Watch TV', 2],
-                  //   ['Sleep',    7]
-                <?php endforeach ?>
-              <?php endif; ?>
-            ]);
-
-            var options = {
-              title: 'Thống kê sản phẩm trong danh mục',
-              is3D: true,
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-            chart.draw(data, options);
-          }
-        </script>
-
-        </html>
+ </html>
