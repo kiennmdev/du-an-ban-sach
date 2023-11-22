@@ -98,15 +98,22 @@
                         <?php endforeach ?>
                         
                     </div>
-                    <div class="submit-comment">
-                        <form action="">
-                            <div class="mb-3 mt-3">
-                                <textarea class="form-control" rows="5" id="comment" name="text"
-                                    placeholder="Bình Luận Tại Đây"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
+                    <?php
+                    if (isset($_SESSION['user'])) {
+                        ?>
+                        <div class="submit-comment">
+                            <form action="">
+                                <div class="mb-3 mt-3">
+                                    <textarea class="form-control" rows="5" id="comment" name="text"
+                                        placeholder="Bình Luận Tại Đây"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    <?php } else { ?>
+                        <p><a href="?act=dangnhap">Đăng nhập</a> hoặc <a href="?act=dangky">đăng ký</a> để có thể gửi bình luận.</p>
+                        <hr>
+                    <?php }?>
                 </div>
                 <div class="module-sameauthor">
                     <h4 class="fontsize20">Sách Cùng Tác Giả</h4>

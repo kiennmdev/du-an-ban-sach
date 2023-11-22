@@ -21,6 +21,16 @@ function load_all_sach_moi()
     $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY ngayxuatban DESC LIMIT 0,5";
     return pdo_query($sql);
 }
+function load_all_sach_banchay()
+{
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY luotban DESC LIMIT 0,5";
+    return pdo_query($sql);
+}
+function load_all_sach_rand()
+{
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY rand() DESC LIMIT 0,5";
+    return pdo_query($sql);
+}
 
 function load_all_sach_madanhmuc($madanhmuc)
 {

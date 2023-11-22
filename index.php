@@ -14,6 +14,8 @@ $dsdm = load_all_danhmuc();
 $top5tacgia = load_top5_author();
 $top5nxb = load_top5_nxb();
 $sachmoi = load_all_sach_moi();
+$sachbanchay = load_all_sach_banchay();
+$sachrand = load_all_sach_rand();
 $dssp = 0;
 $act = $_GET['act'] ?? "";
 $view = "";
@@ -51,6 +53,7 @@ switch ($act) {
                     $_SESSION['idtk'] = $id;
                     $_SESSION['username'] = $hoten;
                     $_SESSION['role'] = $capbac;
+                    $_SESSION['user'] = $checknd;
                     header('location: ?act=home');
                 }
                 else {echo 'Tài khoản của bạn đang bị khóa';}
