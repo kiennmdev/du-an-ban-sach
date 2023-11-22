@@ -77,39 +77,25 @@
                     </h4>
                     <hr>
                     <div class="view-comment">
+                        <?php foreach($listbinhluan as $bl): 
+                            extract($bl);
+                            ?>
                         <div class="comment">
                             <div class="avatar-cmt">
-                                <img src="assets/image/Capture.PNG" alt="">
+                                <img src="<?= $img_path . $hinh ?>" alt=" ">
                             </div>
                             <div class="info-cmt">
-                                <div class="name-user">Binladen </div>
+                                <div class="name-user"><?= $hoten ?> </div>
                                 <div class="content-cmt">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati sapiente quo ducimus
-                                    quas, quae earum voluptatibus ad iusto voluptates placeat?
+                                    <?= $noidung ?>
                                 </div>
                                 <div class="footcmt">
                                     <span class="like"><i class="fa-regular fa-thumbs-up"></i> Thích</span>
-                                    <span class="time">20/12/2023</span>
+                                    <span class="time"><?= $thoigian ?></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="comment">
-                            <div class="avatar-cmt">
-                                <img src="assets/image/Capture.PNG" alt="">
-                            </div>
-                            <div class="info-cmt">
-                                <div class="name-user">Binladen <sup>20/11/2023</sup></div>
-                                <div class="content-cmt">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati sapiente quo ducimus
-                                    quas, quae earum voluptatibus ad iusto voluptates placeat?
-                                </div>
-                                <div class="footcmt">
-                                    <span class="like"><i class="fa-regular fa-thumbs-up"></i> Thích</span>
-                                    <span class="time">20/12/2023</span>
-                                </div>
-                            </div>
-    
-                        </div>
+                        <?php endforeach ?>
                         
                     </div>
                     <div class="submit-comment">

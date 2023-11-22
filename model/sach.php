@@ -68,3 +68,13 @@ function delete_sach_mem($masach)
     pdo_execute($sql, $masach);
 }
 // $sql = "SELECT sach.*, ten_danh_muc FROM sach JOIN danhmuc ON sach.ma_danh_muc=danhmuc.ma_danh_muc WHERE trang_thai = 1 ORDER BY id DESC";
+
+function load_top5_author(){
+    $sql = "SELECT tacgia, COUNT(tacgia) AS soluongsach FROM `sach` GROUP BY tacgia ORDER BY soluongsach DESC LIMIT 0,5";
+    return pdo_query($sql);
+}
+
+function load_top5_nxb(){
+    $sql = "SELECT nhaxuatban, COUNT(nhaxuatban) FROM `sach` GROUP BY nhaxuatban ORDER BY COUNT(nhaxuatban) DESC LIMIT 0,5";
+    return pdo_query($sql);
+}

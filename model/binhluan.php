@@ -16,6 +16,13 @@ function load_all_binhluan_chitiet($masach)
     return $listbl;
 }
 
+function load_all_binhluan_chitiet_theosp($masach)
+{
+    $sql = "SELECT binhluan.*,nguoidung.hoten as hoten,sach.tensach as tensach from binhluan inner join nguoidung on binhluan.manguoidung = nguoidung.id inner join sach on binhluan.masach = sach.id where masach='$masach' order by id desc";
+    $listbl = pdo_query($sql);
+    return $listbl;
+}
+
 function deletet_binhluan($id)
 {
     $sql = "delete from binhluan where id=" . $id;

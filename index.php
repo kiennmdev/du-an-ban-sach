@@ -11,6 +11,8 @@ require_once "model/binhluan.php";
 
 
 $dsdm = load_all_danhmuc();
+$top5tacgia = load_top5_author();
+$top5nxb = load_top5_nxb();
 $sachmoi = load_all_sach_moi();
 $dssp = 0;
 $act = $_GET['act'] ?? "";
@@ -33,6 +35,7 @@ switch ($act) {
             extract($sp);
             $spsameauthor = load_top5_sach_same_author($tacgia);
             $spsamedanhmuc = load_top5_sach_same_danhmuc($madanhmuc,$id);
+            $listbinhluan = load_all_binhluan_chitiet_theosp($id);
         }
         $view = "view/chitietsach.php";
         break;
@@ -59,24 +62,28 @@ switch ($act) {
         $view = "view/user/register.php";
         break;
     case 'profile':
-        if (isset($_POST['logout'])) {
-            if (isset($_COOKIE['user_email']) && isset($_COOKIE['user_password'])) {
-                setcookie('user_email', '', time() - 3600 * 24 * 30, "/");
-                setcookie('user_password', '', time() - 3600 * 24 * 30, "/");
-            }
-        }
-        if (isset($_SESSION['idtk'])) {
-            $nd = load_one_nguoidung($_SESSION['idtk']);
-            extract($nd);
-            if ($_SESSION['idtk'] == 0) {
-                header("Location: admin1/index.php");
-            }
-        }
-        else {
-            header("Location: ?act=dangnhap"); 
-        }
+        // if (isset($_POST['logout'])) {
+        //     if (isset($_COOKIE['user_email']) && isset($_COOKIE['user_password'])) {
+        //         setcookie('user_email', '', time() - 3600 * 24 * 30, "/");
+        //         setcookie('user_password', '', time() - 3600 * 24 * 30, "/");
+        //     }
+        // }
+        // if (isset($_SESSION['idtk'])) {
+        //     $nd = load_one_nguoidung($_SESSION['idtk']);
+        //     extract($nd);
+        //     if ($_SESSION['idtk'] == 0) {
+        //         header("Location: admin1/index.php");
+        //     }
+        // }
+        // else {
+        //     header("Location: ?act=dangnhap"); 
+        // }
         $view = "view/user/profile.php";
         break;
+
+        case 'editprofile':
+            $view = "view/user/editprofile.php";
+            break;
     case 'recover':
         $view = "view/user/recover.php";
         break;

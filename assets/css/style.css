@@ -197,7 +197,7 @@ aside{
     padding-bottom: 10px;
     border-radius: 5px;
 }
-.box-list>a{
+.box-list a{
     display: block;
     padding: 8px 0 5px 10px;
     color: black;
