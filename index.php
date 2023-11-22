@@ -59,6 +59,15 @@ switch ($act) {
         $view = "view/user/login.php";
         break;
     case 'dangky':
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $hoten = $_POST['hoten'];
+                $email = $_POST['email'];
+                $matkhau = $_POST['matkhau'];
+                $sodienthoai = $_POST['sodienthoai'];
+                $diachi = $_POST['diachi'];
+                insert_nguoidung($email, $matkhau, $hoten, $sodienthoai, $diachi);
+                header("Location: ?act=home");
+            }
         $view = "view/user/register.php";
         break;
     case 'profile':
