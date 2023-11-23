@@ -122,6 +122,12 @@ switch ($act) {
                     move_uploaded_file($img["tmp_name"], "../" . $img_path . $hinh);
                 }
                 update_nguoidung_user($idtk,$hoten,$sodienthoai,$diachi,$hinh);
+                $_SESSION['idtk'] = $id;
+                    $_SESSION['avatar'] = $hinh;
+                    $_SESSION['username'] = $hoten;
+                    $_SESSION['phone'] = $sodienthoai;
+                    $_SESSION['assdres'] = $diachi;
+                    $_SESSION['role'] = $capbac;
                 header("Location: ?act=profile");
             }
         }
