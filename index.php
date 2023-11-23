@@ -16,7 +16,7 @@ $top5nxb = load_top5_nxb();
 $sachmoi = load_all_sach_moi();
 $sachbanchay = load_all_sach_banchay();
 $sachrand = load_all_sach_rand();
-$dssp = 0;
+$dssp = load_all_sach();
 $act = $_GET['act'] ?? "";
 $view = "";
 switch ($act) {
@@ -33,12 +33,13 @@ switch ($act) {
     case 'chitietsach':
         if (isset($_GET['idsp'])) {
             $idsp = $_GET['idsp'];
-            $sp = load_one_sach($idsp);
-            extract($sp);
+            $onesach = load_one_sach($idsp);
+            extract($onesach);
             $spsameauthor = load_top5_sach_same_author($tacgia);
             $spsamedanhmuc = load_top5_sach_same_danhmuc($madanhmuc, $id);
             $listbinhluan = load_all_binhluan_chitiet_theosp($id);
         }
+        
         $view = "view/chitietsach.php";
         break;
     case 'dangnhap':
@@ -138,41 +139,70 @@ switch ($act) {
         break;
 
     case 'giohang':
-        if (!isset($_SESSION['giohang'])) {
-            $_SESSION['giohang'] =[];
-        }; 
-        function add_to_cart($masach,$tensach,$hinh,$gia){
+        function tong_thanh_tien(){
+            $sum = 0;
+            $carts = $_SESSION['giohang'];
+            foreach($carts as $cart){
+                extract($cart);
+                $sum += $soluongmua * ($gia - $gia*$giamgia/100);
+            }
+            return $sum;
+        }
+        function add_to_cart($masach,$tensach,$hinh,$gia,$giamgia,$soluongmua,$soluongsach){
             $sach = [
                 'masach' => $masach,
                 'tensach' => $tensach,
                 'hinh' => $hinh,
                 'gia' => $gia,
-                // 'giamgia' => $giamgia,
-                // 'soluong' => $soluong,
-                // 'thanhtien' => $gia
+                'giamgia' => $giamgia,
+                'soluongmua' => $soluongmua,
+                'soluongsach' => $soluongsach
             ];
-            // if (!isset($_SESSION['giohang'][$masach])) {
-            //     $_SESSION['giohang'][$masach] = $sach;
-            // } else {
-            //     $_SESSION['giohang'][$masach]['soluong'] += 1;
-            // }
-            return $sach;
-        }
-        if (isset($_POST['addcart']) && $_POST['addcart']) {
-            
-            $masach = $_POST['masach'];
-            $tensach = $_POST['tensach'];
-            $hinh = $_POST['hinh'];
-            $gia = $_POST['gia'];
-            
-            $sach = add_to_cart($masach,$tensach,$hinh,$gia);
             if (!isset($_SESSION['giohang'][$masach])) {
-                $_SESSION['giohang'][$masach] =$sach;
+                $_SESSION['giohang'][$masach]= $sach;
             }
             else {
-                $_SESSION['giohang'][$masach]['soluong'] += 1;
+                $_SESSION['giohang'][$masach]['soluongmua'] += 1;
             }
         }
+
+        if (!isset($_SESSION['giohang'])) {
+            $_SESSION['giohang'] =[];
+        };
+
+        if (isset($_POST['updatecart'])) {
+            $idsp = $_POST['id'];
+            $soluongsp = $_POST['soluong'];
+            $convertcart = array_values($_SESSION['giohang']);
+            // var_dump($convertcart);
+            // die; 
+            for($i = 0; $i < sizeof($convertcart);$i++){
+                for ($j=0; $j < sizeof($idsp); $j++) { 
+                    if ($convertcart[$i]['masach'] == $idsp[$j]) {
+                        $_SESSION['giohang'][$convertcart[$i]['masach']]['soluongmua'] = $soluongsp[$j];
+                    }
+                }
+            }
+        }
+        if (isset($_GET['idsp'])) {
+            $idsp = $_GET['idsp'];
+            $soluongmua = 1;
+            $sach = load_one_sach($idsp);
+            extract($sach);
+        //    $masach = $_POST['masach'];
+        //    $tensach = $_POST['tensach'];
+        //    $hinh = $_POST['hinh'];
+        //    $soluongmua = $_POST['soluongmua'];
+        //    $soluongsach = $_POST['soluongban'];
+        //    $gia = $_POST['gia'];
+            add_to_cart($id,$tensach,$hinh,$gia,$giamgia,$soluongmua,$soluong);
+        //    var_dump($_SESSION['giohang']);
+        //    unset($_SESSION['giohang']);
+        //    die;
+        // unset($_SESSION['giohang']);
+        header('location: ?act=giohang');
+        }
+
         $view = "view/user/giohang.php";
         break;
     case 'thanhtoan':

@@ -12,7 +12,7 @@ function load_top5_sach_same_author($tacgia){
 }
 
 function load_top5_sach_same_danhmuc($iddanhmuc,$idsp){
-    $sql = "SELECT * from sach where madanhmuc = '$iddanhmuc' and id <> $idsp limit 0,5";
+    $sql = "SELECT * from sach where madanhmuc = $iddanhmuc and id <> $idsp limit 0,5";
     return pdo_query($sql);
 }
 
@@ -41,7 +41,7 @@ function load_all_sach_madanhmuc($madanhmuc)
 
 function load_one_sach($ma_sach)
 {
-    $sql = "SELECT * FROM sach WHERE id=?";
+    $sql = "SELECT sach.*, tendanhmuc as danhmucsach FROM sach join danhmuc on sach.madanhmuc=danhmuc.id WHERE sach.id=?";
     return pdo_query_one($sql, $ma_sach);
 }
 function insert_sach($tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai)

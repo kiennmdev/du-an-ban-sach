@@ -35,16 +35,15 @@
                         </div>
                         <div class="button-buy">
                             <form action="?act=giohang" method="post">
-                                <input type="hidden" name="masach" value="<?= $id ?>">
+                                <!-- <input type="hidden" name="masach" value="<?= $idsp ?>">
                                 <input type="hidden" name="tensach" value="<?= $tensach ?>">
                                 <input type="hidden" name="hinh" value="<?=$hinh?>">
-                                <?php if($giamgia != 0): ?>
-                                <input type="hidden" name="gia" value="<?= $giamoi = $gia - $gia*$giamgia/100 ?>">
-                                <?php else: ?>
-                                    <input type="hidden" name="gia" value="<?= $gia ?>">
-                                <?php endif ?>
-                            <button type="submit" class="btn btn-danger" name="addcart">Mua Ngay</button>
-                            <a href="?act=giohang&idsp=<?= $id ?>"><button type="button" class="btn btn-warning">Thêm Vào Giỏ Hàng</button></a>
+                                <input type="hidden" name="soluongmua" value="1">
+                                <input type="hidden" name="soluongban" value="<?= $soluong ?>">
+                                <input type="hidden" name="gia" value="<?= $giamgia != 0 ? $giamoi = $gia - $gia*$giamgia/100 : $gia ?>"> -->
+
+                                <a href="?act=giohang&idsp=<?= $idsp ?>"><button type="button" class="btn btn-danger">Mua Ngay</button></a>
+                                <a href="?act=giohang&idsp=<?= $idsp ?>"><button type="button" class="btn btn-warning">Thêm Vào Giỏ Hàng</button></a>
                             </form>
                         </div>
                     </div>
@@ -76,7 +75,7 @@
                             </tr>
                             <tr>
                                 <td>Danh mục</td>
-                                <td><?= $tendanhmuc ?></td>
+                                <td><?= $danhmucsach ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -121,7 +120,7 @@
                             </form>
                         </div>
                     <?php } else { ?>
-                        <p><a href="?act=dangnhap">Đăng nhập</a> hoặc <a href="?act=dangky">đăng ký</a> để có thể gửi bình luận.</p>
+                        <p><a href="?act=dangnhap">Đăng nhập</a> hoặc <a href="?act=dangky">Đăng ký</a> để có thể gửi bình luận.</p>
                         <hr>
                     <?php }?>
                 </div>
