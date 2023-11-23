@@ -37,35 +37,26 @@
                     </tr>
                 </thead>
                 <tbody id="cart-items">
-                    <!-- Dữ liệu sản phẩm sẽ được thêm vào đây -->
                     <tr>
                         <td>1</td>
-                        <td><img src="^1^" alt="Áo thun nam" width="100" height="100"></td>
+                        <td><img src="" alt=" " width="100" height="100"></td>
                         <td>Áo thun nam</td>
-                        <td>2</td>
+                        <td>
+                            <input class="form-control" type="number" name="" id="" min="1" max="10" value="1">
+                        </td>
                         <td>200.000 VNĐ</td>
-                        <td><button class="btn btn-danger" onclick="deleteItem(this)">Xoá</button></td>
+                        <td><button class="btn btn-danger">Xoá</button></td>
                     </tr>
                 </tbody>
             </table>
             <div id="total" class="mb-3">Tạm tính: <span id="total-price">500.000</span> VNĐ</div>
             <div class="d-flex align-items-start">
-                <button id="checkout-btn" class="btn btn-success me-2" onclick="submitForm()">Đặt Hàng</button>
-                <button id="clear-btn" class="btn btn-danger me-2">Xoá Giỏ Hàng</button>
-                <button class="btn btn-secondary"> Chọn Thêm Sản Phẩm </button>
+                <button type="submit" id="checkout-btn" class="btn btn-success me-2">Đặt Hàng</button>
+                <a href=""><button id="clear-btn" class="btn btn-danger me-2">Xoá Giỏ Hàng</button></a>
+                <a href="?act=danhsach"><button class="btn btn-secondary"> Chọn Thêm Sản Phẩm </button></a>
             </div>
         </div>
     </div>
-    <!-- <script>
-        function submitForm() {
-            // Hàm này sẽ nộp cả form thông tin, giỏ hàng và hình thức thanh toán khi người dùng ấn nút đặt hàng
-            // Bạn có thể thay đổi action và method của form theo ý muốn
-            var paymentMethod = document.getElementById("payment-method").value;
-            alert("Bạn đã chọn hình thức thanh toán: " + paymentMethod);
-            document.getElementById("info-form").submit();
-        }
-
-    </script> -->
     </div>
 </main>
 </div>

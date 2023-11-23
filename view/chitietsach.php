@@ -34,8 +34,18 @@
                             </p>
                         </div>
                         <div class="button-buy">
-                            <button type="button" class="btn btn-danger">Mua Ngay</button>
-                            <button type="button" class="btn btn-warning">Thêm Vào Giỏ Hàng</button>
+                            <form action="?act=giohang" method="post">
+                                <input type="hidden" name="masach" value="<?= $id ?>">
+                                <input type="hidden" name="tensach" value="<?= $tensach ?>">
+                                <input type="hidden" name="hinh" value="<?=$hinh?>">
+                                <?php if($giamgia != 0): ?>
+                                <input type="hidden" name="gia" value="<?= $giamoi = $gia - $gia*$giamgia/100 ?>">
+                                <?php else: ?>
+                                    <input type="hidden" name="gia" value="<?= $gia ?>">
+                                <?php endif ?>
+                            <button type="submit" class="btn btn-danger" name="addcart">Mua Ngay</button>
+                            <a href="?act=giohang&idsp=<?= $id ?>"><button type="button" class="btn btn-warning">Thêm Vào Giỏ Hàng</button></a>
+                            </form>
                         </div>
                     </div>
                 </div>

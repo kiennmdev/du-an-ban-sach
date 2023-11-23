@@ -109,6 +109,41 @@ switch ($act) {
         break;
 
     case 'giohang':
+        if (!isset($_SESSION['giohang'])) {
+            $_SESSION['giohang'] =[];
+        }; 
+        function add_to_cart($masach,$tensach,$hinh,$gia){
+            $sach = [
+                'masach' => $masach,
+                'tensach' => $tensach,
+                'hinh' => $hinh,
+                'gia' => $gia,
+                // 'giamgia' => $giamgia,
+                // 'soluong' => $soluong,
+                // 'thanhtien' => $gia
+            ];
+            // if (!isset($_SESSION['giohang'][$masach])) {
+            //     $_SESSION['giohang'][$masach] = $sach;
+            // } else {
+            //     $_SESSION['giohang'][$masach]['soluong'] += 1;
+            // }
+            return $sach;
+        }
+        if (isset($_POST['addcart']) && $_POST['addcart']) {
+            
+            $masach = $_POST['masach'];
+            $tensach = $_POST['tensach'];
+            $hinh = $_POST['hinh'];
+            $gia = $_POST['gia'];
+            
+            $sach = add_to_cart($masach,$tensach,$hinh,$gia);
+            if (!isset($_SESSION['giohang'][$masach])) {
+                $_SESSION['giohang'][$masach] =$sach;
+            }
+            else {
+                $_SESSION['giohang'][$masach]['soluong'] += 1;
+            }
+        }
         $view = "view/user/giohang.php";
         break;
     case 'thanhtoan':
