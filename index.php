@@ -52,7 +52,10 @@ switch ($act) {
                 extract($checknd);
                 if ($trangthai == 1) {
                     $_SESSION['idtk'] = $id;
+                    $_SESSION['avatar'] = $hinh;
                     $_SESSION['username'] = $hoten;
+                    $_SESSION['phone'] = $sodienthoai;
+                    $_SESSION['assdres'] = $diachi;
                     $_SESSION['role'] = $capbac;
                     $_SESSION['user'] = $checknd;
                     header('location: ?act=home');
@@ -98,10 +101,36 @@ switch ($act) {
         // else {
         //     header("Location: ?act=dangnhap"); 
         // }
+        
         $view = "view/user/profile.php";
         break;
 
     case 'editprofile':
+        if (isset($_SESSION['idtk'])) {
+            $idtk = $_SESSION['idtk'];
+            $nd = load_one_nguoidung($idtk);
+            extract($nd);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $idtk = $_POST['idtk'];
+                $hoten = $_POST['hoten'];
+                $sodienthoai = $_POST['sdt'];
+                $diachi = $_POST['diachi'];
+                $img = $_FILES['hinh'];
+
+                if (!empty($img['name'])) {
+                    $hinh = time() . '_' . $img['name'];
+                    move_uploaded_file($img["tmp_name"], "../" . $img_path . $hinh);
+                }
+                update_nguoidung_user($idtk,$hoten,$sodienthoai,$diachi,$hinh);
+                $_SESSION['idtk'] = $id;
+                    $_SESSION['avatar'] = $hinh;
+                    $_SESSION['username'] = $hoten;
+                    $_SESSION['phone'] = $sodienthoai;
+                    $_SESSION['assdres'] = $diachi;
+                    $_SESSION['role'] = $capbac;
+                header("Location: ?act=profile");
+            }
+        }
         $view = "view/user/editprofile.php";
         break;
     case 'recover':

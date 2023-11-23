@@ -29,7 +29,7 @@
             <div class="cart-login-regis">
                 <?php if(isset($_SESSION['idtk'])): ?>
                 <div class="avatar">
-                    <img src="../assets/image/1700126521_anh1.jpg" alt="" width="20px" height="20px" style="border-radius: 50%;">
+                    <img src="<?= isset($_SESSION['avatar']) ? $img_path.$_SESSION['avatar'] : $img_path.'banner.jpg' ?>" alt="" width="20px" height="20px" style="border-radius: 50%;">
                 </div>
                 <div class="login-regis">
                     <a href="?act=profile"><?= $_SESSION['username'] ?></a>
