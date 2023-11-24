@@ -8,6 +8,8 @@ require_once "model/danhmuc.php";
 require_once "model/sach.php";
 require_once "model/nguoidung.php";
 require_once "model/binhluan.php";
+require_once "model/cart.php";
+require_once "model/order.php";
 
 
 $dsdm = load_all_danhmuc();
@@ -17,6 +19,10 @@ $sachmoi = load_all_sach_moi();
 $sachbanchay = load_all_sach_banchay();
 $sachrand = load_all_sach_rand();
 $dssp = load_all_sach();
+if (isset($_SESSION['idtk']) && $_SESSION['idtk'] != '') {
+    $nd = load_one_nguoidung($_SESSION['idtk']);
+    extract($nd);
+}
 $act = $_GET['act'] ?? "";
 $view = "";
 switch ($act) {
@@ -53,12 +59,12 @@ switch ($act) {
                 extract($checknd);
                 if ($trangthai == 1) {
                     $_SESSION['idtk'] = $id;
-                    $_SESSION['avatar'] = $hinh;
-                    $_SESSION['username'] = $hoten;
-                    $_SESSION['phone'] = $sodienthoai;
-                    $_SESSION['assdres'] = $diachi;
-                    $_SESSION['role'] = $capbac;
-                    $_SESSION['user'] = $checknd;
+                    // $_SESSION['avatar'] = $hinh;
+                    // $_SESSION['username'] = $hoten;
+                    // $_SESSION['phone'] = $sodienthoai;
+                    // $_SESSION['assdres'] = $diachi;
+                    // $_SESSION['role'] = $capbac;
+                    // $_SESSION['user'] = $checknd;
                     header('location: ?act=home');
                 } elseif ($trangthai == 0) {
                     $err = "Tài khoản của bạn đã bị khóa mõm";
@@ -81,10 +87,12 @@ switch ($act) {
         }
         $view = "view/user/register.php";
         break;
+
     case 'dangxuat':
-        session_unset();
+        unset($_SESSION['idtk']);
         header('Location: ?act=home');
         break;
+
     case 'profile':
         // if (isset($_POST['logout'])) {
         //     if (isset($_COOKIE['user_email']) && isset($_COOKIE['user_password'])) {
@@ -123,12 +131,12 @@ switch ($act) {
                     move_uploaded_file($img["tmp_name"], "../" . $img_path . $hinh);
                 }
                 update_nguoidung_user($idtk,$hoten,$sodienthoai,$diachi,$hinh);
-                $_SESSION['idtk'] = $id;
-                    $_SESSION['avatar'] = $hinh;
-                    $_SESSION['username'] = $hoten;
-                    $_SESSION['phone'] = $sodienthoai;
-                    $_SESSION['assdres'] = $diachi;
-                    $_SESSION['role'] = $capbac;
+                // $_SESSION['idtk'] = $id;
+                //     $_SESSION['avatar'] = $hinh;
+                //     $_SESSION['username'] = $hoten;
+                //     $_SESSION['phone'] = $sodienthoai;
+                //     $_SESSION['assdres'] = $diachi;
+                //     $_SESSION['role'] = $capbac;
                 header("Location: ?act=profile");
             }
         }
@@ -139,32 +147,7 @@ switch ($act) {
         break;
 
     case 'giohang':
-        function tong_thanh_tien(){
-            $sum = 0;
-            $carts = $_SESSION['giohang'];
-            foreach($carts as $cart){
-                extract($cart);
-                $sum += $soluongmua * ($gia - $gia*$giamgia/100);
-            }
-            return $sum;
-        }
-        function add_to_cart($masach,$tensach,$hinh,$gia,$giamgia,$soluongmua,$soluongsach){
-            $sach = [
-                'masach' => $masach,
-                'tensach' => $tensach,
-                'hinh' => $hinh,
-                'gia' => $gia,
-                'giamgia' => $giamgia,
-                'soluongmua' => $soluongmua,
-                'soluongsach' => $soluongsach
-            ];
-            if (!isset($_SESSION['giohang'][$masach])) {
-                $_SESSION['giohang'][$masach]= $sach;
-            }
-            else {
-                $_SESSION['giohang'][$masach]['soluongmua'] += 1;
-            }
-        }
+        
 
         if (!isset($_SESSION['giohang'])) {
             $_SESSION['giohang'] =[];
@@ -202,10 +185,24 @@ switch ($act) {
         // unset($_SESSION['giohang']);
         header('location: ?act=giohang');
         }
-
+        
         $view = "view/user/giohang.php";
         break;
-    case 'thanhtoan':
+    case 'order':
+        if (isset($_POST['order'])) {
+            if (isset($_SESSION['idtk'])) {
+                $idtk = $_SESSION['idtk'];
+                $hoten = $_POST['hoten'];
+                $sodienthoai = $_POST['sodienthoai'];
+                $diachinhan = $_POST['diachinhan'];
+                $ngaydathang = date('Y-m-d H:i:s');
+                $tongtien = tong_thanh_tien();
+                $ghichu = $_POST['ghichu'];
+
+                add_to_order($idtk,$hoten,$sodienthoai,$diachinhan,$tongtien,$ngaydathang,$ghichu);
+                header('location: ?act=order');
+            }
+        }
         $view = "view/user/dathangthanhcong.php";
         break;
     default:

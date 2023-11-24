@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="main-list">
-                <<?php foreach ($sachbanchay as $sbc) :
+                <?php foreach ($sachbanchay as $sbc) :
                         extract($sbc);
                     ?> <div class="blockcontent">
                     <div class="product-contener">
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="main-list">
-            <<?php foreach ($sachrand as $srd) :
+            <?php foreach ($sachrand as $srd) :
                         extract($srd);
                     ?> <div class="blockcontent">
                     <div class="product-contener">

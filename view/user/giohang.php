@@ -5,15 +5,19 @@
             <hr>
             <div class="mb-3">
                 <label for="" class="form-label">Họ và tên:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập họ và tên" name="">
+                <input type="text" class="form-control" id="" placeholder="Nhập họ và tên" name="hoten" value="<?= $hoten ?>">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Số điện thoại:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập số điện thoại" name="">
+                <input type="text" class="form-control" id="" placeholder="Nhập số điện thoại" name="sodienthoai" value="<?= $sodienthoai ?>">
             </div>
             <div class="mb-3">
-                <label for="" class="form-label">Địa chỉ:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ" name="">
+                <label for="" class="form-label">Địa chỉ nhận:</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ" name="diachinhan" value="<?= $diachi ?>">
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Ghi chú:</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập ghi chú" name="ghichu">
             </div>
             <!-- <div class="mb-3">
                 <label for="" class="form-label">Hình thức thanh toán:</label>
@@ -66,9 +70,10 @@
                 </tbody>
             </table>
             <div class="d-flex align-items-start">
-                <button type="submit" id="checkout-btn" class="btn btn-success me-2">Đặt Hàng</button>
+                <!-- <a href="?act=order" class="btn btn-success me-2" onclick="return confirm('Bạn có chắc muốn đặt hàng?')">Đặt Hàng</a> -->
+                <button onclick="return confirm('Bạn có chắc muốn đặt hàng?')" type="submit" id="checkout-btn" class="btn btn-success me-2" name="order">Đặt Hàng</button>
                 <button class="btn btn-warning me-2" type="submit" name="updatecart">Cập nhật giỏ hàng</button>
-                <a href="?act=danhsach" class="btn btn-secondary me-2"> Chọn Thêm Sản Phẩm</a>
+                <a href="?act=danhsach" class="btn btn-secondary me-2">Chọn Thêm Sản Phẩm</a>
                 <a href="" class="btn btn-danger me-2">Xoá Giỏ Hàng</a>
                 
             </div>
