@@ -108,7 +108,7 @@
                         
                     </div>
                     <?php
-                    if (isset($_SESSION['user'])) {
+                    if (isset($_SESSION['idtk'])) {
                         ?>
                         <div class="submit-comment">
                             <form action="">

@@ -29,7 +29,7 @@
             <div class="cart-login-regis">
                 <?php if(isset($_SESSION['idtk'])): ?>
                 <div class="avatar">
-                    <img src="<?= $img_path.$hinh ?>" alt="" width="20px" height="20px" style="border-radius: 50%;">
+                    <img src="<?= $img_path.$nd['hinh'] ?>" alt="" width="20px" height="20px" style="border-radius: 50%;">
                 </div>
                 <div class="login-regis">
                     <a href="?act=profile"><?= $hoten ?></a>

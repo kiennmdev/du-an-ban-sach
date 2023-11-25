@@ -1,7 +1,7 @@
 
     <div class="main-content">
         <form action="?act=giohang" class="mb-4" id="info-form" method="post">
-            <h4 class="text-success h2">Thông Tin Cá Nhân</h4>
+            <!-- <h4 class="text-success h2">Thông Tin Cá Nhân</h4>
             <hr>
             <div class="mb-3">
                 <label for="" class="form-label">Họ và tên:</label>
@@ -19,11 +19,11 @@
                 <label for="" class="form-label">Ghi chú:</label>
                 <input type="text" class="form-control" id="" placeholder="Nhập ghi chú" name="ghichu">
             </div>
-            <!-- <div class="mb-3">
+            <div class="mb-3">
                 <label for="" class="form-label">Hình thức thanh toán:</label>
-                <select class="form-select" id="payment-method" name="">
-                    <option value="Tiền mặt">Thanh toán tiền mặt</option>
-                    <option value="Chuyển khoản">Thanh toán chuyển khoản</option>
+                <select class="form-select" id="payment-method" name="payments">
+                    <option value="0">Giao hàng nhận tiền</option>
+                    <option value="1">Chuyển khoản</option>
                 </select>
             </div> -->
         
@@ -59,19 +59,19 @@
                         <td>
                             <input class="form-control" type="number" name="soluong[]" id="" min="1" max="<?= $soluongsach ?>" value="<?= $soluongmua ?>">
                         </td>
-                        <td class="text-center"><?=number_format($soluongmua*($gia - $gia*$giamgia),0,',','.')?><sup> đ</sup></td>
+                        <td class="text-center"><?=number_format($soluongmua*($gia - $gia*$giamgia/100),0,',','.')?><sup> đ</sup></td>
                         <td class="text-center"><button class="btn btn-danger">Xoá</button></td>
                     </tr>
                     <?php endfor ?>
                     <tr>
-                        <th colspan="5">Tổng: </th>
+                        <th colspan="5">Tạm Tính: </th>
                         <th colspan="2" class="text-center"><?=number_format(tong_thanh_tien(),0,',','.') ?><sup> đ</sup></th>
                     </tr>
                 </tbody>
             </table>
             <div class="d-flex align-items-start">
                 <!-- <a href="?act=order" class="btn btn-success me-2" onclick="return confirm('Bạn có chắc muốn đặt hàng?')">Đặt Hàng</a> -->
-                <button onclick="return confirm('Bạn có chắc muốn đặt hàng?')" type="submit" id="checkout-btn" class="btn btn-success me-2" name="order">Đặt Hàng</button>
+                <a href="?act=order" class="btn btn-success me-2">Đặt Hàng</a>
                 <button class="btn btn-warning me-2" type="submit" name="updatecart">Cập nhật giỏ hàng</button>
                 <a href="?act=danhsach" class="btn btn-secondary me-2">Chọn Thêm Sản Phẩm</a>
                 <a href="" class="btn btn-danger me-2">Xoá Giỏ Hàng</a>

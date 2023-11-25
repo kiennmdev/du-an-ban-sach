@@ -189,21 +189,33 @@ switch ($act) {
         $view = "view/user/giohang.php";
         break;
     case 'order':
+       
+        $view = "view/user/order.php";
+        break;
+    
+    case 'bill':
         if (isset($_POST['order'])) {
             if (isset($_SESSION['idtk'])) {
                 $idtk = $_SESSION['idtk'];
                 $hoten = $_POST['hoten'];
+                $email = $_POST['email'];
                 $sodienthoai = $_POST['sodienthoai'];
                 $diachinhan = $_POST['diachinhan'];
-                $ngaydathang = date('Y-m-d H:i:s');
                 $tongtien = tong_thanh_tien();
                 $ghichu = $_POST['ghichu'];
 
-                add_to_order($idtk,$hoten,$sodienthoai,$diachinhan,$tongtien,$ngaydathang,$ghichu);
-                header('location: ?act=order');
+                $madon = add_to_order($idtk,$hoten,$email,$sodienthoai,$diachinhan,$tongtien,$ghichu);
+                $convertcart = array_values($_SESSION['giohang']);
+                for($i = 0; $i < sizeof($convertcart);$i++){
+                        extract($convertcart[$i]);
+                        $dongia = $gia - $gia*$giamgia/100;
+                        $thanhtien = $soluongmua*($gia - $gia*$giamgia);
+                        add_to_order_detail($madon,$masach,$soluongmua,$dongia,$thanhtien);
+                    }
             }
         }
-        $view = "view/user/dathangthanhcong.php";
+        $view = "view/user/bill.php";
+        
         break;
     default:
         $view = "view/home.php";

@@ -1,8 +1,8 @@
 <?php
-function insert_binhluan($noidung, $manguoidung, $masach, $thoigian)
+function insert_binhluan($noidung, $manguoidung, $masach)
 {
-    $sql = "insert into binhluan(noidung,manguoidung,masach,thoigian) values(?,?,?,?)";
-    pdo_execute($sql, $noidung, $manguoidung, $masach, $thoigian);
+    $sql = "insert into binhluan(noidung,manguoidung,masach) values(?,?,?)";
+    pdo_execute($sql, $noidung, $manguoidung, $masach);
 }
 function load_all_binhluan_sanpham(){
     $sql = "SELECT sach.id as id, sach.tensach as tensach, MIN(binhluan.thoigian) as cunhat, MAX(binhluan.thoigian) as moinhat, COUNT(binhluan.noidung) as tongsobl from binhluan inner join sach on binhluan.masach = sach.id group by masach order by id desc";
