@@ -17,7 +17,7 @@
                 <h2><a href="?act=home">FakeBook<i class="fa-solid fa-book"></i></a></h2>
             </div>
             <div class="form-search">
-                <form action="" method="get">
+                <form action="?act=danhsach" method="POST">
                     <div class="form-input">
                         <input type="text" name="search" placeholder="Tìm kiếm" id="">
                     </div>

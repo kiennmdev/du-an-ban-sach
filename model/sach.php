@@ -32,10 +32,44 @@ function load_all_sach_rand()
     return pdo_query($sql);
 }
 
-function load_all_sach_madanhmuc($madanhmuc)
+// function load_all_sach_madanhmuc($madanhmuc)
+// {
+//     $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where sach.madanhmuc = $madanhmuc ORDER BY id DESC";
+//     return pdo_query($sql);
+// }
+// function load_all_sach_tacgia($tacgia)
+// {
+//     $sql = "SELECT * FROM sach  where tacgia = ? ORDER BY id DESC";
+//     return pdo_query($sql,$tacgia);
+// }
+// function load_all_sach_nhaxuatban($nhaxuatban)
+// {
+//     $sql = "SELECT * FROM sach  where nhaxuatban = ? ORDER BY id DESC";
+//     return pdo_query($sql,$nhaxuatban);
+// }
+function load_all_sach_timkiem($tukhoa){
+    
+    if ($tukhoa!="") {
+        $sql = "SELECT * FROM sach where tensach like '%$tukhoa%' ORDER BY id DESC";
+        return pdo_query($sql);
+    }
+    else {
+        $err=[];
+        return $err;
+    }
+}
+function load_all_sach_all($act,$giatriact)
 {
-    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where sach.madanhmuc = $madanhmuc ORDER BY id DESC";
-    return pdo_query($sql);
+    $sql = "SELECT * FROM sach where 1";
+    if ($act == "iddm") {
+        $sql.=" and madanhmuc=?";
+    } elseif ($act == "tacgia"){
+        $sql.=" and tacgia = ?";
+    } elseif($act == 'nxb'){
+        $sql.=" and nhaxuatban = ?";
+    }
+    $sql.=" ORDER BY id DESC";
+    return pdo_query($sql,$giatriact);
 }
 
 
@@ -87,4 +121,11 @@ function load_top5_author(){
 function load_top5_nxb(){
     $sql = "SELECT nhaxuatban, COUNT(nhaxuatban) FROM `sach` GROUP BY nhaxuatban ORDER BY COUNT(nhaxuatban) DESC LIMIT 0,5";
     return pdo_query($sql);
+}
+
+function tang_luot_xem($idsach){
+    $sach = load_one_sach($idsach);
+    $luotxem = $sach['luotxem'] + 1;
+    $sql = "UPDATE sach set luotxem=$luotxem where id = $idsach";
+    pdo_execute($sql);
 }

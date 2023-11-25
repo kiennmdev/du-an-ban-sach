@@ -80,50 +80,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="box-comment">
-                    <h4 class="fontsize20">
-                        Bình Luận
-                    </h4>
-                    <hr>
-                    <div class="view-comment">
-                        <?php foreach($listbinhluan as $bl): 
-                            extract($bl);
-                            ?>
-                        <div class="comment">
-                            <div class="avatar-cmt">
-                                <img src="<?= $img_path . $hinh ?>" alt=" ">
-                            </div>
-                            <div class="info-cmt">
-                                <div class="name-user"><?= $hoten ?> </div>
-                                <div class="content-cmt">
-                                    <?= $noidung ?>
-                                </div>
-                                <div class="footcmt">
-                                    <span class="like"><i class="fa-regular fa-thumbs-up"></i> Thích</span>
-                                    <span class="time"><?= $thoigian ?></span>
-                                </div>
-                            </div>
-                        </div>
-                        <?php endforeach ?>
-                        
-                    </div>
-                    <?php
-                    if (isset($_SESSION['idtk'])) {
-                        ?>
-                        <div class="submit-comment">
-                            <form action="">
-                                <div class="mb-3 mt-3">
-                                    <textarea class="form-control" rows="5" id="comment" name="text"
-                                        placeholder="Bình Luận Tại Đây"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-                        </div>
-                    <?php } else { ?>
-                        <p><a href="?act=dangnhap">Đăng nhập</a> hoặc <a href="?act=dangky">Đăng ký</a> để có thể gửi bình luận.</p>
-                        <hr>
-                    <?php }?>
-                </div>
+                <?php include 'binhluan.php' ?>
                 <div class="module-sameauthor">
                     <h4 class="fontsize20">Sách Cùng Tác Giả</h4>
                     <hr>

@@ -30,15 +30,42 @@ switch ($act) {
         $view = "view/home.php";
         break;
     case 'danhsach':
-        if (isset($_GET['iddm'])) {
-            $iddm = $_GET['iddm'];
-            $dssp = load_all_sach_madanhmuc($iddm);
+        if (isset($_GET['iddm'])||isset($_GET['tacgia'])||isset($_GET['nxb'])) {
+            if (isset($_GET['iddm'])) {
+                $ma = 'iddm';
+                $giatri= $_GET['iddm'];
+                // $dssp = load_all_sach_madanhmuc($iddm);
+            }elseif (isset($_GET['tacgia'])) {
+                $ma = 'tacgia';
+                $giatri = $_GET['tacgia'];
+                // $dssp = load_all_sach_tacgia($iddm);
+            }elseif (isset($_GET['nxb'])) {
+                $ma = 'nxb';
+                $giatri = $_GET['nxb'];
+                // $dssp = load_all_sach_nhaxuatban($iddm);
+            }
+            $dssp = load_all_sach_all($ma,$giatri);
+        } else {
+            if (isset($_POST['search']) && ($_POST['search'] != "")) {
+                $tukhoa = $_POST['search'];
+            } else {
+                $tukhoa = "";
+            }
+            $dssp = load_all_sach_timkiem($tukhoa);
         }
+        
+        // if (isset($_GET['iddm'])||isset($_GET['tacgia'])||isset($_GET['nxb'])) {
+        //     $giatriact = $_GET['iddm'] ?? $_GET['tacgia'] ?? $_GET['nxb'] ?? null;
+        // }
         $view = "view/danhsach.php";
         break;
+        case 'search':
+            # code...
+            break;
     case 'chitietsach':
         if (isset($_GET['idsp'])) {
             $idsp = $_GET['idsp'];
+            tang_luot_xem($_GET['idsp']);
             $onesach = load_one_sach($idsp);
             extract($onesach);
             $spsameauthor = load_top5_sach_same_author($tacgia);
