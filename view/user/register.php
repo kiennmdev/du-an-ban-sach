@@ -1,6 +1,6 @@
 <!-- Form đăng ký -->
 <div class="main-content">
-    <form action="index.php?act=dangky" method="post">
+    <form action="index.php?act=dangky" method="post" style="width: 600px; margin: 0 auto">
         <h4 class="fontsize20">Thông Tin Đăng Ký</h4>
         <hr>
         <div class="mb-3 mt-3">

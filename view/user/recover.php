@@ -1,5 +1,5 @@
 <div class="main-content">
-                    <form action="">
+                    <form action="" style="width: 600px; margin: 0 auto">
                         <h4 class="fontsize20">Quên Mật Khẩu</h4>
                         <hr>
                         <div class="mb-3 mt-3">

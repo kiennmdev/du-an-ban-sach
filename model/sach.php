@@ -32,21 +32,21 @@ function load_all_sach_rand()
     return pdo_query($sql);
 }
 
-// function load_all_sach_madanhmuc($madanhmuc)
-// {
-//     $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where sach.madanhmuc = $madanhmuc ORDER BY id DESC";
-//     return pdo_query($sql);
-// }
-// function load_all_sach_tacgia($tacgia)
-// {
-//     $sql = "SELECT * FROM sach  where tacgia = ? ORDER BY id DESC";
-//     return pdo_query($sql,$tacgia);
-// }
-// function load_all_sach_nhaxuatban($nhaxuatban)
-// {
-//     $sql = "SELECT * FROM sach  where nhaxuatban = ? ORDER BY id DESC";
-//     return pdo_query($sql,$nhaxuatban);
-// }
+function load_all_sach_madanhmuc($madanhmuc)
+{
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where sach.madanhmuc = $madanhmuc ORDER BY id DESC";
+    return pdo_query($sql);
+}
+function load_all_sach_tacgia($tacgia)
+{
+    $sql = "SELECT * FROM sach  where tacgia = ? ORDER BY id DESC";
+    return pdo_query($sql,$tacgia);
+}
+function load_all_sach_nhaxuatban($nhaxuatban)
+{
+    $sql = "SELECT * FROM sach  where nhaxuatban = ? ORDER BY id DESC";
+    return pdo_query($sql,$nhaxuatban);
+}
 function load_all_sach_timkiem($tukhoa){
     
     if ($tukhoa!="") {
@@ -58,19 +58,19 @@ function load_all_sach_timkiem($tukhoa){
         return $err;
     }
 }
-function load_all_sach_all($act,$giatriact)
-{
-    $sql = "SELECT * FROM sach where 1";
-    if ($act == "iddm") {
-        $sql.=" and madanhmuc=?";
-    } elseif ($act == "tacgia"){
-        $sql.=" and tacgia = ?";
-    } elseif($act == 'nxb'){
-        $sql.=" and nhaxuatban = ?";
-    }
-    $sql.=" ORDER BY id DESC";
-    return pdo_query($sql,$giatriact);
-}
+// function load_all_sach_all($act,$giatriact)
+// {
+//     $sql = "SELECT * FROM sach where 1";
+//     if ($act == "iddm") {
+//         $sql.=" and madanhmuc=?";
+//     } elseif ($act == "tacgia"){
+//         $sql.=" and tacgia = ?";
+//     } elseif($act == 'nxb'){
+//         $sql.=" and nhaxuatban = ?";
+//     }
+//     $sql.=" ORDER BY id DESC";
+//     return pdo_query($sql,$giatriact);
+// }
 
 
 function load_one_sach($ma_sach)

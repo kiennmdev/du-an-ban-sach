@@ -24,12 +24,12 @@ function update_nguoidung($id,$email,$matkhau,$hoten,$sodienthoai,$diachi,$hinh,
 
     pdo_execute($sql,$email,$matkhau,$hoten,$sodienthoai,$diachi,$hinh,$gioitinh,$capbac,$trangthai,$id);
 }
-function update_nguoidung_user($id,$hoten,$sodienthoai,$diachi,$hinh)
+function update_nguoidung_user($id,$hoten,$diachi,$hinh)
 {
 
-    $sql = "update nguoidung set hoten=?,sodienthoai=?,diachi=?,hinh=? where id=?";
+    $sql = "update nguoidung set hoten=?,diachi=?,hinh=? where id=?";
 
-    pdo_execute($sql,$hoten,$sodienthoai,$diachi,$hinh,$id);
+    pdo_execute($sql,$hoten,$diachi,$hinh,$id);
 }
 function load_all_nguoidung()
 {
@@ -68,4 +68,9 @@ function delete_nguoidung_multi_item($id) {
     $mand = rtrim($mand, ", ");
     $sql = "DELETE FROM nguoidung WHERE id IN ($mand)";
     pdo_execute($sql);
+}
+
+function change_password($idtk,$newpass){
+    $sql = "UPDATE nguoidung set matkhau = ? where id = $idtk";
+    pdo_execute($sql,$newpass);
 }

@@ -80,7 +80,49 @@
                         </tbody>
                     </table>
                 </div>
-                <?php include 'binhluan.php' ?>
+                <div class="box-comment">
+                    <h4 class="fontsize20">
+                        Bình Luận
+                    </h4>
+                    <hr>
+                    <div class="view-comment">
+                        <?php foreach($listbinhluan as $bl): 
+                            extract($bl);
+                            ?>
+                        <div class="comment">
+                            <div class="avatar-cmt">
+                                <img src="<?= $img_path . $avatar ?>" alt=" ">
+                            </div>
+                            <div class="info-cmt">
+                                <div class="name-user"><?= $hoten ?> </div>
+                                <div class="content-cmt">
+                                    <?= $noidung ?>
+                                </div>
+                                <div class="footcmt">
+                                    <span class="like"><i class="fa-regular fa-thumbs-up"></i> Thích</span>
+                                    <span class="time"><?= $thoigian ?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach ?>
+                        
+                    </div>
+                    <?php if (isset($_SESSION['idtk'])) {?>
+                        <div class="submit-comment">
+                            <form action="?act=chitietsach&idsp=<?=$_GET['idsp']?>" method="POST">
+                                <div class="mb-3 mt-3">
+                                    <textarea class="form-control" rows="5" id="comment" name="noidung"
+                                        placeholder="Bình Luận Tại Đây"></textarea>
+                                </div>
+                                <input type="hidden" name="masach" value="<?= $idsp?>">
+                                <button type="submit" name="addbl" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    <?php } else { ?>
+                        <p><a href="?act=dangnhap">Đăng nhập</a> hoặc <a href="?act=dangky">Đăng ký</a> để có thể gửi bình luận.</p>
+                        <hr>
+                    <?php }?>
+                </div>
                 <div class="module-sameauthor">
                     <h4 class="fontsize20">Sách Cùng Tác Giả</h4>
                     <hr>
@@ -89,6 +131,7 @@
                     <?php foreach($spsameauthor as $sach): 
                         extract($sach);
                         ?>
+                    <div class="product-contener">
                     <div class="product">
                                     <div class="image">
                                         <a href="?act=chitietsach&idsp=<?= $id ?>"><img src="<?= $img_path . $hinh ?>" alt=""></a>
@@ -101,7 +144,7 @@
                                             <a href="?act=chitietsach&idsp=<?= $id ?>"><?= $tensach ?></a>
                                         </div>
                                         <div class="fields">
-                                            <span><a href=""><?= $tacgia ?></a></span>
+                                            <span><a href="?act=danhsach&tacgia=<?= $tacgia ?>"><?= $tacgia ?></a></span>
                                         </div>
                                         <div class="d_price_group">
                                         <?php if($giamgia != 0): 
@@ -115,6 +158,7 @@
                                         </div>
                                     </div>
                                 </div>
+                    </div>
                                 <?php endforeach ?>
                     </div>
                    
@@ -128,6 +172,7 @@
                     <?php foreach($spsamedanhmuc as $sach): 
                         extract($sach);
                         ?>
+                    <div class="product-contener">
                     <div class="product">
                                     <div class="image">
                                         <a href="?act=chitietsach&idsp=<?= $id ?>"><img src="<?= $img_path . $hinh ?>" alt=""></a>
@@ -140,7 +185,7 @@
                                             <a href="?act=chitietsach&idsp=<?= $id ?>"><?= $tensach ?></a>
                                         </div>
                                         <div class="fields">
-                                            <span><a href=""><?= $tacgia ?></a></span>
+                                            <span><a href="?act=danhsach&tacgia=<?= $tacgia ?>"><?= $tacgia ?></a></span>
                                         </div>
                                         <div class="d_price_group">
                                         <?php if($giamgia != 0): 
@@ -154,6 +199,7 @@
                                         </div>
                                     </div>
                                 </div>
+                    </div>
                                 <?php endforeach ?>
                     </div>
                 </div>

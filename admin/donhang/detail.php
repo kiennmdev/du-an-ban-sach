@@ -12,7 +12,7 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Quản lý bình luận</h4>
+                        <h4 class="page-title">Quản lý đơn hàng</h4>
                     </div>
                     <!-- <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
@@ -42,32 +42,36 @@
                     <div class="col-sm-12">
                         <div class="white-box">
                             <div class="table-responsive">
+                                <a href="?act=donhang" class="text-dark"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;Danh sách đơn hàng</a>
                                 <table class="table text-wrap">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0">ID sản phẩm</th>
-                                            <th class="border-top-0">Tên sản phẩm</th>
-                                            <th class="border-top-0">Tổng số bình luận</th>
-                                            <th class="border-top-0">Cũ nhất</th>
-                                            <th class="border-top-0">Mới nhất</th>
+                                            <th class="border-top-0">STT</th>
+                                            <th class="border-top-0">Hình ảnh</th>
+                                            <th class="border-top-0">Tên sách</th>
+                                            <th class="border-top-0">Số lượng mua</th>
+                                            <th class="border-top-0">Đơn giá</th>
+                                            <th class="border-top-0">Thành tiền</th>
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <?php foreach($binhluan as $bl): ?>
-                                        <?php extract($bl) ?>
+                                    <?php for($i = 0; $i < sizeof($dsspdh); $i++): ?>
+                                        <?php extract($dsspdh[$i]) ?>
                                     <tbody>
-                                            <td><?= $id?></td>
-                                            <td><?= $tensach?></td>
-                                            <td><?= $tongsobl?></td>
-                                            <td><?= $cunhat?></td>
-                                            <td><?= $moinhat?></td>
+                                            <td><?= $i+1?></td>
                                             <td>
-                                                <a href="?act=chitietbinhluan&masanpham=<?=$id?>" class="btn btn-secondary text-white">Chi tiết bình luận</a>
+                                                <img src="../<?=$img_path . $hinh?>" alt="" width="100px">
+                                            </td>
+                                            <td><?= $tensach?></td>
+                                            <td><?= $soluong?></td>
+                                            <td><?= number_format($dongia,0,',','.')?><sup> đ</sup></td>
+                                            <td><?= number_format($thanhtien,0,',','.')?><sup> đ</sup></td>
+                                            <td>
                                             </td>
                                         </tr>
                       
                                     </tbody>
-                                    <?php endforeach ?>
+                                    <?php endfor ?>
                                 </table>
                             </div>
                         </div>

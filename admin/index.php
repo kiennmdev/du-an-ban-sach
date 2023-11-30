@@ -1,13 +1,18 @@
 <?php
+session_start();
 require_once '../model/pdo.php';
 require_once '../_global.php';
 require_once '../model/danhmuc.php';
 require_once '../model/sach.php';
 require_once '../model/nguoidung.php';
 require_once '../model/binhluan.php';
+require_once '../model/bill.php';
 $dsdm = load_all_danhmuc();
 $dssp = load_all_sach();
 $nguoidung = load_all_nguoidung();
+if (isset($_SESSION['idtk'])) {
+    $nd = load_one_nguoidung($_SESSION['idtk']);
+}
 
 
 $act = $_GET['act'] ?? '';
@@ -281,6 +286,27 @@ switch ($act) {
         $VIEW = "binhluan/chitietbl.php";
         break;
 
+    case 'donhang':
+        $dsdh = load_all_bill();
+        if (isset($_POST['updatebill'])) {
+            $trangthai = $_POST['updatebill'];
+            if (isset($_POST['id'])) {
+                $madonhang = $_POST['id'];
+                update_status_bill($madonhang,$trangthai);
+                header('location: ?act=donhang');
+            }
+            
+        }
+        $VIEW = 'donhang/list.php';
+        break;
+
+    case 'chitietdonhang':
+        if (isset($_GET['iddh'])) {
+            $iddh = $_GET['iddh'];
+            $dsspdh = load_detail_bill($iddh);
+            $VIEW = 'donhang/detail.php';
+        }
+        break;
     default:
         $check = false;
         $VIEW = "404.php";

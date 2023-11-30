@@ -1,8 +1,8 @@
 <?php
-function insert_binhluan($noidung,$thoigian, $manguoidung, $masach)
+function insert_binhluan($noidung, $manguoidung, $masach)
 {
-    $sql = "INSERT INTO binhluan(noidung,thoigian,manguoidung,masach) values(?,?,?,?)";
-    pdo_execute($sql, $noidung,$thoigian, $manguoidung, $masach);
+    $sql = "INSERT INTO binhluan(noidung,manguoidung,masach) values(?,?,?)";
+    pdo_execute($sql, $noidung, $manguoidung, $masach);
 }
 function load_all_binhluan_sanpham(){
     $sql = "SELECT sach.id as id, sach.tensach as tensach, MIN(binhluan.thoigian) as cunhat, MAX(binhluan.thoigian) as moinhat, COUNT(binhluan.noidung) as tongsobl from binhluan inner join sach on binhluan.masach = sach.id group by masach order by id desc";
@@ -18,7 +18,9 @@ function load_all_binhluan_chitiet($masach)
 
 function load_all_binhluan_chitiet_theosp($masach)
 {
-    $sql = "SELECT binhluan.*,nguoidung.hoten as hoten,sach.tensach as tensach from binhluan inner join nguoidung on binhluan.manguoidung = nguoidung.id inner join sach on binhluan.masach = sach.id where masach='$masach' order by id desc";
+    $sql = "SELECT binhluan.*,nguoidung.hoten,nguoidung.hinh as avatar from binhluan 
+    inner join nguoidung on binhluan.manguoidung = nguoidung.id 
+    inner join sach on binhluan.masach = sach.id where masach=$masach;";
     $listbl = pdo_query($sql);
     return $listbl;
 }

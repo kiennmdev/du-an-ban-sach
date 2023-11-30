@@ -13,10 +13,10 @@
                             <input type="file" class="form-control" id="" name="hinh">
                             <img src="<?= $img_path.$hinh ?>" alt="" width="150px" height="150px" style="border-radius: 50%">
                         </div>
-                          <div class="mb-3 mt-3">
+                          <!-- <div class="mb-3 mt-3">
                             <label for="" class="form-label">Số điện thoại:</label>
-                            <input type="text" class="form-control" id="" placeholder="" name="sdt" value="<?= $sodienthoai ?>">
-                          </div>
+                            <input type="text" class="form-control" id="" placeholder="" name="sdt" value="<?= $sodienthoai ?>" readonly>
+                          </div> -->
                           <div class="mb-3 mt-3">
                             <label for="" class="form-label">Địa chỉ:</label>
                             <input type="text" class="form-control" id="" placeholder="" name="diachi" value="<?= $diachi ?>">

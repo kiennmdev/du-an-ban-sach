@@ -37,7 +37,7 @@
           let checkall = document.getElementById('checkall');
           let clearall = document.getElementById('clearall');
           let deleteall = document.getElementById('deleteall');
-
+          
           let checkbox = document.getElementsByClassName('checkbox');
 
           // Check All
@@ -71,6 +71,6 @@
               event.preventDefault(); // Khoong cho phép kích hoạt sự kiện gửi dữ liệu lên server
               return false;
             }
-          })
+          });
         </script>
  </html>

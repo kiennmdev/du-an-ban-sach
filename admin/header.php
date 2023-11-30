@@ -89,8 +89,8 @@
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li>
-                            <a class="profile-pic" href="#">
-                                <img src="plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><span class="text-white font-medium">Steave</span></a>
+                            <a class="profile-pic" href="../index.php">
+                                <img src="../<?= $img_path . $nd['hinh'] ?>" alt="user-img" width="36" class="img-circle"><span class="text-white font-medium"><?=$nd['hoten']?></span></a>
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->

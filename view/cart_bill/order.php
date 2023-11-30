@@ -6,19 +6,19 @@
             <hr>
             <div class="mb-3">
                 <label for="" class="form-label">Họ và tên:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập họ và tên" name="hoten" value="<?= $hoten ?>">
+                <input type="text" class="form-control" id="" placeholder="Nhập họ và tên" name="hoten" value="<?= isset($hoten) ? $hoten : "" ?>">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="" placeholder="Nhập emaili" name="email" value="<?= $email ?>">
+                <input type="email" class="form-control" id="" placeholder="Nhập emaili" name="email" value="<?= isset($email) ? $email : "" ?>">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Số điện thoại:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập số điện thoại" name="sodienthoai" value="<?= $sodienthoai ?>">
+                <input type="text" class="form-control" id="" placeholder="Nhập số điện thoại" name="sodienthoai" value="<?= isset($sodienthoai) ? $sodienthoai : "" ?>">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Địa chỉ nhận:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ" name="diachinhan" value="<?= $diachi ?>">
+                <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ" name="diachinhan" value="<?= isset($diachi) ? $diachi : ""  ?>">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Ghi chú:</label>
@@ -33,7 +33,6 @@
             </div>
         </div>
         <div id="cart">
-            <h2 class="text-primary">Giỏ Hàng</h2>
             <table class="table table-bordered">
                 <thead class="table-primary">
                     <tr>

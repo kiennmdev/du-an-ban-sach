@@ -1,6 +1,9 @@
 
 <div class="main-content">
         <div class="mb-4">
+        <div class="alert alert-success">
+    <strong>Đặt Hàng Thành Công!</strong>&nbsp;<a href="?act=profile" style="color: #1A585D; text-decoration:none;font-size:13px">(Theo giõi đơn hàng của bạn)</a>
+  </div>
             <h4 class="text-success">Mã đơn hàng: <?=$madon?></h4>
             <hr>
             <h5 class="text-primary">Thông tin đơn hàng</h5>
@@ -12,7 +15,7 @@
                     </tr>
                     <tr>
                         <th>Địa chỉ</th>
-                        <td><?=$diachi?></td>
+                        <td><?=$diachinhan?></td>
                     </tr>
                     <tr>
                         <th>Điện thoại</th>
@@ -26,7 +29,6 @@
             </table>
         </div>
         <div id="cart">
-            <h2 class="text-primary">Giỏ Hàng</h2>
             <table class="table table-bordered">
                 <thead class="table-primary">
                     <tr>

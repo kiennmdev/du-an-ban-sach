@@ -19,7 +19,7 @@
             <div class="form-search">
                 <form action="?act=danhsach" method="POST">
                     <div class="form-input">
-                        <input type="text" name="search" placeholder="Tìm kiếm" id="">
+                        <input type="text" name="search" placeholder="Tìm kiếm sách..." id="">
                     </div>
                     <div class="form-button">
                         <button><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -30,8 +30,6 @@
                 <?php if(isset($_SESSION['idtk'])): ?>
                 <div class="avatar">
                     <img src="<?= $img_path.$nd['hinh'] ?>" alt="" width="20px" height="20px" style="border-radius: 50%;">
-                </div>
-                <div class="login-regis">
                     <a href="?act=profile"><?= $hoten ?></a>
                 </div>
                 <?php else: ?>
@@ -47,14 +45,26 @@
     </header>
     <nav>
         <div class="container nav">
-            <div class="menu">
-                <span><i class="fa-solid fa-bars"></i></span>
-                <span>Danh Mục sản phẩm</span>
-                <!-- <span><i class="fa-solid fa-chevron-down"></i></span> -->
+        <div class="menu">
+                <div class="title-menu">
+                <a href="?act=danhsach" id="danhmuc"><i class="fa-solid fa-bars"></i>&nbsp;&nbsp;Danh Mục sản phẩm&nbsp;&nbsp;<i class="fa-solid fa-chevron-down"></i></a>
+                </div>
+                <div class="category">
+                    <!-- <a href="#"><strong>Nổi bật</strong></a> -->
+                    <?php foreach($dsdm as $dm):
+                        extract($dm);
+                        ?>
+                    <a href="?act=danhsach&iddm=<?=$id?>"><?=$tendanhmuc?></a>
+                    <?php endforeach ?>
+                </div>
             </div>
 
             <div class="contact">
-                <span><i class="fa-solid fa-phone maincolor"></i><strong>Hotline:</strong> <strong class="maincolor">1900 1508</strong> | <i class="fa-regular fa-circle-question"></i> <a href="#">Hỗ trợ trực tuyến</a></span>
+                <span>
+                    <a href="?act=tracuudonhang" class="maincolor"><i class="fa-solid fa-truck-fast"></i>&nbsp;Kiểm tra đơn hàng</a> |
+                    <i class="fa-solid fa-phone maincolor"></i>
+                    <strong>Hotline:</strong> <strong class="maincolor">1900 1508</strong> 
+                </span>
             </div>
         </div>
     </nav>

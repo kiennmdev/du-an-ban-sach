@@ -18,8 +18,8 @@
                             <label for="" class="form-label">Địa chỉ: <?= $diachi ?></label>
                             <!-- <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ" name="" value="" readonly> -->
                           </div>
-                          <a href="?act=dangxuat"><button class="btn btn-danger" onclick="return confirm('Bạn có muốn đăng xuất không?')">Đăng xuất</button></a>
-                          <a href="?act=editprofile"><button class="btn btn-warning">Sửa thông tin</button></a>
+                          <!-- <a href="?act=dangxuat"><button class="btn btn-danger" onclick="return confirm('Bạn có muốn đăng xuất không?')">Đăng xuất</button></a> -->
+                          <!-- <a href="?act=editprofile"><button class="btn btn-warning">Sửa thông tin</button></a> -->
                           <?php if ($capbac == 0) { ?>
                             <a href="admin/index.php"><button class="btn btn-success">Đến trang quản trị</button></a>
                           <?php } ?>

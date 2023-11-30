@@ -1,7 +1,7 @@
 
                 <div class="main-content">
                     <div class="main-title">
-                        <h2><?= $tendanhmuc ?></h2>
+                        <h2><?= $title ?></h2>
                     </div>
                     <div class="content">
                         <div class="content-sort">
@@ -30,9 +30,6 @@
                                     <option value="5">Xem
                                         nhiều
                                     </option>
-                                    <option value="6">Ngày xuất
-                                        bản
-                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -53,7 +50,7 @@
                                             <a href="?act=chitietsach&idsp=<?= $id ?>"><?= $tensach ?></a>
                                         </div>
                                         <div class="fields">
-                                            <span><a href=""><?= $tacgia ?></a></span>
+                                            <span><a href="?act=danhsach&tacgia=<?= $tacgia ?>"><?= $tacgia ?></a></span>
                                         </div>
                                         <div class="d_price_group">
                                         <?php if($giamgia != 0): 
