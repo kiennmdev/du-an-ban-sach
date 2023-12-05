@@ -16,14 +16,26 @@ function load_top5_sach_same_danhmuc($iddanhmuc,$idsp){
     return pdo_query($sql);
 }
 
-function load_all_sach_moi()
+function load_5_sach_moi()
 {
     $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY ngayxuatban DESC LIMIT 0,5";
     return pdo_query($sql);
 }
-function load_all_sach_banchay()
+
+function load_all_sach_moi()
+{
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY ngayxuatban DESC";
+    return pdo_query($sql);
+}
+
+function load_5_sach_banchay()
 {
     $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY luotban DESC LIMIT 0,5";
+    return pdo_query($sql);
+}
+function load_all_sach_banchay()
+{
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY luotban DESC";
     return pdo_query($sql);
 }
 function load_all_sach_rand()
@@ -58,19 +70,6 @@ function load_all_sach_timkiem($tukhoa){
         return $err;
     }
 }
-// function load_all_sach_all($act,$giatriact)
-// {
-//     $sql = "SELECT * FROM sach where 1";
-//     if ($act == "iddm") {
-//         $sql.=" and madanhmuc=?";
-//     } elseif ($act == "tacgia"){
-//         $sql.=" and tacgia = ?";
-//     } elseif($act == 'nxb'){
-//         $sql.=" and nhaxuatban = ?";
-//     }
-//     $sql.=" ORDER BY id DESC";
-//     return pdo_query($sql,$giatriact);
-// }
 
 
 function load_one_sach($ma_sach)
@@ -78,15 +77,15 @@ function load_one_sach($ma_sach)
     $sql = "SELECT sach.*, tendanhmuc as danhmucsach FROM sach join danhmuc on sach.madanhmuc=danhmuc.id WHERE sach.id=?";
     return pdo_query_one($sql, $ma_sach);
 }
-function insert_sach($tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai)
+function insert_sach($tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia,$giamgia, $mota, $ngayxuatban, $madanhmuc, $trangthai)
 {
-    $sql = "INSERT INTO sach(tensach, tacgia, hinh, nhaxuatban, soluong, gia, mota, ngayxuatban, madanhmuc, trangthai) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    pdo_execute($sql, $tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
+    $sql = "INSERT INTO sach(tensach, tacgia, hinh, nhaxuatban, soluong, gia, giamgia, mota, ngayxuatban, madanhmuc, trangthai) VALUES(?,?, ?, ?, ?,?, ?, ?, ?, ?, ?)";
+    pdo_execute($sql, $tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia,$giamgia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
 }
-function update_sach($masach, $tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai)
+function update_sach($masach, $tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia,$giamgia, $mota, $ngayxuatban, $madanhmuc, $trangthai)
 {
-    $sql = "UPDATE sach SET tensach=?, tacgia=?, hinh=?, nhaxuatban=?, soluong=?, gia=?, mota=?, ngayxuatban=?, madanhmuc=?, trangthai=? WHERE id=?";
-    pdo_execute($sql, $tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai, $masach);
+    $sql = "UPDATE sach SET tensach=?, tacgia=?, hinh=?, nhaxuatban=?, soluong=?, gia=?,giamgia=?, mota=?, ngayxuatban=?, madanhmuc=?, trangthai=? WHERE id=?";
+    pdo_execute($sql, $tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia,$giamgia, $mota, $ngayxuatban, $madanhmuc, $trangthai, $masach);
 }
 //Xóa cứng
 function delete_sach($masach)
@@ -128,4 +127,8 @@ function tang_luot_xem($idsach){
     $luotxem = $sach['luotxem'] + 1;
     $sql = "UPDATE sach set luotxem=$luotxem where id = $idsach";
     pdo_execute($sql);
+}
+function timkiem_sach($tensach){
+    $sql = "SELECT sach.* , danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where tensach like '%$tensach%'";
+    return pdo_query($sql);
 }

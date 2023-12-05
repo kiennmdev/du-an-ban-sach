@@ -5,16 +5,17 @@
                         <img src="<?=$img_path . $hinh?>" alt=" ">
                     </div>
                     <div class="showinfo-pvc">
-                        <h4><?= $tensach ?></h4>
+                        <h4 class="mt-3"><?= $tensach ?></h4>
     
-                        <div class="author-contener">
+                        <div class="author-contener mt-2">
                             Tác Giả: <span><?= $tacgia ?></span> <br>
                             NXB: <span><?= $nhaxuatban ?></span>
                         </div>
-                        <div class="quantity">
+                        <div class="quantity mt-2">
                             Số lượng: <span><?= $soluong?></span>
-                        </div>
-                        <div class="price-contener">
+                        </div> 
+                        <div class="price-contener mt-2">
+                            Giá bán:
                             <?php if($giamgia != 0): 
                                 $giamoi = $gia - $gia*$giamgia/100;
                             ?>
@@ -25,15 +26,8 @@
                             <?php endif ?>
                             
                         </div>
-                        <div class="module-productdetail">
-                            <h4 class="fontsize20">
-                                Mô Tả:
-                            </h4>
-                            <p>
-                              <?= $mota ?>
-                            </p>
-                        </div>
-                        <div class="button-buy">
+                        
+                        <div class="button-buy mt-2">
                             <form action="?act=giohang" method="post">
                                 <!-- <input type="hidden" name="masach" value="<?= $idsp ?>">
                                 <input type="hidden" name="tensach" value="<?= $tensach ?>">
@@ -48,6 +42,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="module-productdetail">
+                            <h4 class="fontsize20">
+                                Giới Thiệu Sách
+                            </h4>
+                            <hr>
+                            <p>
+                              <?= $mota ?>
+                            </p>
+                        </div>
                 <div class="module-productfeids">
                     <h4 class="fontsize20">
                         Thông Tin Chi Tiết

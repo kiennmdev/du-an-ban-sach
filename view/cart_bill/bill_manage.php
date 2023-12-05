@@ -6,7 +6,6 @@
                 <th>STT</th>
                 <th>Mã đơn hàng</th>
                 <th>Người đặt</th>
-                <th>Số điện thoại</th>
                 <th>Tổng cộng</th>
                 <th>Trạng thái</th>
                 <th class="text-center">Chi tiết đơn</th>
@@ -22,7 +21,6 @@
                     <td><?= $i + 1 ?></td>
                     <td><?= $id ?></td>
                     <td><?= $hoten ?></td>
-                    <td><?= $sodienthoai ?></td>
                     <td><?= number_format($tongtien,0,',','.')?><sup>đ</sup></td>
                     <td class="
                         <?php
@@ -48,7 +46,7 @@
                     </td>
                     <td>
                     <?php if ($trangthai == 0): ?>
-                        <a href="?act=managebill&cancel=<?=$id?>" class="btn btn-danger">Hủy</a>
+                        <a href="?act=managebill&cancel=<?=$id?>" class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này không')">Hủy</a>
                         <?php endif ?>
                     </td>
                 </tr>

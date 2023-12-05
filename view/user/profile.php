@@ -21,7 +21,7 @@
                           <!-- <a href="?act=dangxuat"><button class="btn btn-danger" onclick="return confirm('Bạn có muốn đăng xuất không?')">Đăng xuất</button></a> -->
                           <!-- <a href="?act=editprofile"><button class="btn btn-warning">Sửa thông tin</button></a> -->
                           <?php if ($capbac == 0) { ?>
-                            <a href="admin/index.php"><button class="btn btn-success">Đến trang quản trị</button></a>
+                            <a href="admin/index.php?act=home"><button class="btn btn-success">Đến trang quản trị</button></a>
                           <?php } ?>
                         <!-- <button type="submit" class="btn btn-warning">Sửa tài khoản</button> -->
                       <!-- </form> -->

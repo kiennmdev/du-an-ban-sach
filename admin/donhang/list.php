@@ -41,6 +41,16 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
+                        <form action="?act=danhmuc" method="POST"  class="d-flex mb-2 justify-content-center">
+                            <div class="d-flex" style=" width:600px">
+                            <div class="form-order-input col">
+                                <input type="text" name="key" class="form-control" placeholder="Tìm kiếm..." id="">
+                            </div>
+                            <div class="form-order-button">
+                                <button class="btn btn-primary " name="search">Tìm Kiếm</button>
+                            </div>
+                            </div>
+                        </form>
                         <form action="?act=donhang" method="post">
                         <button type="submit" class="btn btn-secondary text-white" name="updatebill" value="0" onclick="return confirm('Bạn có chắc muốn cập nhật trạng thái không?')">Chờ xác nhận</button>
                         <button type="submit" class="btn btn-primary text-white" name="updatebill" value="1" onclick="return confirm('Bạn có chắc muốn cập nhật trạng thái không?')">Đã xác nhận</button>

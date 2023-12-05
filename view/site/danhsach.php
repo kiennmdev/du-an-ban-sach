@@ -10,8 +10,9 @@
                                 <span><a href=""><i class="fa-solid fa-list"></i></a></span> -->
                             </div>
                             <div class="sort">
+                            <form action="" method="post">
                                 <span>Xem theo:</span>&nbsp;&nbsp;&nbsp;
-                                <select name="" id="">
+                               <select name="" id="">
                                     <option value="0">Mới trước
                                         cũ sau
                                     </option>
@@ -24,13 +25,9 @@
                                     <option value="3" selected="">Giá cao
                                         đến thấp
                                     </option>
-                                    <option value="4">Bán chạy
-                                        nhất
-                                    </option>
-                                    <option value="5">Xem
-                                        nhiều
-                                    </option>
                                 </select>
+                                <!-- <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button> -->
+                               </form>
                             </div>
                         </div>
                         <div class="blockcontent">

@@ -41,11 +41,21 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
+                        <form action="?act=nguoidung" method="POST"  class="d-flex mb-2 justify-content-center">
+                            <div class="d-flex" style=" width:600px">
+                            <div class="form-order-input col">
+                                <input type="text" name="key" class="form-control" placeholder="Tìm kiếm..." id="">
+                            </div>
+                            <div class="form-order-button">
+                                <button class="btn btn-primary " name="search">Tìm Kiếm</button>
+                            </div>
+                            </div>
+                        </form>
                             <form action="?act=nguoidung" method="post">
                             <a href="?act=addnguoidung"><button type="button" class="btn btn-success text-white">Thêm người dùng</button></a>
                             <button type="button" id="checkall" class="btn btn-primary">Chọn tất cả</button>
                             <button type="button" id="clearall" class="btn btn-primary">Bỏ chọn tất cả</button>
-                            <button type="submit" id="deleteall" class="btn btn-danger text-white" onclick="return confirm('Bạn có muốn xóa không')">Xóa các mục chọn</button>
+                            <button type="submit" id="deleteall" name="deleteall" class="btn btn-danger text-white" onclick="return confirm('Bạn có muốn xóa không')">Xóa các mục chọn</button>
                             <div class="table-responsive">
                                 <table class="table text-wrap">
                                     <thead>

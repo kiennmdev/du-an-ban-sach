@@ -6,7 +6,7 @@
             <h2 class="text-success">Giỏ Hàng</h2>
             <a href="?act=danhsach" class="text-dark" ><i class="fa-solid fa-arrow-left"></i>&nbsp;Chọn Thêm Sản Phẩm</a>
             <?php if(isset($_SESSION['giohang']) && $_SESSION['giohang']): ?>
-                <table class="table table-striped table-bordered mt-2">
+                <table class="table table-hover mt-2">
                 <thead>
                     <tr>
                         <th class="text-center">STT</th>

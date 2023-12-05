@@ -41,12 +41,12 @@
         <div class="head-list">
             <div class="title-list">
                 <div class="text">
-                    <a href="?act=danhsach&sachmoi=1">Sách Mới</a>
+                    <a href="?act=danhsach&sachmoi">Sách Mới</a>
                 </div>
                 <canvas></canvas>
             </div>
             <div class="view-all">
-                <a href="?act=danhsach&sachmoi=1">Xem tất cả</a>
+                <a href="?act=danhsach&sachmoi">Xem tất cả</a>
             </div>
         </div>
         <div class="main-list">
@@ -92,7 +92,7 @@
             <div class="head-list">
                 <div class="title-list">
                     <div class="text">
-                        <a href="?act=danhsach">Sách Bán Chạy</a>
+                        <a href="?act=danhsach&sachbanchay">Sách Bán Chạy</a>
                     </div>
                     <canvas></canvas>
                 </div>
@@ -142,12 +142,12 @@
             <div class="head-list">
                 <div class="title-list">
                     <div class="text">
-                        <a href="?act=danhsach">Đề xuất cho bạn</a>
+                        <a href="#">Đề xuất cho bạn</a>
                     </div>
                     <canvas></canvas>
                 </div>
                 <div class="view-all">
-                    <a href="?act=danhsach">Xem tất cả</a>
+                    <a href="#">Xem tất cả</a>
                 </div>
             </div>
             <div class="main-list">

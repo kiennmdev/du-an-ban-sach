@@ -12,7 +12,7 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Quản lý danh mục</h4>
+                        <h4 class="page-title">Quản lý thống kê</h4>
                     </div>
                     <!-- <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
@@ -41,29 +41,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <div class="form-group">
-                                <form action="" method="post">
-                                    <button type="submit" class="btn btn-success text-white">Sửa danh mục</button>
-                                    <button type="reset" class="btn btn-primary">Nhập lại</button>
-                                    <a href="?act=danhmuc"><button type="button" class="btn btn-primary">Danh sách</button></a>
-                                    <div class="mb-3 mt-3">
-                                      <label for="">Tên danh mục:<span class="text-danger">*</span></label>
-                                      <input type="text" class="form-control" id="" placeholder="Nhập tên danh mục" name="tendanhmuc" value="<?=$tendanhmuc?>">
-                                      <span class="text-danger"><?=isset($err['tendanhmuc']) ? $err['tendanhmuc'] : ''?></span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="">Trạng thái:</label>
-                                        <div class="form-control">
-                                            <input type="radio" name="trangthai" id="" value="1" <?= $trangthai == 1 ? 'checked' : '' ?>> Hiện
-                                            <input type="radio" name="trangthai" id="" value="0" <?= $trangthai == 0 ? 'checked' : '' ?>> Ẩn
-                                        </div>
-                                    </div>
-                                    
-                                    <button type="submit" class="btn btn-success text-white">Sửa danh mục</button>
-                                    <button type="reset" class="btn btn-primary">Nhập lại</button>
-                                    <a href="?act=danhmuc"><button type="button" class="btn btn-primary">Danh sách</button></a>
-                                  </form>
-                            </div>
+                        <div id="myChart" style="width:100%; max-width:600px; height:500px;"></div>
                         </div>
                     </div>
                 </div>
@@ -75,4 +53,4 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
- 
+

@@ -47,8 +47,9 @@
                                     <button type="reset" class="btn btn-primary">Nhập lại</button>
                                     <a href="?act=danhmuc"><button type="button" class="btn btn-primary">Danh sách</button></a>
                                     <div class="mb-3 mt-3">
-                                      <label for="">Tên danh mục:</label>
+                                      <label for="">Tên danh mục:<span class="text-danger">*</span></label>
                                       <input type="text" class="form-control" id="" placeholder="Nhập tên danh mục" name="tendanhmuc">
+                                      <span class="text-danger"><?=isset($err['tendanhmuc']) ? $err['tendanhmuc'] : ''?></span>
                                     </div>
                                     <div class="mb-3">
                                         <label for="">Trạng thái:</label>

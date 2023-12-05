@@ -35,5 +35,9 @@ function delete_multi_danhmuc($madanhmuc){
     $sql = "DELETE FROM danhmuc where id in ($madm)";
     pdo_execute($sql);
 }
-?>
+
+function timkiem_danhmuc($tendanhmuc){
+    $sql = "SELECT * FROM danhmuc where tendanhmuc like '%$tendanhmuc%' ";
+    return pdo_query($sql);
+}
 

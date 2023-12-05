@@ -17,7 +17,7 @@
                  <li class="sidebar-item">
                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=nguoidung" aria-expanded="false">
                          <i class="fa fa-user" aria-hidden="true"></i>
-                         <span class="hide-menu">Người dùng</span>
+                         <span class="hide-menu">Tài khoản</span>
                      </a>
                  </li>
                  <li class="sidebar-item">
@@ -28,25 +28,25 @@
                  </li>
                  <li class="sidebar-item">
                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=sanpham" aria-expanded="false">
-                         <i class="fa fa-font" aria-hidden="true"></i>
+                         <i class="fas fa-book" aria-hidden="true"></i>
                          <span class="hide-menu">Sản phẩm</span>
                      </a>
                  </li>
                  <li class="sidebar-item">
                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=donhang" aria-expanded="false">
-                         <i class="fa fa-globe" aria-hidden="true"></i>
+                         <i class="fab fa-opencart" aria-hidden="true"></i>
                          <span class="hide-menu">Đơn hàng</span>
                      </a>
                  </li>
                  <li class="sidebar-item">
                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=thongke" aria-expanded="false">
-                         <i class="fa fa-columns" aria-hidden="true"></i>
+                         <i class="fas fa-chart-bar" aria-hidden="true"></i>
                          <span class="hide-menu">Thống kê</span>
                      </a>
                  </li>
                  <li class="sidebar-item">
                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=binhluan" aria-expanded="false">
-                         <i class="fa fa-info-circle" aria-hidden="true"></i>
+                         <i class="fas fa-comment" aria-hidden="true"></i>
                          <span class="hide-menu">Bình luận</span>
                      </a>
                  </li>

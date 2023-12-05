@@ -16,8 +16,8 @@ require_once "model/bill.php";
 $dsdm = load_all_danhmuc();
 $top5tacgia = load_top5_author();
 $top5nxb = load_top5_nxb();
-$sachmoi = load_all_sach_moi();
-$sachbanchay = load_all_sach_banchay();
+$sachmoi = load_5_sach_moi();
+$sachbanchay = load_5_sach_banchay();
 $sachrand = load_all_sach_rand();
 $dssp = load_all_sach();
 if (isset($_SESSION['idtk']) && $_SESSION['idtk'] != '') {
@@ -49,6 +49,14 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                 $nxb = $_GET['nxb'];
                 $dssp = load_all_sach_nhaxuatban($nxb);
                 $title = $nxb;
+            }
+            if (isset($_GET['sachmoi'])) {
+                $title = "Sách mới";
+                $dssp = load_all_sach_moi();
+            }
+            if (isset($_GET['sachbanchay'])) {
+                $title = "Sách bán chạy";
+                $dssp = load_all_sach_banchay();
             }
             // if (isset($_GET['iddm'])||isset($_GET['tacgia'])||isset($_GET['nxb'])) {
             //     if (isset($_GET['iddm'])) {
@@ -112,21 +120,14 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $email = $_POST['email'];
                 $matkhau = $_POST['matkhau'];
-                // $remember = isset($_POST['remember']) ? $_POST['remember'] : false;
                 $checknd = check_nguoidung($email, $matkhau);
                 if ($checknd) {
                     extract($checknd);
                     if ($trangthai == 1) {
                         $_SESSION['idtk'] = $id;
-                        // $_SESSION['avatar'] = $hinh;
-                        // $_SESSION['username'] = $hoten;
-                        // $_SESSION['phone'] = $sodienthoai;
-                        // $_SESSION['assdres'] = $diachi;
-                        // $_SESSION['role'] = $capbac;
-                        // $_SESSION['user'] = $checknd;
                         header('location: ?act=home');
                     } elseif ($trangthai == 0) {
-                        $err = "Tài khoản của bạn đã bị khóa mõm";
+                        $err = "Tài khoản của bạn đã bị khóa";
                     }
                 } else {
                     $err = "Tài khoản sai thông tin hoặc không tồn tại";
@@ -135,14 +136,35 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
             $view = "view/user/login.php";
             break;
         case 'dangky':
+            $err=[];
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $hoten = $_POST['hoten'];
                 $email = $_POST['email'];
                 $matkhau = $_POST['matkhau'];
                 $sodienthoai = $_POST['sodienthoai'];
                 $diachi = $_POST['diachi'];
-                insert_nguoidung($email, $matkhau, $hoten, $sodienthoai, $diachi);
-                header("Location: ?act=home");
+                $hinh = "default.jpg";
+                if (empty($hoten)) {
+                    $err['hoten'] = "Bạn chưa nhập họ tên"; 
+                }
+                if (empty($email)) {
+                    $err['email'] = "Bạn chưa nhập email"; 
+                } else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    $err['email'] = "Sai định dạng email"; 
+                }
+                if (empty($matkhau)) {
+                    $err['matkhau'] = "Bạn chưa nhập mật khẩu"; 
+                }
+                $regex_phone = '/^0\d{9}$/';
+                if (empty($sodienthoai)) {
+                    $err['sodienthoai'] = "Bạn chưa nhập số điện thoại"; 
+                } else if (!preg_match($regex_phone,$sodienthoai)) {
+                    $err['sodienthoai'] = "Nhập sai định dạng số điện thoại"; 
+                }
+                if (!$err) {
+                    insert_nguoidung($email, $matkhau, $hoten, $sodienthoai, $diachi,$hinh);
+                    header("Location: ?act=dangnhap");
+                }
             }
             $view = "view/user/register.php";
             break;
@@ -153,63 +175,51 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
             break;
         
         case 'doimatkhau':
+            $err = "";
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $newpass = $_POST['matkhaumoi'];
-                change_password($_SESSION['idtk'],$newpass);
-                $thongbao = "Đổi mật khẩu thành công!";
+                if (empty($newpass)) {
+                    $err = "Mật khẩu không được để rỗng";
+                }
+                if ($err == "") {
+                    change_password($_SESSION['idtk'],$newpass);
+                    $thongbao = "Đổi mật khẩu thành công!";
+                }
             }
             $sidebarbillcheck = true;
             $view = "./view/user/changePassword.php";
             break;
         
         case 'profile':
-            // if (isset($_POST['logout'])) {
-            //     if (isset($_COOKIE['user_email']) && isset($_COOKIE['user_password'])) {
-            //         setcookie('user_email', '', time() - 3600 * 24 * 30, "/");
-            //         setcookie('user_password', '', time() - 3600 * 24 * 30, "/");
-            //     }
-            // }
-            // if (isset($_SESSION['idtk'])) {
-            //     $nd = load_one_nguoidung($_SESSION['idtk']);
-            //     extract($nd);
-            //     if ($_SESSION['idtk'] == 0) {
-            //         header("Location: admin1/index.php");
-            //     }
-            // }
-            // else {
-            //     header("Location: ?act=dangnhap"); 
-            // }
             $sidebarbillcheck = true;
             $view = "view/user/profile.php";
             break;
 
         case 'editprofile':
             if (isset($_SESSION['idtk'])) {
-                $idtk = $_SESSION['idtk'];
-                $nd = load_one_nguoidung($idtk);
-                extract($nd);
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $idtk = $_POST['idtk'];
-                    $hoten = $_POST['hoten'];
-                    $diachi = $_POST['diachi'];
-                    $img = $_FILES['hinh'];
-
-                    if (!empty($img['name'])) {
-                        $hinh = time() . '_' . $img['name'];
-                        move_uploaded_file($img["tmp_name"], "../" . $img_path . $hinh);
+                    $hotenmoi = $_POST['hoten'];
+                    $diachimoi = $_POST['diachi'];
+                    $imgmoi = $_FILES['hinh'];
+                    $err=[];
+                    if (empty($hotenmoi)) {
+                        $err['hoten'] = "Bạn chưa nhập họ tên"; 
                     }
-                    update_nguoidung_user($idtk,$hoten,$diachi,$hinh);
-                    // $_SESSION['idtk'] = $id;
-                    //     $_SESSION['avatar'] = $hinh;
-                    //     $_SESSION['username'] = $hoten;
-                    //     $_SESSION['phone'] = $sodienthoai;
-                    //     $_SESSION['assdres'] = $diachi;
-                    //     $_SESSION['role'] = $capbac;
-                    header("Location: ?act=profile");
+                    if (!$err) {
+                        if (!empty($imgmoi['name'])) {
+                            $hinh = time() . '_' . $imgmoi['name'];
+                            move_uploaded_file($imgmoi["tmp_name"], "../" . $img_path . $hinh);
+                        }
+                        update_nguoidung_user($idtk,$hotenmoi,$diachimoi,$hinh);
+                        header("Location: ?act=profile");
+                    }
                 }
+                $sidebarbillcheck = true;
+                $view = "view/user/editprofile.php";
+            } else{
+                header('location: ?act=dangnhap');
             }
-            $sidebarbillcheck = true;
-            $view = "view/user/editprofile.php";
             break;
         case 'recover':
             $view = "view/user/recover.php";
@@ -250,42 +260,78 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                 $soluongmua = 1;
                 $sach = load_one_sach($idsp);
                 extract($sach);
-            //    $masach = $_POST['masach'];
-            //    $tensach = $_POST['tensach'];
-            //    $hinh = $_POST['hinh'];
-            //    $soluongmua = $_POST['soluongmua'];
-            //    $soluongsach = $_POST['soluongban'];
-            //    $gia = $_POST['gia'];
                 add_to_cart($id,$tensach,$hinh,$gia,$giamgia,$soluongmua,$soluong);
-            //    var_dump($_SESSION['giohang']);
-            //    unset($_SESSION['giohang']);
-            //    die;
-            // unset($_SESSION['giohang']);
             header('location: ?act=giohang');
             }
             
             $view = "view/cart_bill/giohang.php";
             break;
         case 'order':
-        if (isset($get)) {
-            # code...
-        }
+            $check_err_order = [];
+            $_SESSION['thongtinkhachhang'] = [];
+            if (isset($_POST['order'])) {
+                $_SESSION['thongtinkhachhang']['hoten'] = $_POST['hoten'];
+                $_SESSION['thongtinkhachhang']['email'] = $_POST['email'];
+                $_SESSION['thongtinkhachhang']['sodienthoai'] = $_POST['sodienthoai'];
+                $_SESSION['thongtinkhachhang']['diachinhan'] = $_POST['diachinhan'];
+                $_SESSION['thongtinkhachhang']['ghichu'] = $_POST['ghichu'];
+                $_SESSION['thongtinkhachhang']['pttt'] = $_POST['payments'];
+
+                if (empty($_SESSION['thongtinkhachhang']['hoten'])) {
+                    $check_err_order['hoten'] = "Bạn chưa nhập tên người nhận hàng";
+                }
+                if (empty($_SESSION['thongtinkhachhang']['email'])) {
+                    $check_err_order['email'] = "Bạn chưa nhập email";
+                } else if (!filter_var($_SESSION['thongtinkhachhang']['email'],FILTER_VALIDATE_EMAIL)) {
+                    $check_err_order['email'] = "Bạn nhập sai định dạng email";
+                }
+                $regex_phone = '/^0\d{9}$/';
+                if (empty($_SESSION['thongtinkhachhang']['sodienthoai'])) {
+                    $check_err_order['sodienthoai'] = "Bạn chưa nhập số điện thoại";
+                } else if(!preg_match($regex_phone,$_SESSION['thongtinkhachhang']['sodienthoai'])) {
+                    $check_err_order['sodienthoai'] = "Bạn nhập sai định dạng số điện thoại";
+                }
+                if (empty($_SESSION['thongtinkhachhang']['diachinhan'])) {
+                    $check_err_order['diachinhan'] = "Bạn chưa nhập địa chỉ nhận";
+                }
+                if (!$check_err_order) {
+                    header('location: ?act=bill');
+                }
+            }
             $view = "view/cart_bill/order.php";
             break;
         
         case 'bill':
-            if (isset($_POST['order'])) {
+            // if (isset($_POST['order'])) {
                 $idtk = null;
                 if (isset($_SESSION['idtk'])) {
                     $idtk = $_SESSION['idtk'];
                 };
-                    $hoten = $_POST['hoten'];
-                    $email = $_POST['email'];
-                    $sodienthoai = $_POST['sodienthoai'];
-                    $diachinhan = $_POST['diachinhan'];
-                    $tongtien = tong_thanh_tien();
-                    $ghichu = $_POST['ghichu'];
-                    $pttt = $_POST['payments'];
+                $hoten = $_SESSION['thongtinkhachhang']['hoten'];
+                $email = $_SESSION['thongtinkhachhang']['email'];
+                $sodienthoai = $_SESSION['thongtinkhachhang']['sodienthoai'];
+                $diachinhan = $_SESSION['thongtinkhachhang']['diachinhan'];
+                $ghichu = $_SESSION['thongtinkhachhang']['ghichu'];
+                $pttt = $_SESSION['thongtinkhachhang']['pttt'];
+                $tongtien = tong_thanh_tien();
+
+            //     if (empty($hoten)) {
+            //         $check_err_order['hoten'] = "Bạn chưa nhập tên người nhận hàng";
+            //     }
+            //     if (empty($email)) {
+            //         $check_err_order['email'] = "Bạn chưa nhập email";
+            //     } else if (!filter_var($email,FILTER_VALIDATE_EMAIL)) {
+            //         $check_err_order['email'] = "Bạn nhập sai định dạng email";
+            //     }
+            //     $regex_phone = '/^0\d{9}$/';
+            //     if (empty($sodienthoai)) {
+            //         $check_err_order['sodienthoai'] = "Bạn chưa nhập số điện thoại";
+            //     } else if(!preg_match($regex_phone,$sodienthoai)) {
+            //         $check_err_order['sodienthoai'] = "Bạn nhập sai định dạng số điện thoại";
+            //     }
+            //     if (empty($diachinhan)) {
+            //         $check_err_order['diachinhan'] = "Bạn chưa nhập địa chỉ nhận";
+            //     }
 
                     $madon = add_to_order($idtk,$hoten,$email,$sodienthoai,$diachinhan,$tongtien,$pttt,$ghichu);
                     $convertcart = array_values($_SESSION['giohang']);
@@ -295,9 +341,9 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                             $thanhtien = $soluongmua*($gia - $gia*$giamgia);
                             add_to_order_detail($madon,$masach,$soluongmua,$dongia,$thanhtien);
                         }
-                
-            }
-            $view = "view/cart_bill/bill.php";
+                        $view = "view/cart_bill/bill.php";
+            //}
+            
             break;
 
         case 'managebill':
@@ -331,6 +377,7 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
 
         case 'detailbill':
             if (isset($_GET['mabill']) && $_GET['mabill'] != "") {
+                $bill = load_one_bill($_GET['mabill']);
                 $sidebarbillcheck = true;
                 $dsspdh = load_detail_bill($_GET['mabill']);
                 $view = "./view/cart_bill/bill_detail.php";
@@ -341,14 +388,17 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
             break;
         
         case 'tracuudonhang':
+            $regex_number = "/^\\d+$/";
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if (isset($_POST['idbill']) && $_POST['idbill'] != "") {
+                if (isset($_POST['idbill']) && preg_match($regex_number,$_POST['idbill'])) {
                     $idbill = $_POST['idbill'];
                     $bill = load_one_bill($idbill);
                 }
             }
             if (isset($_GET['mabill'])) {
                 $dsspdh = load_detail_bill($_GET['mabill']);
+                $idbill = $_GET['mabill'];
+                $bill = load_one_bill($idbill);
             }
             $view = "./view/cart_bill/search_order.php";
             break;

@@ -45,62 +45,75 @@
                                     <button type="submit" class="btn btn-success text-white">Sửa người dùng</button>
                                     <button type="reset" class="btn btn-primary">Nhập lại</button>
                                     <a href="?act=nguoidung"><button type="button" class="btn btn-primary">Danh sách</button></a>
-                                    <div class="mb-3 mt-3">
-                                        <label for="">Họ và tên:</label>
-                                        <input type="text" class="form-control" id="" value="<?=$hoten?>"
-                                            name="hoten">
-                                            <input type="hidden" name="idnd" value="<?=$id?>">
-                                    </div>
-                                    <div class="mb-3 mt-3">
-                                        <label for="">Email:</label>
-                                        <input type="text" class="form-control" id="" value="<?=$email?>"
-                                            name="email">
-                                    </div>
-                                    <div class="mb-3 mt-3">
-                                        <label for="">Mật khẩu:</label>
-                                        <input type="text" class="form-control" id="" value="<?=$matkhau?>"
-                                            name="matkhau">
-                                    </div>
-                                    <div class="mb-3 mt-3">
-                                        <label for="">Hình ảnh:</label>
-                                        <input type="file" class="form-control" id="" name="hinh">
-                                        <img src="../assets/images/user/<?=$hinh?>" alt="" width="200px">
-                                    </div>
-                                    <div class="mb-3 mt-3">
-                                        <label for="">Số điện thoại:</label>
-                                        <input type="text" class="form-control" id="" value="<?=$sodienthoai?>"
-                                            name="sodienthoai">
-                                    </div>
-                                    <div class="mb-3 mt-3">
-                                        <label for="">Địa chỉ:</label>
-                                        <input type="text" class="form-control" id="" value="<?=$diachi?>"
-                                            name="diachi">
-                                    </div>
-
-
-                                    <div class="mb-3 mt-3">
-                                        <label for="">Giới tính:</label>
-                                        <div class="form-control">
-                                            <input type="radio" name="gioitinh" id="" value="1" <?= $gioitinh==1 ? "checked" : "" ?>> Nam
-                                            <input type="radio" name="gioitinh" id="" value="0" <?= $gioitinh==0 ? "checked" : "" ?>> Nữ
+                                    <div class="row">
+                                        <div class="mb-3 mt-3 col">
+                                            <label for="">Họ và tên:<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="" value="<?=$hoten?>"
+                                                name="hoten">
+                                                <input type="hidden" name="idnd" value="<?=$id?>">
+                                                <span class="text-danger"><?=isset($err['hoten'])?$err['hoten']:''?></span>
+                                        </div>
+                                        <div class="mb-3 mt-3 col">
+                                            <label for="">Mật khẩu:<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="" value="<?=$matkhau?>"
+                                                name="matkhau">
+                                                <span class="text-danger"><?=isset($err['matkhau'])?$err['matkhau']:''?></span>
                                         </div>
                                     </div>
-                            <div class="mb-3 mt-3">
-                                <label for="">Cấp bậc:</label>
-                                <select class="form-select-sm form-control" name="capbac" id="">
-                                    <option value="0" <?= $capbac ==0 ? "selected" : "" ?> >Admin</option>
-                                    <option value="1" <?= $capbac ==1 ? "selected" : "" ?> >User</option>
-
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="">Trạng thái:</label>
-                                <div class="form-control">
-                                    <input type="radio" name="trangthai" id="" value="1" <?= $trangthai == 1 ? "checked" : "" ?> > Mở
-                                    <input type="radio" name="trangthai" id="" value="0" <?= $trangthai == 0 ? "checked" : "" ?> > Khóa
-                                </div>
-                            </div>
+                                    <div class="row">
+                                        <div class="mb-3 mt-3 col">
+                                            <label for="">Email:<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="" value="<?=$email?>"
+                                                name="email">
+                                                <span class="text-danger"><?=isset($err['email'])?$err['email']:''?></span>
+                                        </div>
+                                        <div class="mb-3 mt-3 col">
+                                            <label for="">Số điện thoại:<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="" value="<?=$sodienthoai?>"
+                                                name="sodienthoai">
+                                                <span class="text-danger"><?=isset($err['sodienthoai'])?$err['sodienthoai']:''?></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 mt-3 col">
+                                            <label for="">Hình ảnh:</label>
+                                            <input type="file" class="form-control" id="" name="hinh">
+                                            <img src="../<?=$img_path . $hinh?>" alt="" width="100px">
+                                        </div>
+                                        
+                                        <div class="mb-3 mt-3 col">
+                                            <label for="">Địa chỉ:</label>
+                                            <input type="text" class="form-control" id="" value="<?=$diachi?>"
+                                                name="diachi">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 mt-3 col">
+                                            <label for="">Giới tính:</label>
+                                            <div class="form-control">
+                                                <input type="radio" name="gioitinh" id="" value="1" <?= $gioitinh==1 ? "checked" : "" ?>> Nam
+                                                <input type="radio" name="gioitinh" id="" value="0" <?= $gioitinh==0 ? "checked" : "" ?>> Nữ
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 mt-3 col">
+                                            <label for="">Cấp bậc:</label>
+                                            <select class="form-select" name="capbac" id="">
+                                                <option value="0" <?= $capbac ==0 ? "selected" : "" ?> >Admin</option>
+                                                <option value="1" <?= $capbac ==1 ? "selected" : "" ?> >User</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 mt-3 col">
+                                            <label for="">Trạng thái:</label>
+                                            <div class="form-control">
+                                                <input type="radio" name="trangthai" id="" value="1" <?= $trangthai == 1 ? "checked" : "" ?> > Mở
+                                                <input type="radio" name="trangthai" id="" value="0" <?= $trangthai == 0 ? "checked" : "" ?> > Khóa
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 mt-3 col">
+                                        </div>
+                                    </div>
 
                             <button type="submit" class="btn btn-success text-white">Sửa người dùng</button>
                             <button type="reset" class="btn btn-primary">Nhập lại</button>

@@ -7,18 +7,68 @@ require_once '../model/sach.php';
 require_once '../model/nguoidung.php';
 require_once '../model/binhluan.php';
 require_once '../model/bill.php';
+require_once '../model/thongke.php';
 $dsdm = load_all_danhmuc();
 $dssp = load_all_sach();
 $nguoidung = load_all_nguoidung();
+$thongke1 = thong_ke_sanpham_danhmuc();
+$thongke2 = thong_ke_binhluan_sanpham();
+$thongke3 = [];
+$thongke4 = [];
+if (isset($_POST['loginAdmin'])) {
+    $err = [];
+    $email = $_POST['email'];
+    $pass = $_POST['pass'];
+    if (empty($email)) {
+        $err['email'] = "Bạn chưa nhập email";
+    }
+    if (empty($pass)) {
+         $err['pass'] = "Bạn chưa nhập mật khẩu";
+    }
+    if (!$err) {
+        $tk = check_nguoidung($email,$pass);
+        if ($tk && $tk['capbac'] == 0) {
+            $_SESSION['idtk'] = $tk['id'];
+            header('location: ?act=home');
+        }
+        else{
+            $err['tk'] = "Tài khoản không tồn tại hoặc không phải tài khoản Admin";
+        }
+    }
+}
 if (isset($_SESSION['idtk'])) {
     $nd = load_one_nguoidung($_SESSION['idtk']);
-}
-
-
 $act = $_GET['act'] ?? '';
 $check = true;
 switch ($act) {
     case 'home':
+        $fromdate = '2023-11-01';
+        $todate = date("Y-m-d");
+        $err = [];
+        if (isset($_POST['chart1'])) {
+            if ($_POST['todate'] <  $_POST['fromdate']) {
+                $err['chart1'] = "Thời gian bắt đầu lớn hơn thời gian kết thúc.";
+            } else{
+                $fromdate = $_POST['fromdate'];
+                $todate = $_POST['todate'];
+            }
+            
+        }
+        $fromdate1 = '2023-11-01';
+        $todate1 = date("Y-m-d");
+        if (isset($_POST['chart2'])) {
+            if ($_POST['todate1'] <  $_POST['fromdate1']) {
+                $err['chart2'] = "Thời gian bắt đầu lớn hơn thời gian kết thúc.";
+            } else{
+                $fromdate1 = $_POST['fromdate1'];
+                $todate1 = $_POST['todate1'];
+            }
+            
+        }
+        $thongke4 = thong_ke_thu_nhap_theo_khoang_thoigian($fromdate1,$todate1);
+        // var_dump($thongke4);
+        // die;
+        $thongke3 = thong_ke_sanpham_banduoc_theo_date($fromdate,$todate);
         $VIEW = "home.php";
         break;
 
@@ -28,10 +78,13 @@ switch ($act) {
             delete_danhmuc($iddm);
             header('location: ?act=danhmuc');
         }
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['deleteall'])) {
             $madanhmuc = $_POST['id']; //đây là 1 mảng
             delete_multi_danhmuc($madanhmuc);
             header('location: ?act=danhmuc');
+        }
+        if (isset($_POST['search'])) {
+            $dsdm = timkiem_danhmuc($_POST['key']);
         }
         $VIEW = "danhmuc/list.php";
         break;
@@ -43,9 +96,6 @@ switch ($act) {
             if (empty($tendanhmuc)) {
                 $err['tendanhmuc'] = 'Bạn chưa nhập tên loại hàng';
             }
-            // if (empty($trangthai)) {
-            //     $err['trangthai'] = 'Bạn chưa chọn trạng thái';
-            // }
             if (!$err) {
                 insert_danhmuc($tendanhmuc, $trangthai);
                 header('location: ?act=danhmuc');
@@ -67,9 +117,6 @@ switch ($act) {
                 if (empty($tendanhmuc)) {
                     $err['tenloaihang'] = 'Bạn chưa nhập tên loại hàng';
                 }
-                // if (empty($trangthai)) {
-                //     $err['trangthai'] = 'Bạn chưa chọn trạng thái';
-                // }
                 if (!$err) {
                     update_danhmuc($iddm, $tendanhmuc, $trangthai);
                     header('location: ?act=danhmuc');
@@ -87,10 +134,13 @@ switch ($act) {
             delete_sach($idsp);
             header('location: ?act=sanpham');
         }
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['deleteall'])) {
             $masach = $_POST['id']; 
             delete_multi_item_sach($masach);
             header('location: ?act=sanpham');
+        }
+        if (isset($_POST['search'])) {
+            $dssp = timkiem_sach($_POST['key']);
         }
         $VIEW = "sanpham/list.php";
         break;
@@ -102,6 +152,7 @@ switch ($act) {
             $nhaxuatban = $_POST['nxb'];
             $soluong = $_POST['soluong'];
             $gia = $_POST['gia'];
+            $giamgia = $_POST['giamgia'];
             $mota = $_POST['mota'];
             $ngayxuatban = $_POST['timexb'];
             $madanhmuc = $_POST['loaisach'];
@@ -139,7 +190,7 @@ switch ($act) {
                     $hinh = time() . "_" . $img['name'];
                     move_uploaded_file($img['tmp_name'], "../" . $img_path . $hinh);
                 }
-                insert_sach($tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
+                insert_sach($tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia,$giamgia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
                 header("location: ?act=sanpham");
             }
         }
@@ -157,6 +208,7 @@ switch ($act) {
                 $nhaxuatban = $_POST['nxb'];
                 $soluong = $_POST['soluong'];
                 $gia = $_POST['gia'];
+                $giamgia = $_POST['giamgia'];
                 $mota = $_POST['mota'];
                 $ngayxuatban = $_POST['timexb'];
                 $madanhmuc = $_POST['loaisach'];
@@ -169,9 +221,6 @@ switch ($act) {
                 if (empty($tacgia)) {
                     $err['tacgia'] = 'Bạn chưa nhập tên tác giả';
                 }
-                // if (empty($img['name'])) {
-                //     $err['img'] = 'Bạn chưa đăng ảnh bìa';
-                // }
                 if (empty($nhaxuatban)) {
                     $err['nxb'] = 'Bạn chưa nhập tên nhà xuất bản';
                 }
@@ -193,7 +242,7 @@ switch ($act) {
                         $hinh = time() . "_" . $img['name'];
                         move_uploaded_file($img['tmp_name'], "../" . $img_path . $hinh);
                     }
-                    update_sach($idsp, $tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
+                    update_sach($idsp, $tensach, $tacgia, $hinh, $nhaxuatban, $soluong, $gia,$giamgia, $mota, $ngayxuatban, $madanhmuc, $trangthai);
                     header("location: ?act=sanpham"); 
                 }
             }
@@ -209,14 +258,17 @@ switch ($act) {
             delete_nguoidung($idnd);
             header("Location: ?act=nguoidung");
         }
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['deleteall'])) {
             $idnd = $_POST['id'];
             delete_nguoidung_multi_item($idnd);
             header("Location: ?act=nguoidung");
         }
-        $nguoidung = load_all_nguoidung();
+        if (isset($_POST['key'])) {
+            $nguoidung = timkiem_nguoidung($_POST['key']);
+        }
         $VIEW = "nguoidung/list.php";
         break;
+
     case 'addnguoidung':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hoten = $_POST['hoten'];
@@ -224,15 +276,41 @@ switch ($act) {
             $matkhau = $_POST['matkhau'];
             $sodienthoai = $_POST['sodienthoai'];
             $diachi = $_POST['diachi'];
-            $hinh = $_FILES['hinh']['name'];
-            $target_dir = "../" . $img_path;
-            $target_file = $target_dir . basename($_FILES['hinh']['name']);
-            move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file);
             $gioitinh = $_POST['gioitinh'];
             $capbac = $_POST['capbac'];
             $trangthai = $_POST['trangthai'];
-            insert_nguoidung_admin($email, $matkhau, $hoten, $sodienthoai, $diachi,$hinh,$gioitinh,$capbac,$trangthai);
-            header("Location: ?act=nguoidung");
+            $img = $_FILES['hinh'];
+            $hinh = "default.jpg";
+
+            $err = [];
+            if (empty($hoten)) {
+                $err['hoten'] = "Bạn chưa nhập họ tên"; 
+            }
+            if (empty($email)) {
+                $err['email'] = "Bạn chưa nhập email"; 
+            } else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $err['email'] = "Sai định dạng email"; 
+            }
+            if (empty($matkhau)) {
+                $err['matkhau'] = "Bạn chưa nhập mật khẩu"; 
+            }
+            $regex_phone = '/^0\d{9}$/';
+            if (empty($sodienthoai)) {
+                $err['sodienthoai'] = "Bạn chưa nhập số điện thoại"; 
+            } else if (!preg_match($regex_phone,$sodienthoai)) {
+                $err['sodienthoai'] = "Nhập sai định dạng số điện thoại"; 
+            }
+
+            if (!$err) {
+                if (!empty($img['name'])) {
+                    $hinh = $img['name'];
+                    $target_dir = "../" . $img_path;
+                    $target_file = $target_dir . basename($hinh);
+                    move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file);
+                }
+                insert_nguoidung_admin($email, $matkhau, $hoten, $sodienthoai, $diachi,$hinh,$gioitinh,$capbac,$trangthai);
+                header("Location: ?act=nguoidung");
+            }
         }
         $VIEW = "nguoidung/add.php";
         break;
@@ -253,13 +331,33 @@ switch ($act) {
                 $trangthai = $_POST['trangthai'];
                 $img = $_FILES['hinh'];
 
-                if (!empty($img['name'])) {
-                    $hinh = time() . '_' . $img['name'];
-                    move_uploaded_file($img["tmp_name"], "../" . $img_path . $hinh);
+                $err = [];
+                if (empty($hoten)) {
+                    $err['hoten'] = "Bạn chưa nhập họ tên"; 
                 }
-               
-                update_nguoidung($idnd, $email, $matkhau, $hoten, $sodienthoai, $diachi, $hinh, $gioitinh, $capbac, $trangthai);
-                header("Location: ?act=nguoidung");
+                if (empty($email)) {
+                    $err['email'] = "Bạn chưa nhập email"; 
+                } else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    $err['email'] = "Sai định dạng email"; 
+                }
+                if (empty($matkhau)) {
+                    $err['matkhau'] = "Bạn chưa nhập mật khẩu"; 
+                }
+                $regex_phone = '/^0\d{9}$/';
+                if (empty($sodienthoai)) {
+                    $err['sodienthoai'] = "Bạn chưa nhập số điện thoại"; 
+                } else if (!preg_match($regex_phone,$sodienthoai)) {
+                    $err['sodienthoai'] = "Nhập sai định dạng số điện thoại"; 
+                }
+
+                if (!$err) {
+                    if (!empty($img['name'])) {
+                        $hinh = time() . '_' . $img['name'];
+                        move_uploaded_file($img["tmp_name"], "../" . $img_path . $hinh);
+                    }
+                    update_nguoidung($idnd, $email, $matkhau, $hoten, $sodienthoai, $diachi, $hinh, $gioitinh, $capbac, $trangthai);
+                    header("Location: ?act=nguoidung");
+                }
             }
             $VIEW = "nguoidung/edit.php";
         }
@@ -297,6 +395,9 @@ switch ($act) {
             }
             
         }
+        // if (isset($_POST['search'])) {
+        //     $dsdh = load_one_bill();
+        // }
         $VIEW = 'donhang/list.php';
         break;
 
@@ -304,8 +405,16 @@ switch ($act) {
         if (isset($_GET['iddh'])) {
             $iddh = $_GET['iddh'];
             $dsspdh = load_detail_bill($iddh);
+            $bill = load_one_bill($iddh);
             $VIEW = 'donhang/detail.php';
         }
+        break;
+
+    case 'thongke':
+        $VIEW = 'thongke/list.php';
+        break;
+    case 'bieudo':
+        $VIEW = 'thongke/bieudo.php';
         break;
     default:
         $check = false;
@@ -327,4 +436,8 @@ if ($check) {
 include $VIEW;
 if ($check) {
     include 'footer.php';
+}
+
+}else {
+    include 'adminLogin.php';
 }

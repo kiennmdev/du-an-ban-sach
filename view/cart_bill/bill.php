@@ -2,7 +2,7 @@
 <div class="main-content">
         <div class="mb-4">
         <div class="alert alert-success">
-    <strong>Đặt Hàng Thành Công!</strong>&nbsp;<a href="?act=profile" style="color: #1A585D; text-decoration:none;font-size:13px">(Theo giõi đơn hàng của bạn)</a>
+    <strong>Đặt Hàng Thành Công!</strong>&nbsp;<a href="<?=isset($_SESSION['idtk']) ? '?act=profile': '?act=tracuudonhang'?>" style="color: #1A585D; text-decoration:none;font-size:13px">(Theo giõi đơn hàng của bạn)</a>
   </div>
             <h4 class="text-success">Mã đơn hàng: <?=$madon?></h4>
             <hr>
@@ -25,11 +25,21 @@
                         <th>Email</th>
                         <td><?=$email?></td>
                     </tr>
+                    <tr>
+                        <th>Phương thức thanh toán</th>
+                        <td>
+                            <?=$pttt == 0 ? 'Giao hàng nhận tiền' : 'Chuyển khoản'?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Ghi chú</th>
+                        <td><?=!empty($ghichu) ? $ghichu : ''?></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
         <div id="cart">
-            <table class="table table-bordered">
+            <table class="table table-hover">
                 <thead class="table-primary">
                     <tr>
                         <th class="text-center">STT</th>

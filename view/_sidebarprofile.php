@@ -17,6 +17,7 @@
                             <div class="box-title">
                                 <h3>Quản lý tài khoản</h3>
                             </div>
+                            <a href="?act=profile">Thông tin tài khoản</a>
                             <a href="?act=editprofile">Cập nhật thông tin tài khoản</a>
                             <a href="?act=doimatkhau">Đổi mật khẩu</a>
                             <a href="?act=dangxuat" onclick="return confirm('Bạn có muốn đăng xuất không?')">Đăng xuất</a>

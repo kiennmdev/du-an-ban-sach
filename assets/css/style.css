@@ -9,6 +9,9 @@
 .maincolor {
     color: #00CC66;
 }
+.important{
+    color: red;
+}
 .container, .header {
     width: 1200px;
     margin: 0 auto;
@@ -257,8 +260,11 @@ aside{
 .view a:hover{
     color: #00CC66;
 }
-.sort>span,select{
+.sort span,select{
     font-size: 13px;
+}
+.sort button{
+    background-color: #F2F2F2;
 }
 .blockcontent{
     display: flex;
@@ -345,7 +351,7 @@ aside{
 .image-pvc img{
     width: 100%;
 }
-.author-contener, .quantity{
+.author-contener, .quantity, .price-contener{
     font-weight: 500;
 }
 .author-contener span{

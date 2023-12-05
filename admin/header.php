@@ -24,12 +24,12 @@
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
-    <div class="preloader">
+    <!-- <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
-    </div>
+    </div> -->
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -47,7 +47,7 @@
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <!-- Dark Logo icon -->
-                            <img src="plugins/images/logo-icon.png" alt="homepage" />
+                            <!-- <img src="plugins/images/logo-icon.png" alt="homepage" /> -->
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
@@ -78,12 +78,12 @@
                         <!-- Search -->
                         <!-- ============================================================== -->
                         <li class=" in">
-                            <form role="search" class="app-search d-none d-md-block me-3">
+                            <!-- <form role="search" class="app-search d-none d-md-block me-3">
                                 <input type="text" placeholder="Search..." class="form-control mt-0">
                                 <a href="" class="active">
                                     <i class="fa fa-search"></i>
                                 </a>
-                            </form>
+                            </form> -->
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->

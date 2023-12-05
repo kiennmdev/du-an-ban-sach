@@ -1,8 +1,8 @@
 <?php
-function insert_nguoidung($email, $matkhau, $hoten, $sodienthoai, $diachi)
+function insert_nguoidung($email, $matkhau, $hoten, $sodienthoai, $diachi,$hinh)
 {
-    $sql = "insert into nguoidung(email,matkhau,hoten,sodienthoai,diachi) values(?,?,?,?,?)";
-    pdo_execute($sql,$email, $matkhau, $hoten, $sodienthoai, $diachi);
+    $sql = "insert into nguoidung(email,matkhau,hoten,sodienthoai,diachi,hinh) values(?,?,?,?,?,?)";
+    pdo_execute($sql,$email, $matkhau, $hoten, $sodienthoai, $diachi,$hinh);
 }
 function insert_nguoidung_admin($email, $matkhau, $hoten, $sodienthoai, $diachi,$hinh,$gioitinh,$capbac,$trangthai)
 {
@@ -73,4 +73,9 @@ function delete_nguoidung_multi_item($id) {
 function change_password($idtk,$newpass){
     $sql = "UPDATE nguoidung set matkhau = ? where id = $idtk";
     pdo_execute($sql,$newpass);
+}
+
+function timkiem_nguoidung($tennguoidung){
+    $sql = "SELECT * from nguoidung where hoten like '%$tennguoidung%'";
+    return pdo_query($sql);
 }
