@@ -8,20 +8,24 @@ function load_one_bill($idbill){
     $sql = "SELECT * FROM donhang where id = $idbill";
     return pdo_query_one($sql);
 }
+function timkiem_bill($idbill){
+    $sql = "SELECT * FROM donhang where id = $idbill";
+    return pdo_query($sql);
+}
 
 function load_detail_bill($iddh){
     $sql = "SELECT chitietdonhang.*, sach.hinh, sach.tensach FROM chitietdonhang join sach on chitietdonhang.masach  = sach.id where madon = $iddh";
     return pdo_query($sql);
 }
 
-function update_status_bill($madon,$trangthai){
+function update_status_bill($madon,$trangthai,$pay_status){
     $md = "";
     foreach ($madon as $item) {
         $md .= $item . ", ";
     }
     //Xóa dấu (,) thừa ở bên phải
     $md = rtrim($md, ", ");
-    $sql = "UPDATE donhang SET trangthai=$trangthai WHERE id IN ($md);";
+    $sql = "UPDATE donhang SET trangthai=$trangthai,pay_status=$pay_status WHERE id IN ($md);";
     pdo_execute($sql);
 }
 

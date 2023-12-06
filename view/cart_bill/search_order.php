@@ -39,6 +39,10 @@
                         <td><?=number_format($tongtien,0,',','.')?><sup>đ</sup></td>
                     </tr>
                     <tr>
+                        <th>Trạng thái thanh toán</th>
+                        <td><?=$pay_status == 0 ? 'Chưa thanh toán' : 'Đã thanh toán'?></td>
+                    </tr>
+                    <tr>
                         <th>Ngày đặt hàng</th>
                         <td><?=$ngaydathang?></td>
                     </tr>
@@ -70,37 +74,47 @@
                     </tr>
                     <tr>
                         <th>Phương thức thanh toán</th>
-                        <td><?= $cachthanhtoan == 0 ? 'Giao hàng nhận tiền' : 'Chuyển khoản'?></td>
+                        <td>
+                            <?php 
+                                if($cachthanhtoan == 0) {
+                                    echo 'Giao hàng nhận tiền';
+                                }else if ($cachthanhtoan == 1) {
+                                    echo 'Chuyển khoản';
+                                }else{
+                                    echo 'Thanh toán bằng MOMO';
+                                }
+                            ?>
+                        </td>
                     </tr>
                 </tbody>
             </table>
             <table class="table table-hover">
-            <thead>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Hình ảnh</th>
+                <th>Tên sách</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+                <?php for ($i = 0; $i < sizeof($dsspdh); $i++) :
+                extract($dsspdh[$i]);
+            ?>
                 <tr>
-                    <th>STT</th>
-                    <th>Hình ảnh</th>
-                    <th>Tên sách</th>
-                    <th>Đơn giá</th>
-                    <th>Số lượng</th>
-                    <th>Thành tiền</th>
+                    <td><?= $i + 1 ?></td>
+                    <td>
+                        <img src="<?= $img_path . $hinh ?>" alt="" width="100px">
+                    </td>
+                    <td><?= $tensach ?></td>
+                    <td><?= number_format($dongia,0,',','.') ?><span>đ</span></td>
+                    <td><?= $soluong ?></td>
+                    <td><?= number_format($thanhtien,0,',','.') ?><span>đ</span></td>
                 </tr>
-            </thead>
-            <tbody>
-                    <?php for ($i = 0; $i < sizeof($dsspdh); $i++) :
-                    extract($dsspdh[$i]);
-                ?>
-                    <tr>
-                        <td><?= $i + 1 ?></td>
-                        <td>
-                            <img src="<?= $img_path . $hinh ?>" alt="" width="100px">
-                        </td>
-                        <td><?= $tensach ?></td>
-                        <td><?= $dongia ?></td>
-                        <td><?= $soluong ?></td>
-                        <td><?=$thanhtien?></td>
-                    </tr>
-                <?php endfor ?>
-        </table>
+            <?php endfor ?>
+    </table>
         <?php else: ?>
         <?php if($_SERVER['REQUEST_METHOD'] === 'POST'):?>
         <table class="table table-hover">

@@ -37,6 +37,7 @@ if (isset($_POST['loginAdmin'])) {
     }
 }
 if (isset($_SESSION['idtk'])) {
+    update_luong_sach_duoc_mua();
     $nd = load_one_nguoidung($_SESSION['idtk']);
 $act = $_GET['act'] ?? '';
 $check = true;
@@ -66,8 +67,6 @@ switch ($act) {
             
         }
         $thongke4 = thong_ke_thu_nhap_theo_khoang_thoigian($fromdate1,$todate1);
-        // var_dump($thongke4);
-        // die;
         $thongke3 = thong_ke_sanpham_banduoc_theo_date($fromdate,$todate);
         $VIEW = "home.php";
         break;
@@ -365,6 +364,9 @@ switch ($act) {
 
     case 'binhluan':
         $binhluan = load_all_binhluan_sanpham();
+        if (isset($_POST['search'])) {
+            $binhluan = timkiem_binhluan_sanpham($_POST['key']);
+        }
         $VIEW = "binhluan/list.php";
         break;
     case 'chitietbinhluan':
@@ -388,16 +390,21 @@ switch ($act) {
         $dsdh = load_all_bill();
         if (isset($_POST['updatebill'])) {
             $trangthai = $_POST['updatebill'];
+            $pay_status = 0;
             if (isset($_POST['id'])) {
                 $madonhang = $_POST['id'];
-                update_status_bill($madonhang,$trangthai);
+                if ($trangthai == 3) {
+                    $pay_status = 1;
+                }
+                update_status_bill($madonhang,$trangthai,$pay_status);
                 header('location: ?act=donhang');
             }
             
         }
-        // if (isset($_POST['search'])) {
-        //     $dsdh = load_one_bill();
-        // }
+        if (isset($_POST['search'])) {
+            $madon = (int)$_POST['key'];
+            $dsdh = timkiem_bill($madon);
+        }
         $VIEW = 'donhang/list.php';
         break;
 
@@ -411,6 +418,8 @@ switch ($act) {
         break;
 
     case 'thongke':
+        $dssachbanchay = load_top5_sach_banchay();
+        $dssachtonkho = load_top5_sach_tonkho();
         $VIEW = 'thongke/list.php';
         break;
     case 'bieudo':

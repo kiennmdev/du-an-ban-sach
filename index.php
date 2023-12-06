@@ -270,12 +270,13 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
             $check_err_order = [];
             $_SESSION['thongtinkhachhang'] = [];
             if (isset($_POST['order'])) {
+                $_SESSION['thongtinkhachhang']['madon'] = rand(0,9999);
                 $_SESSION['thongtinkhachhang']['hoten'] = $_POST['hoten'];
                 $_SESSION['thongtinkhachhang']['email'] = $_POST['email'];
                 $_SESSION['thongtinkhachhang']['sodienthoai'] = $_POST['sodienthoai'];
                 $_SESSION['thongtinkhachhang']['diachinhan'] = $_POST['diachinhan'];
                 $_SESSION['thongtinkhachhang']['ghichu'] = $_POST['ghichu'];
-                $_SESSION['thongtinkhachhang']['pttt'] = $_POST['payments'];
+                // $_SESSION['thongtinkhachhang']['pttt'] = $_POST['payments'];
 
                 if (empty($_SESSION['thongtinkhachhang']['hoten'])) {
                     $check_err_order['hoten'] = "Bạn chưa nhập tên người nhận hàng";
@@ -298,52 +299,84 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                     header('location: ?act=bill');
                 }
             }
+
             $view = "view/cart_bill/order.php";
             break;
         
         case 'bill':
-            // if (isset($_POST['order'])) {
                 $idtk = null;
                 if (isset($_SESSION['idtk'])) {
                     $idtk = $_SESSION['idtk'];
                 };
+                $madon = $_SESSION['thongtinkhachhang']['madon'];
                 $hoten = $_SESSION['thongtinkhachhang']['hoten'];
                 $email = $_SESSION['thongtinkhachhang']['email'];
                 $sodienthoai = $_SESSION['thongtinkhachhang']['sodienthoai'];
                 $diachinhan = $_SESSION['thongtinkhachhang']['diachinhan'];
                 $ghichu = $_SESSION['thongtinkhachhang']['ghichu'];
-                $pttt = $_SESSION['thongtinkhachhang']['pttt'];
+                $pay_status = 0;
                 $tongtien = tong_thanh_tien();
-
-            //     if (empty($hoten)) {
-            //         $check_err_order['hoten'] = "Bạn chưa nhập tên người nhận hàng";
-            //     }
-            //     if (empty($email)) {
-            //         $check_err_order['email'] = "Bạn chưa nhập email";
-            //     } else if (!filter_var($email,FILTER_VALIDATE_EMAIL)) {
-            //         $check_err_order['email'] = "Bạn nhập sai định dạng email";
-            //     }
-            //     $regex_phone = '/^0\d{9}$/';
-            //     if (empty($sodienthoai)) {
-            //         $check_err_order['sodienthoai'] = "Bạn chưa nhập số điện thoại";
-            //     } else if(!preg_match($regex_phone,$sodienthoai)) {
-            //         $check_err_order['sodienthoai'] = "Bạn nhập sai định dạng số điện thoại";
-            //     }
-            //     if (empty($diachinhan)) {
-            //         $check_err_order['diachinhan'] = "Bạn chưa nhập địa chỉ nhận";
-            //     }
-
-                    $madon = add_to_order($idtk,$hoten,$email,$sodienthoai,$diachinhan,$tongtien,$pttt,$ghichu);
-                    $convertcart = array_values($_SESSION['giohang']);
-                    for($i = 0; $i < sizeof($convertcart);$i++){
+                $err = "";
+                if (isset($_POST['pay'])) {
+                    if (isset($_POST['payments'])) {
+                        $pttt = $_POST['payments'];
+                        add_to_order($madon,$idtk,$hoten,$email,$sodienthoai,$diachinhan,$tongtien,$pttt,$pay_status,$ghichu);
+                        $convertcart = array_values($_SESSION['giohang']);
+                        for($i = 0; $i < sizeof($convertcart);$i++){
                             extract($convertcart[$i]);
                             $dongia = $gia - $gia*$giamgia/100;
                             $thanhtien = $soluongmua*($gia - $gia*$giamgia);
                             add_to_order_detail($madon,$masach,$soluongmua,$dongia,$thanhtien);
                         }
-                        $view = "view/cart_bill/bill.php";
-            //}
-            
+                        header('location: ?act=camon');
+                    } else {
+                        $err = "Bạn chưa chọn phương thức thanh toán";
+                    }
+                    
+                }
+                $view = "view/cart_bill/bill.php";
+            break;
+        
+        case 'camon':
+            if (isset($_GET['partnerCode'])) {
+                $idtk = null;
+                if (isset($_SESSION['idtk'])) {
+                    $idtk = $_SESSION['idtk'];
+                };
+                $madon = $_SESSION['thongtinkhachhang']['madon'];
+                $hoten = $_SESSION['thongtinkhachhang']['hoten'];
+                $email = $_SESSION['thongtinkhachhang']['email'];
+                $sodienthoai = $_SESSION['thongtinkhachhang']['sodienthoai'];
+                $diachinhan = $_SESSION['thongtinkhachhang']['diachinhan'];
+                $ghichu = $_SESSION['thongtinkhachhang']['ghichu'];
+                $pttt = 2;
+                $pay_status = 1;
+                $tongtien = tong_thanh_tien();
+                add_to_order($madon,$idtk,$hoten,$email,$sodienthoai,$diachinhan,$tongtien,$pttt,$pay_status,$ghichu);
+                $convertcart = array_values($_SESSION['giohang']);
+                    for($i = 0; $i < sizeof($convertcart);$i++){
+                        extract($convertcart[$i]);
+                        $dongia = $gia - $gia*$giamgia/100;
+                        $thanhtien = $soluongmua*($gia - $gia*$giamgia);
+                        add_to_order_detail($madon,$masach,$soluongmua,$dongia,$thanhtien);
+                    }
+
+                $partnerCode = $_GET['partnerCode'];
+                $orderId = $_GET['orderId'];
+                $amount = $_GET['amount'];
+                $orderInfo = $_GET['orderInfo'];
+                $orderType = $_GET['orderType'];
+                $transId = $_GET['transId'];
+                $payType = $_GET['payType'];
+                $cart_query = insert_momo($partnerCode,$orderId,$amount,$orderInfo,$orderType,$transId,$payType,$madon);
+                // if ($cart_query) {
+                //     $h4 = '<h4>Giao dịch thanh toán bằng MOMO thành công</h4>';
+                //     $p = '<p>Vui lòng vào trang <a href="#">lịch sử đơn hàng</a> để xem chi tiết đơn hàng của bạn</p>';
+                // } else{
+                //     $false = '<h4>Giao dịch thất bại</h4>';
+                // }
+            }
+            $view = 'view/thanhtoanonline/camon.php';
             break;
 
         case 'managebill':

@@ -37,7 +37,79 @@
                 <!-- ============================================================== -->
                 <!-- Three charts -->
                 <!-- ============================================================== -->
-                
+                <div class="row">
+                    <div class="col">
+                        <div class="white-box">
+                        <h4>Danh Sách Sách Bán Chạy</h4>
+                        <a href="?act=thongke" class="btn btn-primary">Xem Tất Cả</a>
+                        <div class="table-responsive">
+                                <table class="table text-wrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã sách</th>
+                                                <th>Tên sách</th>
+                                                <th>Hình ảnh</th>
+                                                <th>Số lượng còn lại</th>
+                                                <th>Số lượng đã bán</th>
+                                            </tr>
+                                        </thead>
+                                    <tbody>
+                                        <?php foreach($dssachbanchay as $sach): 
+                                            extract($sach);
+                                            ?>
+                                        <tr>
+                                            <td><?=$id?></td>
+                                            <td><?=$tensach?></td>
+                                            <td>
+                                                <img src="../<?=$img_path.$hinh?>" alt="" width="100px">
+                                            </td>
+                                            <td><?=$soluonghientai?></td>
+                                            <td><?=$luotban?></td>
+                                        </tr>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="white-box">
+                        <h4>Danh Sách Sách Tồn Kho</h4>
+                        <a href="?act=thongke" class="btn btn-primary">Xem Tất Cả</a>
+                        <div class="table-responsive">
+                        <table class="table text-wrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã sách</th>
+                                                <th>Tên sách</th>
+                                                <th>Hình ảnh</th>
+                                                <th>Số lượng còn lại</th>
+                                                <th>Số lượng đã bán</th>
+                                            </tr>
+                                        </thead>
+                                    <tbody>
+                                        <?php foreach($dssachtonkho as $sach): 
+                                            extract($sach);
+                                            ?>
+                                        <tr>
+                                            <td><?=$id?></td>
+                                            <td><?=$tensach?></td>
+                                            <td>
+                                                <img src="../<?=$img_path.$hinh?>" alt="" width="100px">
+                                            </td>
+                                            <td><?=$soluonghientai?></td>
+                                            <td><?=$luotban?></td>
+                                        </tr>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">

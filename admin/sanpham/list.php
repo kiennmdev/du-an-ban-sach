@@ -47,7 +47,7 @@
                                 <input type="text" name="key" class="form-control" placeholder="Tìm kiếm..." id="">
                             </div>
                             <div class="form-order-button">
-                                <button class="btn btn-primary " name="search">Tìm Kiếm</button>
+                                <button class="btn btn-primary " type="submit" name="search">Tìm Kiếm</button>
                             </div>
                             </div>
                         </form>

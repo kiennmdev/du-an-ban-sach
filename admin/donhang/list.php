@@ -41,13 +41,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                        <form action="?act=danhmuc" method="POST"  class="d-flex mb-2 justify-content-center">
+                        <form action="?act=donhang" method="POST"  class="d-flex mb-2 justify-content-center">
                             <div class="d-flex" style=" width:600px">
                             <div class="form-order-input col">
                                 <input type="text" name="key" class="form-control" placeholder="Tìm kiếm..." id="">
                             </div>
                             <div class="form-order-button">
-                                <button class="btn btn-primary " name="search">Tìm Kiếm</button>
+                                <button class="btn btn-primary" type="submit" name="search">Tìm Kiếm</button>
                             </div>
                             </div>
                         </form>

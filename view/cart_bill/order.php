@@ -28,13 +28,13 @@
                 <label for="" class="form-label">Ghi chú:</label>
                 <input type="text" class="form-control" id="" placeholder="Nhập ghi chú" name="ghichu">
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="" class="form-label">Hình thức thanh toán:</label>
                 <select class="form-select" id="payment-method" name="payments">
                     <option value="0">Giao hàng nhận tiền</option>
                     <option value="1">Chuyển khoản</option>
                 </select>
-            </div>
+            </div> -->
         </div>
         <div id="cart">
             <table class="table table-hover">
@@ -76,7 +76,7 @@
                 </tbody>
             </table>
         </div>
-        <button onclick="return confirm('Bạn có chắc muốn đặt hàng?')" type="submit" id="checkout-btn" class="btn btn-danger me-2" name="order">Đặt Hàng</button>
+        <button type="submit" id="checkout-btn" class="btn btn-danger me-2" name="order">Đặt Hàng</button>
         <a href="?act=giohang" class="btn btn-primary me-2">Chỉnh sửa đơn hàng</a>
         </form>
     </div>

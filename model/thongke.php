@@ -52,3 +52,4 @@ function thong_ke_thu_nhap_theo_khoang_thoigian($date1,$date2){
     return pdo_query($sql);
 }
 
+

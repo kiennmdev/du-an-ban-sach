@@ -5,13 +5,23 @@ function insert_binhluan($noidung, $manguoidung, $masach)
     pdo_execute($sql, $noidung, $manguoidung, $masach);
 }
 function load_all_binhluan_sanpham(){
-    $sql = "SELECT sach.id as id, sach.tensach as tensach, MIN(binhluan.thoigian) as cunhat, MAX(binhluan.thoigian) as moinhat, COUNT(binhluan.noidung) as tongsobl from binhluan inner join sach on binhluan.masach = sach.id group by masach order by id desc";
+    $sql = "SELECT sach.id as id, sach.tensach as tensach, MIN(binhluan.thoigian) as cunhat, MAX(binhluan.thoigian) as moinhat, COUNT(binhluan.noidung) as tongsobl from binhluan 
+    inner join sach on binhluan.masach = sach.id group by masach order by id desc";
     $listbl = pdo_query($sql);
     return $listbl;
 }
+
+function timkiem_binhluan_sanpham($tensach){
+    $sql = "SELECT sach.id as id, sach.tensach as tensach, MIN(binhluan.thoigian) as cunhat, MAX(binhluan.thoigian) as moinhat, COUNT(binhluan.noidung) as tongsobl from binhluan 
+    inner join sach on binhluan.masach = sach.id where sach.tensach like '%$tensach%' group by masach";
+    $listbl = pdo_query($sql);
+    return $listbl;
+}
+
 function load_all_binhluan_chitiet($masach)
 {
-    $sql = "SELECT binhluan.*,nguoidung.hoten as hoten,sach.tensach as tensach from binhluan inner join nguoidung on binhluan.manguoidung = nguoidung.id inner join sach on binhluan.masach = sach.id where masach='$masach' order by id desc";
+    $sql = "SELECT binhluan.*,nguoidung.hoten as hoten,sach.tensach as tensach from binhluan inner join nguoidung on binhluan.manguoidung = nguoidung.id 
+    inner join sach on binhluan.masach = sach.id where masach='$masach' order by id desc";
     $listbl = pdo_query($sql);
     return $listbl;
 }
