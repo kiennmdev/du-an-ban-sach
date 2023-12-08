@@ -125,6 +125,7 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                     extract($checknd);
                     if ($trangthai == 1) {
                         $_SESSION['idtk'] = $id;
+                        $_SESSION['role'] = $capbac;
                         header('location: ?act=home');
                     } elseif ($trangthai == 0) {
                         $err = "Tài khoản của bạn đã bị khóa";
@@ -171,6 +172,7 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
 
         case 'dangxuat':
             unset($_SESSION['idtk']);
+            unset($_SESSION['role']);
             header('Location: ?act=home');
             break;
         
@@ -201,6 +203,7 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                     $idtk = $_POST['idtk'];
                     $hotenmoi = $_POST['hoten'];
                     $diachimoi = $_POST['diachi'];
+                    $gioitinhmoi = $_POST['gioitinh'];
                     $imgmoi = $_FILES['hinh'];
                     $err=[];
                     if (empty($hotenmoi)) {
@@ -209,9 +212,9 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                     if (!$err) {
                         if (!empty($imgmoi['name'])) {
                             $hinh = time() . '_' . $imgmoi['name'];
-                            move_uploaded_file($imgmoi["tmp_name"], "../" . $img_path . $hinh);
+                            move_uploaded_file($imgmoi["tmp_name"],$img_path . $hinh);
                         }
-                        update_nguoidung_user($idtk,$hotenmoi,$diachimoi,$hinh);
+                        update_nguoidung_user($idtk,$hotenmoi,$diachimoi,$gioitinhmoi,$hinh);
                         header("Location: ?act=profile");
                     }
                 }
@@ -222,6 +225,11 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
             }
             break;
         case 'recover':
+            $thongbao = "";
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $mail = $_POST['email'];
+                $thongbao = sendMail($mail);
+            }
             $view = "view/user/recover.php";
             break;
 
@@ -338,43 +346,42 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
             break;
         
         case 'camon':
-            if (isset($_GET['partnerCode'])) {
-                $idtk = null;
-                if (isset($_SESSION['idtk'])) {
-                    $idtk = $_SESSION['idtk'];
-                };
-                $madon = $_SESSION['thongtinkhachhang']['madon'];
-                $hoten = $_SESSION['thongtinkhachhang']['hoten'];
-                $email = $_SESSION['thongtinkhachhang']['email'];
-                $sodienthoai = $_SESSION['thongtinkhachhang']['sodienthoai'];
-                $diachinhan = $_SESSION['thongtinkhachhang']['diachinhan'];
-                $ghichu = $_SESSION['thongtinkhachhang']['ghichu'];
-                $pttt = 2;
-                $pay_status = 1;
-                $tongtien = tong_thanh_tien();
-                add_to_order($madon,$idtk,$hoten,$email,$sodienthoai,$diachinhan,$tongtien,$pttt,$pay_status,$ghichu);
-                $convertcart = array_values($_SESSION['giohang']);
-                    for($i = 0; $i < sizeof($convertcart);$i++){
-                        extract($convertcart[$i]);
-                        $dongia = $gia - $gia*$giamgia/100;
-                        $thanhtien = $soluongmua*($gia - $gia*$giamgia);
-                        add_to_order_detail($madon,$masach,$soluongmua,$dongia,$thanhtien);
-                    }
-
-                $partnerCode = $_GET['partnerCode'];
-                $orderId = $_GET['orderId'];
-                $amount = $_GET['amount'];
-                $orderInfo = $_GET['orderInfo'];
-                $orderType = $_GET['orderType'];
-                $transId = $_GET['transId'];
-                $payType = $_GET['payType'];
-                $cart_query = insert_momo($partnerCode,$orderId,$amount,$orderInfo,$orderType,$transId,$payType,$madon);
-                // if ($cart_query) {
-                //     $h4 = '<h4>Giao dịch thanh toán bằng MOMO thành công</h4>';
-                //     $p = '<p>Vui lòng vào trang <a href="#">lịch sử đơn hàng</a> để xem chi tiết đơn hàng của bạn</p>';
-                // } else{
-                //     $false = '<h4>Giao dịch thất bại</h4>';
-                // }
+            $thongbao = true;
+            if (isset($_GET['message']) && $_GET['message']=="Successful.") {
+                if (isset($_GET['partnerCode'])) {
+                    $idtk = null;
+                    if (isset($_SESSION['idtk'])) {
+                        $idtk = $_SESSION['idtk'];
+                    };
+                    $madon = $_SESSION['thongtinkhachhang']['madon'];
+                    $hoten = $_SESSION['thongtinkhachhang']['hoten'];
+                    $email = $_SESSION['thongtinkhachhang']['email'];
+                    $sodienthoai = $_SESSION['thongtinkhachhang']['sodienthoai'];
+                    $diachinhan = $_SESSION['thongtinkhachhang']['diachinhan'];
+                    $ghichu = $_SESSION['thongtinkhachhang']['ghichu'];
+                    $pttt = 2;
+                    $pay_status = 1;
+                    $tongtien = tong_thanh_tien();
+                    add_to_order($madon,$idtk,$hoten,$email,$sodienthoai,$diachinhan,$tongtien,$pttt,$pay_status,$ghichu);
+                    $convertcart = array_values($_SESSION['giohang']);
+                        for($i = 0; $i < sizeof($convertcart);$i++){
+                            extract($convertcart[$i]);
+                            $dongia = $gia - $gia*$giamgia/100;
+                            $thanhtien = $soluongmua*($gia - $gia*$giamgia);
+                            add_to_order_detail($madon,$masach,$soluongmua,$dongia,$thanhtien);
+                        }
+    
+                    $partnerCode = $_GET['partnerCode'];
+                    $orderId = $_GET['orderId'];
+                    $amount = $_GET['amount'];
+                    $orderInfo = $_GET['orderInfo'];
+                    $orderType = $_GET['orderType'];
+                    $transId = $_GET['transId'];
+                    $payType = $_GET['payType'];
+                    $cart_query = insert_momo($partnerCode,$orderId,$amount,$orderInfo,$orderType,$transId,$payType,$madon);
+                }
+            } else{
+                $thongbao = false;
             }
             $view = 'view/thanhtoanonline/camon.php';
             break;
@@ -400,6 +407,11 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                 if (isset($_GET['cancel']) && ($_GET['cancel'] != "")) {
                     bill_cancel($_GET['cancel']);
                     header('location: ?act=managebill');
+                }
+                if (isset($_GET['congthanhtoan'])) {
+                    $madon = $_GET['code_cart'];
+                    $momo = load_one_momo($madon);
+                    extract($momo);
                 }
                 $sidebarbillcheck = true;
                 $view = "./view/cart_bill/bill_manage.php";

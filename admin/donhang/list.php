@@ -64,11 +64,11 @@
                                             <th></th>
                                             <th class="border-top-0">Mã đơn</th>
                                             <th class="border-top-0">Tên khách hàng</th>
-                                            <th class="border-top-0">Email</th>
                                             <th class="border-top-0">Số điện thoại</th>
                                             <th class="border-top-0">Tổng Tiền</th>
                                             <th class="border-top-0">Phương thức thanh toán</th>
                                             <th class="border-top-0">Trạng thái</th>
+                                            <th class="border-top-0">Trạng thái thanh toán</th>
                                             <th class="border-top-0">Ngày đặt hàng</th>
                                             <!--     -->
                                             <th></th>
@@ -82,11 +82,18 @@
                                             <td class="text-center"><input type="checkbox" class="checkbox" name="id[]" value="<?=$id?>"></td>
                                             <td><?= $id?></td>
                                             <td><?= $hoten?></td>
-                                            <td><?= $email?></td>
                                             <td><?= $sodienthoai?></td>
                                             <td><?= number_format($tongtien,0,',','.')?><sup>đ</sup></td>
                                             <td>
-                                                <?= $cachthanhtoan == 0 ? 'Giao hàng nhận tiền' : 'Chuyển khoản'?>
+                                            <?php 
+                                                if($cachthanhtoan == 0) {
+                                                    echo 'Giao hàng nhận tiền';
+                                                }else if ($cachthanhtoan == 1) {
+                                                    echo 'Chuyển khoản';
+                                                }else{
+                                                    echo 'Thanh toán bằng MOMO';
+                                                }
+                                            ?>
                                             </td>
                                             <td class="
                                                 <?php
@@ -112,6 +119,7 @@
                                                 ?>">
                                                 <?= $status?>
                                             </td>
+                                            <td><?=$pay_status == 0 ? "Chưa thanh toán":"Đã thanh toán"?></td>
                                             <td><?= $ngaydathang?></td>
                                             <!-- <td><?= $ghichu?></td> -->
                                             <td>

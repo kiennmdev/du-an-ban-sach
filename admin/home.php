@@ -53,10 +53,13 @@
                                     </div>
                                     <span class="text-danger"><?= isset($err['chart1']) ? $err['chart1'] : ''?></span>
                                 </div>
+                                <div class="mt-2">
+                                <button type="submit" name="chart1" class="btn btn-primary">Thực hiện</button>
+                                </div>
                             <div class="chart">
-                            <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
+                            <canvas id="myChart1" style="width:100%; max-width: 800px; margin: 0 auto"></canvas>
                             </div>
-                            <button type="submit" name="chart1" class="btn btn-primary">Thực hiện</button>
+                            
                             </form>
                         </div>
                     </div>
@@ -74,10 +77,12 @@
                                     </div>
                                     <span class="text-danger"><?= isset($err['chart2']) ? $err['chart2'] : ''?></span>
                                 </div>
+                                <div class="mt-2">
+                                <button type="submit" name="chart2" class="btn btn-primary">Thực hiện</button>
+                                </div>
                             <div class="chart">
-                            <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+                            <canvas id="myChart2" style="width:100%; max-width: 800px; margin: 0 auto"></canvas>
                             </div>
-                            <button type="submit" name="chart2" class="btn btn-primary">Thực hiện</button>
                             </form>
                         </div>
                     </div>

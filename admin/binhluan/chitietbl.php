@@ -41,10 +41,12 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
+                        <a href="?act=binhluan" class="text-dark"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;Quay lại</a>
+                            <form action="?<?= $_SERVER["QUERY_STRING"]?>" method="post">
                             <a href="?act=binhluan"><button type="button" class="btn btn-primary">Danh sách</button></a>
                             <button type="button" id="checkall" class="btn btn-primary">Chọn tất cả</button>
                             <button type="button" id="clearall" class="btn btn-primary">Bỏ chọn tất cả</button>
-                            <button type="submit" id="deleteall" class="btn btn-danger text-white">Xóa các mục chọn</button>
+                            <button type="submit" id="deleteall" class="btn btn-danger text-white" onclick="return confirm('Bạn có muốn ẩn không?')">Ẩn các mục chọn</button>
                             <div class="table-responsive">
                                 <table class="table text-nowrap">
                                     <thead>
@@ -54,6 +56,7 @@
                                             <th class="border-top-0">Nội dung</th>
                                             <th class="border-top-0">Ngày bình luận</th>
                                             <th class="border-top-0">Người bình luận</th>
+                                            <th>Trạng thái</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -65,8 +68,10 @@
                                             <td><?= $noidung?></td>
                                             <td><?= $thoigian?></td>
                                             <td><?= $hoten?></td>
+                                            <td><?=$trangthai == 0 ? "Ẩn":"Hiện"?></td>
                                             <td>
-                                                <a href="?act=chitietbinhluan&maxoa=<?= $id ?>" class="btn btn-danger text-white">Xóa</a>
+                                                <a href="?<?= $_SERVER["QUERY_STRING"] . "&mahien=" .$id ?>" class="btn btn-primary text-white" onclick="return confirm('Bạn có muốn hiện không?')">Hiện</a>
+                                                <a href="?<?= $_SERVER["QUERY_STRING"] . "&maan=" .$id ?>" class="btn btn-danger text-white" onclick="return confirm('Bạn có muốn ẩn không?')">Ẩn</a>
                                             </td>
                                         </tr>
                       
@@ -74,6 +79,7 @@
                                     <?php endforeach ?>
                                 </table>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -1,20 +1,19 @@
-
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
-             <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <div class="page-breadcrumb bg-white">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Quản lý người dùng</h4>
-                    </div>
-                    <!-- <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb bg-white">
+        <div class="row align-items-center">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Quản lý người dùng</h4>
+            </div>
+            <!-- <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
                                 <li><a href="#" class="fw-normal">Dashboard</a></li>
@@ -24,64 +23,75 @@
                                 to Pro</a>
                         </div>
                     </div> -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Three charts -->
-                <!-- ============================================================== -->
-                
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="white-box">
-                        <form action="?act=nguoidung" method="POST"  class="d-flex mb-2 justify-content-center">
-                            <div class="d-flex" style=" width:600px">
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Three charts -->
+        <!-- ============================================================== -->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <form action="?act=nguoidung" method="POST" class="d-flex mb-2 justify-content-center">
+                        <div class="d-flex" style=" width:600px">
                             <div class="form-order-input col">
                                 <input type="text" name="key" class="form-control" placeholder="Tìm kiếm..." id="">
                             </div>
                             <div class="form-order-button">
                                 <button class="btn btn-primary" type="submit" name="search">Tìm Kiếm</button>
                             </div>
-                            </div>
-                        </form>
-                            <form action="?act=nguoidung" method="post">
-                            <a href="?act=addnguoidung"><button type="button" class="btn btn-success text-white">Thêm người dùng</button></a>
-                            <button type="button" id="checkall" class="btn btn-primary">Chọn tất cả</button>
-                            <button type="button" id="clearall" class="btn btn-primary">Bỏ chọn tất cả</button>
-                            <button type="submit" id="deleteall" name="deleteall" class="btn btn-danger text-white" onclick="return confirm('Bạn có muốn xóa không')">Xóa các mục chọn</button>
-                            <div class="table-responsive">
-                                <table class="table text-wrap">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th class="border-top-0">ID</th>
-                                            <th class="border-top-0">Hình ảnh</th>
-                                            <th class="border-top-0">Họ và tên</th>
-                                            <th class="border-top-0">Email</th>
-                                            <th class="border-top-0">Mật khẩu</th>
-                                            <th class="border-top-0">Số điện thoại</th>
-                                            <th class="border-top-0">Địa chỉ</th>
-                                            <th class="border-top-0">Giới tính</th>
-                                            <th class="border-top-0">Cấp bậc</th>
-                                            <th class="border-top-0">Trạng thái</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <?php foreach($nguoidung as $nd) : ?>
-                                        <?php extract($nd) ?>
+                        </div>
+                    </form>
+                    <form action="<?=isset($_GET['trangthai']) && $_GET['trangthai'] == 0 ? "?act=nguoidung&trangthai=0" :"?act=nguoidung"?>" method="post">
+                        <a href="?act=addnguoidung"><button type="button" class="btn btn-success text-white">Thêm người dùng</button></a>
+                        <?php if (isset($_GET['trangthai']) && $_GET['trangthai'] == 0) : ?>
+                            <a href="?act=nguoidung"><button type="button" class="btn btn-primary text-white">Danh sách tài khoản hoạt động</button></a>
+                        <?php else : ?>
+                            <a href="?act=nguoidung&trangthai=0"><button type="button" class="btn btn-primary text-white">Danh sách tài khoản bị khóa</button></a>
+                        <?php endif ?>
+                        
+                        <button type="button" id="checkall" class="btn btn-primary">Chọn tất cả</button>
+                        <button type="button" id="clearall" class="btn btn-primary">Bỏ chọn tất cả</button>
+                        <?php if (isset($_GET['trangthai']) && $_GET['trangthai'] == 0) : ?>
+                            <button type="submit" id="deleteall" name="deleteall" class="btn btn-danger text-white" onclick="return confirm('Bạn có muốn khóa không')">Mở các mục chọn</button>
+                        <?php else : ?>
+                            <button type="submit" id="deleteall" name="deleteall" class="btn btn-danger text-white" onclick="return confirm('Bạn có muốn khóa không')">Khóa các mục chọn</button>
+                        <?php endif ?>
+                        
+                        <div class="table-responsive">
+                            <table class="table text-wrap">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="border-top-0">ID</th>
+                                        <th class="border-top-0">Hình ảnh</th>
+                                        <th class="border-top-0">Họ và tên</th>
+                                        <th class="border-top-0">Email</th>
+                                        <th class="border-top-0">Mật khẩu</th>
+                                        <th class="border-top-0">Số điện thoại</th>
+                                        <th class="border-top-0">Địa chỉ</th>
+                                        <th class="border-top-0">Giới tính</th>
+                                        <th class="border-top-0">Cấp bậc</th>
+                                        <th class="border-top-0">Trạng thái</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <?php foreach ($nguoidung as $nd) : ?>
+                                    <?php extract($nd) ?>
                                     <tbody>
                                         <tr>
-                                        <td class="text-center"><input type="checkbox" class="checkbox" name="id[]" value="<?=$id?>"></td>
+                                            <td class="text-center"><input type="checkbox" class="checkbox" name="id[]" value="<?= $id ?>"></td>
                                             <td><?= $id ?></td>
                                             <td>
-                                                <img src="../<?=$img_path . $hinh?>" width="50px" alt="">
+                                                <img src="../<?= $img_path . $hinh ?>" width="50px" alt="">
                                             </td>
                                             <td><?= $hoten ?></td>
                                             <td><?= $email ?></td>
@@ -90,34 +100,37 @@
                                             <td><?= $diachi ?></td>
                                             <td><?= $gioitinh == 1 ? "Nam" : "Nữ" ?></td>
                                             <td>
-                                                <?php 
-                                                    if ($capbac==0) {
-                                                        echo "Admin";
-                                                    } else if($capbac==1){
-                                                        echo 'Manager';
-                                                    } else echo 'User';
+                                                <?php
+                                                if ($capbac == 0) {
+                                                    echo "Admin";
+                                                } else {
+                                                    echo 'User'; }
                                                 ?>
                                             </td>
                                             <td><?php echo $trangthai == 1 ? "Mở" : "Khóa" ?></td>
                                             <td>
                                                 <a href="?act=editnguoidung&idnd=<?= $id ?>"><button type="button" class="btn btn-warning">Sửa</button></a>
-                                                <a href="?act=nguoidung&idnd=<?= $id ?>"><button type="button" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không')">Xóa</button></a>
+                                                <?php if ($trangthai == 0) : ?>
+                                                    <a href="?act=nguoidung&mamo=<?= $id ?>"><button type="button" class="btn btn-primary" onclick="return confirm('Bạn có muốn mở tài khoản không')">Mở</button></a>
+                                                <?php else : ?>
+                                                    <a href="?act=nguoidung&makhoa=<?= $id ?>"><button type="button" class="btn btn-danger" onclick="return confirm('Bạn có muốn khóa tài khoản không')">Khóa</button></a>
+
+                                                <?php endif ?>
                                             </td>
                                         </tr>
                                     </tbody>
-                                    <?php endforeach ?>
-                                </table>
-                            </div>
-                            </form>
+                                <?php endforeach ?>
+                            </table>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-      
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->

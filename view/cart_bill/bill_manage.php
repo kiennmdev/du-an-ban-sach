@@ -6,8 +6,10 @@
                 <th>STT</th>
                 <th>Mã đơn hàng</th>
                 <th>Người đặt</th>
+                <th>Ngày Đặt</th>
                 <th>Tổng cộng</th>
                 <th>Trạng thái</th>
+                <th>Hình thức thanh toán</th>
                 <th class="text-center">Chi tiết đơn</th>
                 <th></th>
             </tr>
@@ -21,6 +23,7 @@
                     <td><?= $i + 1 ?></td>
                     <td><?= $id ?></td>
                     <td><?= $hoten ?></td>
+                    <td><?=$ngaydathang?></td>
                     <td><?= number_format($tongtien,0,',','.')?><sup>đ</sup></td>
                     <td class="
                         <?php
@@ -41,6 +44,14 @@
                             echo 'text-danger';
                         };
                         ?>"><?= $status ?></td>
+                        <td>
+                            <?php if($cachthanhtoan==2): ?>
+                                <a href="?act=managebill&congthanhtoan=momo&code_cart=<?=$id?>" style="text-decoration: none;">MoMo</a>
+                            <?php else:
+                                echo $cachthanhtoan == 0 ? 'Giao hàng nhận tiền' : 'Chuyển khoản';
+                            ?>
+                            <?php endif ?>   
+                        </td>
                     <td class="text-center">
                         <a href="?act=detailbill&mabill=<?=$id?>" class="btn btn-secondary">Xem</a>
                     </td>
@@ -58,6 +69,35 @@
             <?php endif ?>
         </tbody>
     </table>
+    <?php if (isset($_GET['congthanhtoan'])): ?>
+        <h4 class="text-primary">Chi tiết thanh toán qua cổng thanh toán: momo</h4>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Partner_code</th>
+                <th>Order_id</th>
+                <th>Amount</th>
+                <th>Order_info</th>
+                <th>Order_type</th>
+                <th>Trans_id</th>
+                <th>Pay_type</th>
+                <th>Code_cart</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><?=$partner_code?></td>
+                <td><?=$order_id?></td>
+                <td><?=$amount?></td>
+                <td><?=$order_info?></td>
+                <td><?=$order_type?></td>
+                <td><?=$trans_id?></td>
+                <td><?=$pay_type?></td>
+                <td><?=$ma_don?></td>
+            </tr>
+            </tbody>
+        </table>
+        <?php endif?>
 </div>
 </main>
 </div>

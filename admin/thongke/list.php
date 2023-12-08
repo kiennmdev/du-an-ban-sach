@@ -61,7 +61,7 @@
                                             <td><?=$id?></td>
                                             <td><?=$tensach?></td>
                                             <td>
-                                                <img src="../<?=$img_path.$hinh?>" alt="" width="100px">
+                                                <img src="../<?=$img_path.$hinh?>" alt="" width="50px">
                                             </td>
                                             <td><?=$soluonghientai?></td>
                                             <td><?=$luotban?></td>
@@ -96,7 +96,7 @@
                                             <td><?=$id?></td>
                                             <td><?=$tensach?></td>
                                             <td>
-                                                <img src="../<?=$img_path.$hinh?>" alt="" width="100px">
+                                                <img src="../<?=$img_path.$hinh?>" alt="" width="50px">
                                             </td>
                                             <td><?=$soluonghientai?></td>
                                             <td><?=$luotban?></td>

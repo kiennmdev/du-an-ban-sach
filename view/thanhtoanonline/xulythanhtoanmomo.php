@@ -29,7 +29,7 @@ $partnerCode = 'MOMOBKUN20180529';
 $accessKey = 'klm05TvNBzhg7h7j';
 $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
 
-$orderInfo = "Thanh toán qua thẻ ATM MoMo";
+$orderInfo = "Thanh toán qua ATM";
 $amount = $_POST['tongtien'];
 $orderId = time() ."";
 $redirectUrl = "http://localhost:3000/duan_xuong_dat_mua_sach/index.php?act=camon";

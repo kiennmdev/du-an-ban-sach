@@ -69,6 +69,8 @@
                                             <th>Tổng tiền</th>
                                             <td><?=number_format($tongtien,0,',','.')?><sup>đ</sup></td>
                                         </tr>
+                                        <th>Trạng thái thanh toán</th>
+                                        <td><?=$pay_status == 0 ? 'Chưa thanh toán' : 'Đã thanh toán'?></td>
                                         <tr>
                                             <th>Ngày đặt hàng</th>
                                             <td><?=$ngaydathang?></td>
@@ -101,7 +103,17 @@
                                         </tr>
                                         <tr>
                                             <th>Phương thức thanh toán</th>
-                                            <td><?= $cachthanhtoan == 0 ? 'Giao hàng nhận tiền' : 'Chuyển khoản'?></td>
+                                            <td>
+                                            <?php 
+                                                if($cachthanhtoan == 0) {
+                                                    echo 'Giao hàng nhận tiền';
+                                                }else if ($cachthanhtoan == 1) {
+                                                    echo 'Chuyển khoản';
+                                                }else{
+                                                    echo 'Thanh toán bằng MOMO';
+                                                }
+                                            ?>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

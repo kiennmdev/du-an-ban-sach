@@ -30,7 +30,7 @@
                 <?php if(isset($_SESSION['idtk'])): ?>
                 <div class="avatar">
                     <img src="<?= $img_path.$nd['hinh'] ?>" alt="" width="20px" height="20px" style="border-radius: 50%;">
-                    <a href="?act=profile"><?= $hoten ?></a>
+                    <a href="?act=managebill"><?= $hoten ?></a>
                 </div>
                 <?php else: ?>
                     <div class="login-regis">

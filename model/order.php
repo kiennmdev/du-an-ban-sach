@@ -13,3 +13,8 @@ function insert_momo($partnerCode,$orderId,$amount,$orderInfo,$orderType,$transI
     $sql = "INSERT INTO tbl_momo(partner_code,order_id,amount,order_info,order_type,trans_id,pay_type,ma_don) value(?,?,?,?,?,?,?,?)";
     pdo_execute($sql,$partnerCode,$orderId,$amount,$orderInfo,$orderType,$transId,$payType,$madon);
 }
+
+function load_one_momo($madon){
+    $sql = "SELECT * FROM tbl_momo where ma_don = $madon";
+    return pdo_query_one($sql);
+}
