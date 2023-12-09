@@ -37,7 +37,6 @@ if (isset($_POST['loginAdmin'])) {
     }
 }
 if (isset($_SESSION['idtk']) && $_SESSION['role'] == 0) {
-    update_luong_sach_duoc_mua();
     $nd = load_one_nguoidung($_SESSION['idtk']);
     $act = $_GET['act'] ?? '';
     $check = true;
@@ -413,6 +412,9 @@ if (isset($_SESSION['idtk']) && $_SESSION['role'] == 0) {
                         $pay_status = 1;
                     }
                     update_status_bill($madonhang, $trangthai, $pay_status);
+                    if ($trangthai == 3) {
+                        update_luong_sach_duoc_mua();
+                    }
                     header('location: ?act=donhang');
                 }
             }
@@ -436,6 +438,19 @@ if (isset($_SESSION['idtk']) && $_SESSION['role'] == 0) {
             $dssachbanchay = load_top5_sach_banchay();
             $dssachtonkho = load_top5_sach_tonkho();
             $VIEW = 'thongke/list.php';
+            break;
+
+        case 'thongkesach':
+            $dssach = [];
+            if(isset($_GET['sach'])){
+                if ($_GET['sach'] == "banchay") {
+                    $dssach = load_sach_banchay();
+                }
+                elseif ($_GET['sach'] == "tonkho") {
+                    $dssach = load_sach_tonkho();
+                }
+                $VIEW = 'thongke/sach/thongke_sach.php';
+            } else{header('location: ?act=thongke');}
             break;
         case 'bieudo':
             $VIEW = 'thongke/bieudo.php';

@@ -6,8 +6,8 @@ function load_all_sach()
     return pdo_query($sql);
 }
 
-function load_top5_sach_same_author($tacgia){
-    $sql = "SELECT * from sach where tacgia = '$tacgia' limit 0,5";
+function load_top5_sach_same_author($tacgia,$idsp){
+    $sql = "SELECT * from sach where tacgia = '$tacgia' and id <> $idsp limit 0,5";
     return pdo_query($sql);
 }
 
@@ -139,7 +139,7 @@ function load_all_table_sach(){
 }
 
 function update_luong_sach_duoc_mua(){
-    $sql = "SELECT chitietdonhang.masach, COUNT(chitietdonhang.soluong) AS soluongduocban FROM `chitietdonhang` JOIN donhang ON chitietdonhang.madon = donhang.id WHERE donhang.trangthai = 3 GROUP BY chitietdonhang.masach";
+    $sql = "SELECT chitietdonhang.masach, SUM(chitietdonhang.soluong) AS soluongduocban FROM `chitietdonhang` JOIN donhang ON chitietdonhang.madon = donhang.id WHERE donhang.trangthai = 3 GROUP BY chitietdonhang.masach";
     $soluong_dssach_daban = pdo_query($sql);
     $dsidsach = load_all_table_sach();
     foreach($soluong_dssach_daban as $sachdaban){
@@ -158,12 +158,23 @@ function update_luong_sach_duoc_mua(){
 
 function load_top5_sach_banchay()
 {
-    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where luotban>0 ORDER BY luotban DESC LIMIT 0,5";
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where luotban>=5 ORDER BY luotban DESC LIMIT 0,5";
     return pdo_query($sql);
 }
 
 function load_top5_sach_tonkho()
 {
-    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where luotban=0 ORDER BY luotban asc LIMIT 0,5";
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where luotban<5 ORDER BY luotban asc LIMIT 0,5";
+    return pdo_query($sql);
+}
+function load_sach_banchay()
+{
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where luotban>=5 ORDER BY luotban DESC";
+    return pdo_query($sql);
+}
+
+function load_sach_tonkho()
+{
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where luotban<5 ORDER BY luotban asc";
     return pdo_query($sql);
 }

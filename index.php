@@ -98,7 +98,7 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                 tang_luot_xem($_GET['idsp']);
                 $onesach = load_one_sach($idsp);
                 extract($onesach);
-                $spsameauthor = load_top5_sach_same_author($tacgia);
+                $spsameauthor = load_top5_sach_same_author($tacgia,$id);
                 $spsamedanhmuc = load_top5_sach_same_danhmuc($madanhmuc, $id);
                 $listbinhluan = load_all_binhluan_chitiet_theosp($id);
                 // echo '<pre>';
@@ -333,10 +333,10 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                         for($i = 0; $i < sizeof($convertcart);$i++){
                             extract($convertcart[$i]);
                             $dongia = $gia - $gia*$giamgia/100;
-                            $thanhtien = $soluongmua*($gia - $gia*$giamgia);
+                            $thanhtien = $soluongmua*($gia - $gia*$giamgia/100);
                             add_to_order_detail($madon,$masach,$soluongmua,$dongia,$thanhtien);
                         }
-                        header('location: ?act=camon');
+                        header('location: ?act=camon&message=Successful.');
                     } else {
                         $err = "Bạn chưa chọn phương thức thanh toán";
                     }

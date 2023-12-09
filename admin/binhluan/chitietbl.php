@@ -60,9 +60,10 @@
                                             <th></th>
                                         </tr>
                                     </thead>
+                                    
+                                    <tbody>
                                     <?php foreach($blct as $bl): ?>
                                         <?php extract($bl) ?>
-                                    <tbody>
                                         <td><input type="checkbox" class="checkbox" name="id[]" value="<?=$id?>"></td>
                                             <td><?= $id?></td>
                                             <td><?= $noidung?></td>
@@ -74,9 +75,9 @@
                                                 <a href="?<?= $_SERVER["QUERY_STRING"] . "&maan=" .$id ?>" class="btn btn-danger text-white" onclick="return confirm('Bạn có muốn ẩn không?')">Ẩn</a>
                                             </td>
                                         </tr>
-                      
+                                        <?php endforeach ?>
                                     </tbody>
-                                    <?php endforeach ?>
+                                    
                                 </table>
                             </div>
                             </form>

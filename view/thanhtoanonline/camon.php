@@ -14,6 +14,6 @@
 <?php 
     if ($thongbao) {
         unset($_SESSION['giohang']);
+        unset($_SESSION['thongtinkhachhang']);
     }
-    unset($_SESSION['thongtinkhachhang']);
 ?>

@@ -41,7 +41,7 @@
                     <div class="col">
                         <div class="white-box">
                         <h4>Danh Sách Sách Bán Chạy</h4>
-                        <a href="?act=thongke" class="btn btn-primary">Xem Tất Cả</a>
+                        <a href="?act=thongkesach&sach=banchay" class="btn btn-primary">Xem Tất Cả</a>
                         <div class="table-responsive">
                                 <table class="table text-wrap">
                                         <thead>
@@ -76,7 +76,7 @@
                     <div class="col">
                         <div class="white-box">
                         <h4>Danh Sách Sách Tồn Kho</h4>
-                        <a href="?act=thongke" class="btn btn-primary">Xem Tất Cả</a>
+                        <a href="?act=thongkesach&sach=tonkho" class="btn btn-primary">Xem Tất Cả</a>
                         <div class="table-responsive">
                         <table class="table text-wrap">
                                         <thead>

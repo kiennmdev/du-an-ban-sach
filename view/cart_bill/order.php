@@ -2,7 +2,7 @@
     <div class="main-content">
         <form action="?act=order" method="post">
         <div class="mb-4">
-             <h4 class="text-primary h2">Thông Tin Cá Nhân</h4>
+             <h4 class="text-primary h2">Thông Tin Nhận Hàng</h4>
             <hr>
             <div class="mb-3">
                 <label for="" class="form-label">Họ và tên:</label>
