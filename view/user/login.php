@@ -5,11 +5,11 @@
     <span style="color: red;"><?= isset($err) ? $err : ""?></span>
     <div class="mb-3 mt-3">
         <label for="email" class="form-label">Email:</label>
-        <input type="text" id="email" name="email" class="form-control" placeholder="Nhập email" required>
+        <input type="text" id="email" name="email" class="form-control" placeholder="Nhập email">
     </div>
     <div class="mb-3">
         <label for="matkhau" class="form-label">Mật khẩu:</label>
-        <input type="password" id="matkhau" name="matkhau" class="form-control" placeholder="Nhập mật khẩu" required>
+        <input type="password" id="matkhau" name="matkhau" class="form-control" placeholder="Nhập mật khẩu">
     </div>
     <!-- <div class="mb-3 form-check">
         <input type="checkbox" id="remember" name="remember" class="form-check-input">

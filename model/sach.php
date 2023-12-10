@@ -7,62 +7,62 @@ function load_all_sach()
 }
 
 function load_top5_sach_same_author($tacgia,$idsp){
-    $sql = "SELECT * from sach where tacgia = '$tacgia' and id <> $idsp limit 0,5";
+    $sql = "SELECT * from sach where tacgia = '$tacgia' and id <> $idsp and trangthai = 1 limit 0,5";
     return pdo_query($sql);
 }
 
 function load_top5_sach_same_danhmuc($iddanhmuc,$idsp){
-    $sql = "SELECT * from sach where madanhmuc = $iddanhmuc and id <> $idsp limit 0,5";
+    $sql = "SELECT * from sach where madanhmuc = $iddanhmuc and id <> $idsp and trangthai = 1 limit 0,5";
     return pdo_query($sql);
 }
 
 function load_5_sach_moi()
 {
-    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY ngayxuatban DESC LIMIT 0,5";
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where sach.trangthai = 1 ORDER BY ngayxuatban DESC LIMIT 0,5";
     return pdo_query($sql);
 }
 
 function load_all_sach_moi()
 {
-    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY ngayxuatban DESC";
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where sach.trangthai = 1 ORDER BY ngayxuatban DESC";
     return pdo_query($sql);
 }
 
 function load_5_sach_banchay()
 {
-    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY luotban DESC LIMIT 0,5";
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where sach.trangthai = 1 ORDER BY luotban DESC LIMIT 0,5";
     return pdo_query($sql);
 }
 function load_all_sach_banchay()
 {
-    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY luotban DESC";
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where sach.trangthai = 1 ORDER BY luotban DESC";
     return pdo_query($sql);
 }
 function load_all_sach_rand()
 {
-    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id ORDER BY rand() DESC LIMIT 0,5";
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where sach.trangthai = 1 ORDER BY rand() DESC LIMIT 0,5";
     return pdo_query($sql);
 }
 
 function load_all_sach_madanhmuc($madanhmuc)
 {
-    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where sach.madanhmuc = $madanhmuc ORDER BY id DESC";
+    $sql = "SELECT sach.*, danhmuc.tendanhmuc FROM sach JOIN danhmuc ON sach.madanhmuc=danhmuc.id where sach.madanhmuc = $madanhmuc and sach.trangthai = 1 ORDER BY id DESC";
     return pdo_query($sql);
 }
 function load_all_sach_tacgia($tacgia)
 {
-    $sql = "SELECT * FROM sach  where tacgia = ? ORDER BY id DESC";
+    $sql = "SELECT * FROM sach  where tacgia = ? and trangthai = 1 ORDER BY id DESC";
     return pdo_query($sql,$tacgia);
 }
 function load_all_sach_nhaxuatban($nhaxuatban)
 {
-    $sql = "SELECT * FROM sach  where nhaxuatban = ? ORDER BY id DESC";
+    $sql = "SELECT * FROM sach  where nhaxuatban = ? and trangthai = 1 ORDER BY id DESC";
     return pdo_query($sql,$nhaxuatban);
 }
 function load_all_sach_timkiem($tukhoa){
     
     if ($tukhoa!="") {
-        $sql = "SELECT * FROM sach where tensach like '%$tukhoa%' ORDER BY id DESC";
+        $sql = "SELECT * FROM sach where tensach like '%$tukhoa%' and trangthai = 1 ORDER BY id DESC";
         return pdo_query($sql);
     }
     else {

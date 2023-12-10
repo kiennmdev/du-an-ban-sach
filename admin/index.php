@@ -100,6 +100,7 @@ if (isset($_SESSION['idtk']) && $_SESSION['role'] == 0) {
             $VIEW = "danhmuc/add.php";
             break;
         case 'editdanhmuc':
+            $err = [];
             if (isset($_GET['iddm']) && $_GET['iddm'] > 0) {
                 $iddm = $_GET['iddm'];
                 $dm = load_one_danhmuc($iddm);

@@ -49,7 +49,7 @@
                                     <div class="mb-3 mt-3">
                                       <label for="">Tên danh mục:<span class="text-danger">*</span></label>
                                       <input type="text" class="form-control" id="" placeholder="Nhập tên danh mục" name="tendanhmuc" value="<?=$tendanhmuc?>">
-                                      <span class="text-danger"><?=isset($err['tendanhmuc']) ? $err['tendanhmuc'] : ''?></span>
+                                      <span class="text-danger"><?=isset($err['tenloaihang']) ? $err['tenloaihang'] : ''?></span>
                                     </div>
                                     <div class="mb-3">
                                         <label for="">Trạng thái:</label>
