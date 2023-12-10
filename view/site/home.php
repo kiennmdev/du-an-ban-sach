@@ -97,7 +97,7 @@
                     <canvas></canvas>
                 </div>
                 <div class="view-all">
-                    <a href="?act=danhsach">Xem tất cả</a>
+                    <a href="?act=danhsach&sachbanchay">Xem tất cả</a>
                 </div>
             </div>
             <div class="main-list">

@@ -140,7 +140,7 @@
         <?php foreach($thongke3 as $thongke): 
           extract($thongke);
           ?>
-          "<?="yellow"?>",
+          "<?="aqua"?>",
         <?php endforeach ?>
       ];
 
@@ -184,7 +184,7 @@
         <?php foreach($thongke4 as $thongke): 
           extract($thongke);
           ?>
-          "<?="yellow"?>",
+          "<?="green"?>",
         <?php endforeach ?>
       ];
 
