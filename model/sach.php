@@ -139,7 +139,7 @@ function load_all_table_sach(){
 }
 
 function update_luong_sach_duoc_mua(){
-    $sql = "SELECT chitietdonhang.masach, SUM(chitietdonhang.soluong) AS soluongduocban FROM `chitietdonhang` JOIN donhang ON chitietdonhang.madon = donhang.id WHERE donhang.trangthai = 3 GROUP BY chitietdonhang.masach";
+    $sql = "SELECT chitietdonhang.masach, SUM(chitietdonhang.soluong) AS soluongduocban FROM `chitietdonhang` JOIN donhang ON chitietdonhang.madon = donhang.id WHERE donhang.trangthai = 0 GROUP BY chitietdonhang.masach";
     $soluong_dssach_daban = pdo_query($sql);
     $dsidsach = load_all_table_sach();
     foreach($soluong_dssach_daban as $sachdaban){
