@@ -48,7 +48,7 @@
             <div class="d-flex justify-content-between">
                 <!-- <a href="?act=order" class="btn btn-success me-2" onclick="return confirm('Bạn có chắc muốn đặt hàng?')">Đặt Hàng</a> -->
                 <div class="chucnang1">
-                <a href="?act=order" class="btn btn-success me-2">Mua Hàng</a>
+                <a <?php if(isset($_SESSION['idtk'])){echo 'href="?act=order"';} else {echo 'href ="?act=dangnhap"';}?>  class="btn btn-success me-2">Mua Hàng</a>
                 <a href="?act=giohang&delcart=1" class="btn btn-danger me-2">Xoá Giỏ Hàng</a>
                 </div>
                 <button class="btn btn-primary" type="submit" name="updatecart">Cập nhật giỏ hàng</button>
